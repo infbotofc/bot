@@ -1,5 +1,6 @@
 const axios = require('axios');
 const yts = require('yt-search');
+const { fetchBuffer } = require('../lib/myfunc2')
 
 module.exports = {
   command: 'song',
@@ -63,11 +64,13 @@ module.exports = {
         
         if (response.data && response.data.success && response.data.data?.downloadUrl) {
           const { downloadUrl } = response.data.data;
+          // Download file into buffer first (more reliable than sending remote URL)
+          const audioBuffer = await fetchBuffer(downloadUrl, { timeout: 120000 });
+          // Send as regular audio (not PTT). MP3 files should not be sent as voice notes (OGG/Opus required for PTT).
           return await sock.sendMessage(chatId, {
-            audio: { url: downloadUrl },
+            audio: audioBuffer,
             mimetype: 'audio/mpeg',
-            fileName: `${title}.mp3`,
-            ptt: true // Send as voice note
+            fileName: `${title}.mp3`
           }, { quoted: message });
         }
       } catch (e) {
@@ -80,11 +83,13 @@ module.exports = {
       
       if (fallbackResponse.data && fallbackResponse.data.success && fallbackResponse.data.data?.downloadUrl) {
         const { downloadUrl } = fallbackResponse.data.data;
+        // Download file into buffer first (more reliable than sending remote URL)
+        const audioBuffer = await fetchBuffer(downloadUrl, { timeout: 120000 });
+        // Send as regular audio (not PTT). MP3 files should not be sent as voice notes (OGG/Opus required for PTT).
         return await sock.sendMessage(chatId, {
-          audio: { url: downloadUrl },
+          audio: audioBuffer,
           mimetype: 'audio/mpeg',
-          fileName: `${title}.mp3`,
-          ptt: true // Send as voice note
+          fileName: `${title}.mp3`
         }, { quoted: message });
       }
 
