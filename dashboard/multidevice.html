@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Multi-device Dashboard</title>
+  <style>
+    body{font-family:Inter,system-ui,Arial;margin:20px;background:#f6f8fa}
+    .card{background:#fff;padding:16px;border-radius:8px;max-width:760px;margin:12px auto;box-shadow:0 6px 20px rgba(0,0,0,0.06)}
+    .row{display:flex;gap:12px;align-items:center}
+    input{padding:8px;border:1px solid #ddd;border-radius:6px;flex:1}
+    button{padding:8px 12px;border-radius:6px;border:none;background:#2b6cb0;color:#fff}
+    img.qr{max-width:260px}
+    pre.code{background:#0b1220;color:#b7f5c6;padding:12px;border-radius:6px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Link device with QR</h2>
+    <div class="row"><button id="genqr">Generate QR</button><div id="qrcontainer"></div></div>
+  </div>
+
+  <div class="card">
+    <h2>Link device with phone number</h2>
+    <div class="row"><input id="phone" placeholder="e.g. 6281234567890" /><button id="gencode">Generate Code</button></div>
+    <div id="codebox"></div>
+  </div>
+
+  <div class="card">
+    <h2>Paired devices</h2>
+    <div id="devices">Loading...</div>
+  </div>
+
+  <script>
+    async function loadDevices(){
+      const r=await fetch('/api/multidevice/devices');
+      const j=await r.json();
+      const el=document.getElementById('devices');
+      el.innerHTML='';
+      (j.devices||[]).forEach(d=>{const div=document.createElement('div');div.innerHTML=`<b>${d.id}</b> — ${d.status||''} ${d.phone?'<span>('+d.phone+')</span>':''} <button onclick="del('${d.id}')">Remove</button>`;el.appendChild(div)});
+      if((j.devices||[]).length===0) el.innerHTML='<i>no devices</i>';
+    }
+    async function del(id){ await fetch(`/api/multidevice/devices/${id}`,{method:'DELETE'}); loadDevices(); }
+
+    document.getElementById('genqr').onclick=async ()=>{
+      document.getElementById('qrcontainer').innerHTML='Generating...';
+      const r=await fetch('/api/multidevice/qr');
+      const j=await r.json();
+      if(j.qr) document.getElementById('qrcontainer').innerHTML=`<img class="qr" src="${j.qr}" alt="qr"/>`;
+      else document.getElementById('qrcontainer').innerText= j.error || 'Failed';
+      loadDevices();
+    }
+
+    document.getElementById('gencode').onclick=async ()=>{
+      const phone=document.getElementById('phone').value.trim();
+      document.getElementById('codebox').innerText='Generating...';
+      const r=await fetch('/api/multidevice/number',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({number:phone})});
+      const j=await r.json();
+      if(j.code) document.getElementById('codebox').innerHTML=`<pre class="code">${j.code}</pre>`;
+      else document.getElementById('codebox').innerText=j.error || 'Failed';
+      loadDevices();
+    }
+
+    loadDevices();
+  </script>
+</body>
+</html>
