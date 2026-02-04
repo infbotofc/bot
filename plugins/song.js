@@ -61,12 +61,25 @@ module.exports = {
       
       try {
         const response = await axios.get(apiUrl, { timeout: 60000 });
-        
         if (response.data && response.data.success && response.data.data?.downloadUrl) {
           const { downloadUrl } = response.data.data;
-          // Download file into buffer first (more reliable than sending remote URL)
           const audioBuffer = await fetchBuffer(downloadUrl, { timeout: 120000 });
-          // Send as regular audio (not PTT). MP3 files should not be sent as voice notes (OGG/Opus required for PTT).
+          if (!audioBuffer || audioBuffer.length < 1024) {
+            console.error('Downloaded audio buffer is empty or too small.');
+            await sock.sendMessage(chatId, {
+              text: '❌ Failed to download audio. The file is empty or invalid.'
+            }, { quoted: message });
+            throw new Error('Audio buffer empty or invalid');
+          }
+          // Optionally, check file signature for MP3 (starts with ID3 or 0xFFFB)
+          const isMp3 = audioBuffer.slice(0, 3).toString() === 'ID3' || (audioBuffer[0] === 0xFF && (audioBuffer[1] & 0xE0) === 0xE0);
+          if (!isMp3) {
+            console.error('Downloaded file is not a valid MP3.');
+            await sock.sendMessage(chatId, {
+              text: '❌ Downloaded file is not a valid MP3 audio.'
+            }, { quoted: message });
+            throw new Error('File is not valid MP3');
+          }
           return await sock.sendMessage(chatId, {
             audio: audioBuffer,
             mimetype: 'audio/mpeg',
@@ -74,18 +87,30 @@ module.exports = {
           }, { quoted: message });
         }
       } catch (e) {
-        console.log('Primary API failed, trying fallback...');
+        console.log('Primary API failed, trying fallback...', e);
       }
 
       // Fallback API: LoaderTo (format: mp3)
       const fallbackUrl = `https://api.qasimdev.dpdns.org/api/loaderto/download?apiKey=qasim-dev&format=mp3&url=${encodeURIComponent(videoUrl)}`;
       const fallbackResponse = await axios.get(fallbackUrl, { timeout: 60000 });
-      
       if (fallbackResponse.data && fallbackResponse.data.success && fallbackResponse.data.data?.downloadUrl) {
         const { downloadUrl } = fallbackResponse.data.data;
-        // Download file into buffer first (more reliable than sending remote URL)
         const audioBuffer = await fetchBuffer(downloadUrl, { timeout: 120000 });
-        // Send as regular audio (not PTT). MP3 files should not be sent as voice notes (OGG/Opus required for PTT).
+        if (!audioBuffer || audioBuffer.length < 1024) {
+          console.error('Fallback: Downloaded audio buffer is empty or too small.');
+          await sock.sendMessage(chatId, {
+            text: '❌ Fallback failed: The audio file is empty or invalid.'
+          }, { quoted: message });
+          throw new Error('Fallback audio buffer empty or invalid');
+        }
+        const isMp3 = audioBuffer.slice(0, 3).toString() === 'ID3' || (audioBuffer[0] === 0xFF && (audioBuffer[1] & 0xE0) === 0xE0);
+        if (!isMp3) {
+          console.error('Fallback: Downloaded file is not a valid MP3.');
+          await sock.sendMessage(chatId, {
+            text: '❌ Fallback: Downloaded file is not a valid MP3 audio.'
+          }, { quoted: message });
+          throw new Error('Fallback file is not valid MP3');
+        }
         return await sock.sendMessage(chatId, {
           audio: audioBuffer,
           mimetype: 'audio/mpeg',
