@@ -322,52 +322,6 @@
       {
         "key": {
           "remoteJid": "228209480200306@lid",
-          "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": false,
-          "id": "AC5A6AC5A077AFACCA56188FDAA540A4",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "message": {
-          "conversation": ".ping",
-          "messageContextInfo": {
-            "deviceListMetadata": {
-              "senderKeyHash": "VjoITV7ta09cdQ==",
-              "senderTimestamp": "1770078384",
-              "recipientKeyHash": "tISlBz230BWlQg==",
-              "recipientTimestamp": "1770132856"
-            },
-            "deviceListMetadataVersion": 2,
-            "messageSecret": "6a6Lf6MVsmtvWT9qofbpeNP7rgfhX1PN0dd8xlgI/UI="
-          }
-        },
-        "messageTimestamp": 1770138136,
-        "pushName": "Infintiy AI",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "fromMe": true,
-          "id": "3EB04C86947CA7AD38BD60"
-        },
-        "message": {
-          "editedMessage": {
-            "message": {
-              "extendedTextMessage": {
-                "text": "🏓 Pong!\nLatency: 639ms"
-              }
-            }
-          }
-        },
-        "messageTimestamp": 1770138137,
-        "participant": null,
-        "pushName": null,
-        "broadcast": null
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
           "fromMe": true,
           "id": "3EB0BDBC07E50E30B246AA"
         },
@@ -852,6 +806,45 @@
         },
         "messageTimestamp": 1770138509,
         "pushName": "Infintiy AI",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "remoteJidAlt": "94770612011@s.whatsapp.net",
+          "fromMe": true,
+          "id": "AC24555EB74B7B7DDAC0B2766C3E7929",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "messageTimestamp": 1770177467,
+        "pushName": "Infinity-MD",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "remoteJidAlt": "94770612011@s.whatsapp.net",
+          "fromMe": true,
+          "id": "AC4CFD4C9A087E1D6912E23366D614FC",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "messageTimestamp": 1770177548,
+        "pushName": "Infinity-MD",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "remoteJidAlt": "94770612011@s.whatsapp.net",
+          "fromMe": true,
+          "id": "AC4CFD4C9A087E1D6912E23366D614FC",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "messageTimestamp": 1770177549,
+        "pushName": "Infinity-MD",
         "broadcast": false
       }
     ]
