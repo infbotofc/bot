@@ -1,5 +1,6 @@
 const axios = require('axios');
 const store = require('../lib/lightweight_store');
+const { fromBuffer } = require('file-type');
 
 module.exports = {
   command: 'cinesubz',
@@ -96,20 +97,105 @@ module.exports = {
           if (movie.imdb) info += `⭐ IMDB: ${movie.imdb}\n`;
           if (movie.description) info += `\n${movie.description}\n\n`;
 
+          // Flatten available download links but DO NOT expose raw URLs in the message
+          const flatLinks = [];
           if (Array.isArray(movie.downloadOptions) && movie.downloadOptions.length > 0) {
             movie.downloadOptions.forEach(opt => {
-              info += `🔰 *${opt.serverTitle || opt.server}*\n`;
               (opt.links || []).forEach(link => {
-                info += `• ${link.quality || 'N/A'} ${link.size ? `(${link.size})` : ''} - ${link.url}\n`;
+                flatLinks.push({
+                  url: link.url,
+                  quality: link.quality || 'N/A',
+                  size: link.size || '',
+                  server: opt.serverTitle || opt.server || ''
+                });
               });
-              info += `\n`;
             });
           } else if (movie.sourceUrl) {
-            info += `🔗 Source: ${movie.sourceUrl}\n`;
+            flatLinks.push({ url: movie.sourceUrl, quality: 'N/A', size: '', server: '' });
           }
 
+          if (flatLinks.length === 0) {
+            info += '\n❌ No downloadable links found.';
+            const image = movie.gallery && movie.gallery.length ? movie.gallery[0] : null;
+            await sock.sendMessage(chatId, image ? { image: { url: image }, caption: info } : { text: info }, { quoted: m });
+            return;
+          }
+
+          // Build a numbered list for the user to choose from (no raw URLs shown)
+          info += '\n*Available Downloads:*\n\n';
+          flatLinks.forEach((l, idx) => {
+            info += `*${idx + 1}.* ${l.server || 'Server'} - ${l.quality} ${l.size ? `(${l.size})` : ''}\n`;
+          });
+          info += '\n↩️ *Reply with the number to download the file (will be sent to chat).*';
+
           const image = movie.gallery && movie.gallery.length ? movie.gallery[0] : null;
-          await sock.sendMessage(chatId, image ? { image: { url: image }, caption: info } : { text: info }, { quoted: m });
+          const sentDlMsg = await sock.sendMessage(chatId, image ? { image: { url: image }, caption: info } : { text: info }, { quoted: m });
+
+          // Persist the actual URLs for this user/session
+          await store.saveSetting(senderId, 'cinesubz_dl_links', flatLinks.map(f => f.url));
+
+          // Listen for a reply to this download-list message
+          const dlTimeout = setTimeout(async () => {
+            sock.ev.off('messages.upsert', dlListener);
+            await store.saveSetting(senderId, 'cinesubz_dl_links', null);
+            try { await sock.sendMessage(chatId, { text: '⌛ Download selection expired. Please run the command again.' }, { quoted: sentDlMsg }); } catch (e) {}
+          }, 5 * 60 * 1000);
+
+          const dlListener = async ({ messages }) => {
+            const mm = messages[0];
+            if (!mm?.message || mm.key.remoteJid !== chatId) return;
+
+            const ctx2 = mm.message?.extendedTextMessage?.contextInfo;
+            if (!ctx2?.stanzaId || ctx2.stanzaId !== sentDlMsg.key.id) return;
+
+            const replyText2 = mm.message.conversation || mm.message.extendedTextMessage?.text || '';
+            const choice2 = parseInt(replyText2.trim());
+            if (isNaN(choice2)) {
+              return await sock.sendMessage(chatId, { text: '❌ Invalid choice. Please reply with the number of the file to download.' }, { quoted: mm });
+            }
+
+            const savedLinks = await store.getSetting(senderId, 'cinesubz_dl_links') || [];
+            if (!Array.isArray(savedLinks) || savedLinks.length === 0) {
+              return await sock.sendMessage(chatId, { text: '❌ Session expired or no saved links. Please run the command again.' }, { quoted: mm });
+            }
+
+            if (choice2 < 1 || choice2 > savedLinks.length) {
+              return await sock.sendMessage(chatId, { text: `❌ Invalid choice. Pick 1-${savedLinks.length}.` }, { quoted: mm });
+            }
+
+            clearTimeout(dlTimeout);
+            sock.ev.off('messages.upsert', dlListener);
+            await store.saveSetting(senderId, 'cinesubz_dl_links', null);
+
+            const finalUrl = savedLinks[choice2 - 1];
+            await sock.sendMessage(chatId, { text: `⬇️ Downloading selection #${choice2}... This may take a while depending on file size.` }, { quoted: mm });
+
+            try {
+              const resBuf = await axios.get(finalUrl, { responseType: 'arraybuffer', timeout: 5 * 60 * 1000 });
+              const buffer = Buffer.from(resBuf.data, 'binary');
+              const type = await fromBuffer(buffer);
+
+              const safeTitle = (movie.title || 'movie').replace(/[^a-zA-Z0-9 _.-]/g, '_').slice(0, 200);
+              const ext = (type && type.ext) ? type.ext : 'mp4';
+              const fileName = `${safeTitle}_${choice2}.${ext}`;
+
+              if (type && type.mime && type.mime.startsWith('image/')) {
+                await sock.sendMessage(chatId, { image: buffer, caption: `Here is ${fileName}` }, { quoted: mm });
+              } else if (type && type.mime && type.mime.startsWith('video/')) {
+                await sock.sendMessage(chatId, { document: buffer, mimetype: type.mime, fileName }, { quoted: mm });
+              } else if (type && type.mime && type.mime.startsWith('audio/')) {
+                await sock.sendMessage(chatId, { audio: buffer, mimetype: type.mime }, { quoted: mm });
+              } else {
+                await sock.sendMessage(chatId, { document: buffer, mimetype: type ? type.mime : 'application/octet-stream', fileName }, { quoted: mm });
+              }
+
+            } catch (e) {
+              console.error('❌ Cinesubz Download Error:', e.message || e);
+              await sock.sendMessage(chatId, { text: '❌ Failed to download or send the file. The source may block direct downloads or file is too large.' }, { quoted: mm });
+            }
+          };
+
+          sock.ev.on('messages.upsert', dlListener);
 
         } catch (e) {
           console.error('❌ Cinesubz DL Error:', e.message || e);
