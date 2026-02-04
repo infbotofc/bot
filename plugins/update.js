@@ -235,9 +235,14 @@ module.exports = {
       }
       
       try {
+        // Load current exported settings object (may be referenced across modules)
+        const oldSettings = require('../settings');
+        // Force fresh require to get updated settings object
         delete require.cache[require.resolve('../settings')];
         const newSettings = require('../settings');
-        const v = newSettings.version || 'unknown';
+        // Merge new values into the existing exported object so other modules see updates
+        try { Object.assign(oldSettings, newSettings); } catch (e) {}
+        const v = (oldSettings && oldSettings.version) || (newSettings && newSettings.version) || 'unknown';
         changesSummary += `\n\n🔖 Version: ${v}`;
       } catch {}
       

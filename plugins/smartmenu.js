@@ -22,9 +22,12 @@ function formatUptime() {
 }
 
 function getRAMUsage() {
-    const totalMem = (os.totalmem() / 1024 / 1024 / 1024).toFixed(2);
-    const usedMem = ((os.totalmem() - os.freemem()) / 1024 / 1024).toFixed(2);
-    return `${usedMem}MB / ${totalMem}GB`;
+  const totalMB = os.totalmem() / 1024 / 1024;
+  const freeMB = os.freemem() / 1024 / 1024;
+  const usedMB = totalMB - freeMB;
+  const percent = ((usedMB / totalMB) * 100).toFixed(1);
+  const procMem = (process.memoryUsage().rss / 1024 / 1024).toFixed(1);
+  return `${(usedMB/1024).toFixed(2)} GB / ${(totalMB/1024).toFixed(2)} GB (${percent}%) · Proc ${procMem} MB`;
 }
 
 module.exports = {
@@ -45,32 +48,24 @@ module.exports = {
       const commandCount = CommandHandler.commands.size;
       const prefix = settings.prefixes ? settings.prefixes[0] : '.';
 
-      let menuText = `╭───〔 🤖 INFINITY MD 〕───
-│ 👤 *Owner* : ${settings.botOwner || 'Default Publisher'}
-│ 📊 *Commands* : ${commandCount}+
-│ ⏱ *Uptime* : ${formatUptime()}
-│ 🚀 *RAM* : ${getRAMUsage()}
-│ ⌨️ *Prefix* : ${prefix}
-╰────────────────────
-
-╭───〔 📂 MAIN MENUS 〕───
-│ 👑 ${prefix}ownermenu
-│ 🧩 ${prefix}groupmenu
-│ 📥 ${prefix}dlmenu
-│ 🎮 ${prefix}funmenu
-│ 🤖 ${prefix}aimenu
-│ 🖼 ${prefix}stickermenu
-│ 🎵 ${prefix}audiomenu
-│ 🎥 ${prefix}videomenu
-│ 🔍 ${prefix}searchmenu
-│ 🛠 ${prefix}toolsmenu
-│ 🧠 ${prefix}convertmenu
-│ ⚙️ ${prefix}settingsmenu
-│ 🗄 ${prefix}dbmenu
-│ 🧪 ${prefix}othermenu
-╰────────────────────
-
-> 💫 *INFINITY MD BOT* - Powered by AI`;
+      const load = os.loadavg()[0] ? os.loadavg()[0].toFixed(2) : '0.00';
+      let menuText = `╭─〔 🤖 INFINITY MD 〕─╮\n` +
+        `│ 👤 Owner : ${settings.botOwner || 'Default Publisher'}\n` +
+        `│ 📊 Commands : ${commandCount}+    │ ⌨️ Prefix : ${prefix}\n` +
+        `│ ⏱ Uptime  : ${formatUptime()}\n` +
+        `│ 💾 RAM     : ${getRAMUsage()}\n` +
+        `│ 🧮 Load(1m): ${load}    │ CPU Cores: ${os.cpus().length}\n` +
+        `╰──────────────────────╯\n\n` +
+        `╭─〔 📂 MAIN MENUS 〕─╮\n` +
+        `│ 👑 ${prefix}ownermenu   │ 🧩 ${prefix}groupmenu\n` +
+        `│ 📥 ${prefix}dlmenu     │ 🎮 ${prefix}funmenu\n` +
+        `│ 🤖 ${prefix}aimenu     │ 🖼 ${prefix}stickermenu\n` +
+        `│ 🎵 ${prefix}audiomenu  │ 🎥 ${prefix}videomenu\n` +
+        `│ 🔍 ${prefix}searchmenu │ 🛠 ${prefix}toolsmenu\n` +
+        `│ 🧠 ${prefix}convertmenu │ ⚙️ ${prefix}settingsmenu\n` +
+        `│ 🗄 ${prefix}dbmenu      │ 🧪 ${prefix}othermenu\n` +
+        `╰──────────────────────╯\n\n` +
+        `💫 INFINITY MD - Powered by AI`;
 
       if (thumbnail) {
         await sock.sendMessage(chatId, {

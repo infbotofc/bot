@@ -30,45 +30,78 @@ module.exports = {
 
       const sentMsg = await sock.sendMessage(chatId, { text: caption }, { quoted: message });
 
+      let timedOut = false;
+      const safeOff = (fn) => {
+        try { sock.ev.off('messages.upsert', fn); } catch (e) { }
+      };
+
       const timeout = setTimeout(async () => {
-        sock.ev.off('messages.upsert', listener);
-        await sock.sendMessage(chatId, { text: '⌛ Selection expired. Please search again.' }, { quoted: sentMsg });
+        timedOut = true;
+        safeOff(listener);
+        try {
+          await sock.sendMessage(chatId, { text: '⌛ Selection expired. Please search again.' }, { quoted: sentMsg }).catch(() => {});
+        } catch (e) {}
       }, 3 * 60 * 1000);
 
       const listener = async ({ messages }) => {
-        const m = messages[0];
-        if (!m?.message || m.key.remoteJid !== chatId) return;
+        try {
+          const m = Array.isArray(messages) ? messages[0] : messages;
+          if (!m || !m.message) return;
+          const from = m.key && (m.key.remoteJid || m.key.participant || null) || null;
+          if (!from || from !== chatId) return;
 
-        const ctx = m.message?.extendedTextMessage?.contextInfo;
-        if (!ctx?.stanzaId || ctx.stanzaId !== sentMsg.key.id) return;
+          const ctx = m.message?.extendedTextMessage?.contextInfo;
+          if (!ctx?.stanzaId || !sentMsg?.key?.id || ctx.stanzaId !== sentMsg.key.id) return;
 
-        const replyText = m.message.conversation || m.message.extendedTextMessage?.text || '';
-        const choice = parseInt(replyText.trim());
-        if (isNaN(choice) || choice < 1 || choice > results.length)
-          return await sock.sendMessage(chatId, { text: `❌ Invalid choice. Pick 1-${results.length}.` }, { quoted: m });
+          const replyText = m.message.conversation || m.message.extendedTextMessage?.text || '';
+          const choice = parseInt((replyText || '').trim());
+          if (isNaN(choice) || choice < 1 || choice > results.length) {
+            await sock.sendMessage(chatId, { text: `❌ Invalid choice. Pick 1-${results.length}.` }, { quoted: m }).catch(() => {});
+            return;
+          }
 
-        clearTimeout(timeout);
-        sock.ev.off('messages.upsert', listener);
+          if (timedOut) return;
+          clearTimeout(timeout);
+          safeOff(listener);
 
-        const selected = results[choice - 1];
-        await sock.sendMessage(chatId, { text: `⬇️ Downloading *${selected.title}*...\n⏳ Please wait...` }, { quoted: m });
+          const selected = results[choice - 1];
+          await sock.sendMessage(chatId, { text: `⬇️ Downloading *${selected.title}*...\n⏳ Please wait...` }, { quoted: m }).catch(() => {});
 
-        const dlUrl = `https://discardapi.dpdns.org/api/apk/dl/apkmirror?apikey=guru&url=${encodeURIComponent(selected.url)}`;
-        const dlRes = await axios.get(dlUrl);
+          const dlUrl = `https://discardapi.dpdns.org/api/apk/dl/apkmirror?apikey=guru&url=${encodeURIComponent(selected.url)}`;
+          let dlRes;
+          try {
+            dlRes = await axios.get(dlUrl, { timeout: 20000 });
+          } catch (e) {
+            await sock.sendMessage(chatId, { text: '❌ Failed to fetch APK details (network).' }, { quoted: m }).catch(() => {});
+            return;
+          }
 
-        const apk = dlRes.data?.result;
-        if (!apk) return await sock.sendMessage(chatId, { text: '❌ Failed to fetch APK details.' }, { quoted: m });
+          const apk = dlRes?.data?.result;
+          if (!apk) {
+            await sock.sendMessage(chatId, { text: '❌ Failed to fetch APK details.' }, { quoted: m }).catch(() => {});
+            return;
+          }
 
-        const info =
-          `📦 *APK Download Info*\n\n` +
-          `📛 Name: ${apk.name}\n` +
-          `📦 Size: ${apk.size}\n` +
-          `📥 Downloads: ${apk.downloads}\n` +
-          `📦 Package: ${apk.package}\n` +
-          `📅 Uploaded: ${apk.uploaded}\n` +
-          `🔢 Version: ${apk.version}`;
+          const info =
+            `📦 *APK Download Info*\n\n` +
+            `📛 Name: ${apk.name || 'N/A'}\n` +
+            `📦 Size: ${apk.size || 'N/A'}\n` +
+            `📥 Downloads: ${apk.downloads || 'N/A'}\n` +
+            `📦 Package: ${apk.package || 'N/A'}\n` +
+            `📅 Uploaded: ${apk.uploaded || 'N/A'}\n` +
+            `🔢 Version: ${apk.version || 'N/A'}`;
 
-        await sock.sendMessage(chatId, { image: { url: apk.icon }, caption: info }, { quoted: m });
+          if (apk.icon) {
+            await sock.sendMessage(chatId, { image: { url: apk.icon }, caption: info }, { quoted: m }).catch(async () => {
+              await sock.sendMessage(chatId, { text: info + `\n\nDownload: ${apk.download || apk.url || 'N/A'}` }, { quoted: m }).catch(() => {});
+            });
+          } else {
+            await sock.sendMessage(chatId, { text: info + `\n\nDownload: ${apk.download || apk.url || 'N/A'}` }, { quoted: m }).catch(() => {});
+          }
+        } catch (err) {
+          console.error('❌ APKMirror listener error:', err);
+          try { safeOff(listener); clearTimeout(timeout); } catch (e) {}
+        }
       };
 
       sock.ev.on('messages.upsert', listener);

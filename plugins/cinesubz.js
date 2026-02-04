@@ -1,6 +1,7 @@
 const axios = require('axios');
 const store = require('../lib/lightweight_store');
 const { fromBuffer } = require('file-type');
+const cheerio = require('cheerio');
 
 module.exports = {
   command: 'cinesubz',
@@ -171,9 +172,36 @@ module.exports = {
             await sock.sendMessage(chatId, { text: `⬇️ Downloading selection #${choice2}... This may take a while depending on file size.` }, { quoted: mm });
 
             try {
-              const resBuf = await axios.get(finalUrl, { responseType: 'arraybuffer', timeout: 5 * 60 * 1000 });
-              const buffer = Buffer.from(resBuf.data, 'binary');
-              const type = await fromBuffer(buffer);
+              // Try direct fetch
+              let resBuf = await axios.get(finalUrl, { responseType: 'arraybuffer', timeout: 5 * 60 * 1000, maxRedirects: 10, headers: { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64)' } });
+              let buffer = Buffer.from(resBuf.data, 'binary');
+              let type = await fromBuffer(buffer);
+
+              // If response is HTML or not a media file, attempt to extract a real media URL from the page
+              const looksLikeHtml = !type || (type && type.mime && type.mime.startsWith('text')) || buffer.slice(0, 16).toString().trim().startsWith('<');
+              if (looksLikeHtml) {
+                try {
+                  const textRes = await axios.get(finalUrl, { responseType: 'text', timeout: 20000, maxRedirects: 10, headers: { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64)' } });
+                  const html = textRes.data || '';
+                  // Try regex for direct mp4 links
+                    const mp4Match = html.match(/https?:\/\/[^'"\s>]+\.mp4/gi);
+                  let realUrl = mp4Match && mp4Match.length ? mp4Match[0] : null;
+                  if (!realUrl) {
+                    // Try parsing common video/source tags
+                    const $ = cheerio.load(html);
+                    const source = $('video source[src]').attr('src') || $('video[src]').attr('src') || $('a[href$=".mp4"]').attr('href');
+                    if (source) realUrl = new URL(source, finalUrl).toString();
+                  }
+                  if (realUrl) {
+                    // fetch the real url
+                    resBuf = await axios.get(realUrl, { responseType: 'arraybuffer', timeout: 5 * 60 * 1000, maxRedirects: 10, headers: { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64)' } });
+                    buffer = Buffer.from(resBuf.data, 'binary');
+                    type = await fromBuffer(buffer);
+                  }
+                } catch (htmlErr) {
+                  console.warn('Cinesubz: HTML resolution failed', htmlErr && htmlErr.message);
+                }
+              }
 
               const safeTitle = (movie.title || 'movie').replace(/[^a-zA-Z0-9 _.-]/g, '_').slice(0, 200);
               const ext = (type && type.ext) ? type.ext : 'mp4';
