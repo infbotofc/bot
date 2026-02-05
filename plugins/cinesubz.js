@@ -180,7 +180,7 @@ module.exports = {
                 for (let i = 0; i < attempts; i++) {
                   try {
                     const tmpFile = path.join(os.tmpdir(), `cinesubz_${Date.now()}_${Math.random().toString(36).slice(2,8)}`);
-                    const res = await axios.get(url, { responseType: 'stream', timeout: 5 * 60 * 1000, maxRedirects: 10, headers: { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64)' } });
+                    const res = await axios.get(url, { responseType: 'stream', timeout: 5 * 60 * 1000, maxRedirects: 10, headers: { 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64)', 'Referer': selectedUrl || 'https://cinesubz.lk' } });
                     const ctype = (res.headers && res.headers['content-type']) || '';
                     const clen = parseInt(res.headers && res.headers['content-length'] || '0');
 
