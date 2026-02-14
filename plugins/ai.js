@@ -7,45 +7,11 @@ module.exports = {
   description: 'Ask the AI (requires AI_API_KEY in env)',
   usage: '.ai <prompt>',
 
-  async handler(sock, message, args, context = {}) {
-    const chatId = context.chatId || message.key.remoteJid;
-    const prompt = args.join(' ').trim() || (message.message?.conversation || '').trim();
-
-    if (!prompt) {
-      return await sock.sendMessage(chatId, { text: 'Usage: .ai <prompt>' }, { quoted: message });
+    async handler(sock, message, args, context = {}) {
+      const chatId = context.chatId || message.key.remoteJid;
+      await sock.sendMessage(chatId, { text: 'AI feature is temporarily unavailable.' }, { quoted: message });
     }
-
-    const apiKey = process.env.AI_API_KEY;
-    module.exports = {
-      command: 'ai',
-      aliases: ['ask','gpt','chat'],
-      category: 'ai',
-      description: 'Ask the AI (feature temporarily unavailable)',
-      usage: '.ai <prompt>',
-
-      async handler(sock, message, args, context = {}) {
-        const chatId = context.chatId || message.key.remoteJid;
-        await sock.sendMessage(chatId, { text: 'AI feature is temporarily unavailable.' }, { quoted: message });
-      }
-    };
- *  💬  WhatsApp :      *
- *                                                                           *
- *    © 2026 GlobalTechInfo. All rights reserved.                            *
- *                                                                           *
- *    Description: This file is part of the Infinity MD Project.                 *
- *                 Unauthorized copying or distribution is prohibited.       *
- *                                                                           *
- *****************************************************************************/
-
-
-const axios = require('axios');
-const fetch = require('node-fetch');
-
-module.exports = {
-  command: 'gpt',
-  aliases: ['gemini', 'ai', 'chat'],
-  category: 'ai',
-  description: 'Ask a question to AI (GPT or Gemini)',
+  };
   usage: '.gpt <question> or .gemini <question>',
   async handler(sock, message, args, context = {}) {
     const chatId = context.chatId || message.key.remoteJid;

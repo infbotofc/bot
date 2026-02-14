@@ -167,11 +167,9 @@ async function fetchWithRetry(url, maxRetries = 3, baseDelay = 2000) {
       category: "music",
       description: "Download song from YouTube (MP3)",
       usage: ".song <song name | youtube link>",
-
       async handler(sock, message, args, context = {}) {
         const chatId = context.chatId || message.key.remoteJid;
         const query = args.join(" ").trim();
-
         if (!query) {
           return sock.sendMessage(
             chatId,
@@ -184,26 +182,20 @@ async function fetchWithRetry(url, maxRetries = 3, baseDelay = 2000) {
             { quoted: message }
           );
         }
-
         try {
           let youtubeUrl;
           let videoInfo = null;
-
           if (isYouTubeLink(query)) {
             youtubeUrl = query;
-
             const id = extractVideoId(query);
             if (id) {
               try {
                 videoInfo = await yts({ videoId: id });
-              } catch (e) {
-                // ignore
-              }
+              } catch (e) {}
             }
           } else {
             const results = await yts(query);
             const first = results?.videos?.[0];
-
             if (!first) {
               return sock.sendMessage(
                 chatId,
@@ -211,15 +203,12 @@ async function fetchWithRetry(url, maxRetries = 3, baseDelay = 2000) {
                 { quoted: message }
               );
             }
-
             videoInfo = first;
             youtubeUrl = first.url;
           }
-
           const caption = videoInfo
             ? `🎶 *${videoInfo.title}*\n⏱ Duration: ${videoInfo.timestamp || "Unknown"}\n\n⏳ Downloading...`
             : "⏳ Downloading...";
-
           if (videoInfo?.thumbnail) {
             await sock.sendMessage(
               chatId,
@@ -229,20 +218,14 @@ async function fetchWithRetry(url, maxRetries = 3, baseDelay = 2000) {
           } else {
             await sock.sendMessage(chatId, { text: caption }, { quoted: message });
           }
-
           const apiUrl = buildMp3ApiUrl(youtubeUrl);
-
           const apiRes = await apiLimiter.add(() => fetchWithRetry(apiUrl, { maxRetries: 4, baseDelay: 1200 }));
-
           if (!apiRes?.success || !apiRes?.data?.downloadUrl) {
             throw new Error("INVALID_API_RESPONSE");
           }
-
           const data = apiRes.data;
-
           const candidates = [];
           if (data.downloadUrl) candidates.push(data.downloadUrl);
-
           if (Array.isArray(data.alternativeUrls)) {
             for (const item of data.alternativeUrls) {
               if (!item) continue;
@@ -253,13 +236,10 @@ async function fetchWithRetry(url, maxRetries = 3, baseDelay = 2000) {
               if (!item.has_ssl && item.url) candidates.push(item.url);
             }
           }
-
           const title = sanitizeFileName(data.title || videoInfo?.title || "song");
           const fileName = `${title}.mp3`;
-
           let sent = false;
           let lastSendError = null;
-
           for (const url of candidates) {
             try {
               await sock.sendMessage(
@@ -278,12 +258,10 @@ async function fetchWithRetry(url, maxRetries = 3, baseDelay = 2000) {
               lastSendError = e;
             }
           }
-
           if (!sent && candidates.length) {
             for (const url of candidates) {
               try {
                 const buf = await downloadToBuffer(url, 60000);
-
                 await sock.sendMessage(
                   chatId,
                   {
@@ -294,7 +272,6 @@ async function fetchWithRetry(url, maxRetries = 3, baseDelay = 2000) {
                   },
                   { quoted: message }
                 );
-
                 sent = true;
                 break;
               } catch (e) {
@@ -302,17 +279,13 @@ async function fetchWithRetry(url, maxRetries = 3, baseDelay = 2000) {
               }
             }
           }
-
           if (!sent) {
             throw lastSendError || new Error("ALL_URLS_FAILED");
           }
         } catch (err) {
           console.error("Song plugin error:", err);
-
           let msg = "❌ Failed to download song. ";
-
           const m = String(err?.message || err);
-
           if (m.includes("RATE_LIMIT") || m.includes("429") || m.includes("Rate")) {
             msg += "Service is busy. Try again in a minute.";
           } else if (m.includes("INVALID_API_RESPONSE")) {
@@ -324,7 +297,6 @@ async function fetchWithRetry(url, maxRetries = 3, baseDelay = 2000) {
           } else {
             msg += "Please try again later.";
           }
-
           await sock.sendMessage(chatId, { text: msg }, { quoted: message });
         }
       },

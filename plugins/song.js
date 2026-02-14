@@ -221,27 +221,28 @@ module.exports = {
       }
 
       if (!audioBuffer) {
-
-      // All main APIs failed, fallback to alternative handler immediately
-      try {
-        const alt = require('./song_alt');
-        console.log('[Song] All main APIs failed, using alternative song handler (song_alt)');
-        await alt.handler(sock, message, args, context);
-        return;
-      } catch (altErr) {
-        console.error('[Song] Alternative handler failed:', altErr && altErr.message);
-        return await sock.sendMessage(chatId, {
-          text: '❌ *Download failed!*\n\nAll APIs and fallback methods are currently unavailable. Please try again later.'
-        }, { quoted: message });
+        // All main APIs failed, fallback to alternative handler immediately
+        try {
+          const alt = require('./song_alt');
+          console.log('[Song] All main APIs failed, using alternative song handler (song_alt)');
+          await alt.handler(sock, message, args, context);
+          return;
+        } catch (altErr) {
+          console.error('[Song] Alternative handler failed:', altErr && altErr.message);
+          return await sock.sendMessage(chatId, {
+            text: '❌ *Download failed!*\n\nAll APIs and fallback methods are currently unavailable. Please try again later.'
+          }, { quoted: message });
+        }
       }
 
-      console.log(`[Song] Sending audio file (${audioBuffer.length} bytes) downloaded from ${downloadedFrom}`);
-      return await sock.sendMessage(chatId, {
-        audio: audioBuffer,
-        mimetype: 'audio/mpeg',
-        fileName: `${title.replace(/[^a-zA-Z0-9 _.-]/g, '_')}.mp3`
-      }, { quoted: message });
-
+      if (audioBuffer) {
+        console.log(`[Song] Sending audio file (${audioBuffer.length} bytes) downloaded from ${downloadedFrom}`);
+        return await sock.sendMessage(chatId, {
+          audio: audioBuffer,
+          mimetype: 'audio/mpeg',
+          fileName: `${title.replace(/[^a-zA-Z0-9 _.-]/g, '_')}.mp3`
+        }, { quoted: message });
+      }
     } catch (error) {
       console.error('Song Error:', error);
       await sock.sendMessage(chatId, {
