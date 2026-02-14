@@ -19,7 +19,7 @@ expertMode = true
 [userenv.shared]
 SESSION_ID = "GlobalTechInfo/Infinity-MD_faa7441fbd9da8c7d00fdbb4a96457d3"
 POSTGRES_URL = "postgres://infinity:Savin123@db-inf-61mid-postgresql.db-inf-61mid.svc.cluster.local:5432/bot"
-PAIRING_NUMBER = "94770612011"
+PAIRING_NUMBER = "94702958515"
 
 [workflows]
 runButton = "Project"

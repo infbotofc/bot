@@ -30,16 +30,24 @@ module.exports = {
       await sock.sendPresenceUpdate('composing', chatId);
       
       const search = await yts(query);
-      if (!search.all || search.all.length === 0) {
-        return await sock.sendMessage(chatId, { text: '❌ No songs found!' }, { quoted: message });
+      // Prefer video results only (songs). yts returns arrays: videos, playlists, etc.
+      let topResult = null;
+      if (search && Array.isArray(search.videos) && search.videos.length > 0) {
+        // pick first reasonable video result (duration between 30s and 2 hours)
+        topResult = search.videos.find(v => (v.seconds || 0) > 30 && (v.seconds || 0) < 2 * 60 * 60) || search.videos[0];
+      } else if (search && Array.isArray(search.all) && search.all.length > 0) {
+        // fallback: pick first item that's a video
+        topResult = search.all.find(i => i.type === 'video') || search.all[0];
       }
 
-      const topResult = search.all[0];
-      const videoUrl = topResult.url;
-      const title = topResult.title;
-      const duration = topResult.timestamp;
-      const author = topResult.author.name;
-      const thumbnail = topResult.thumbnail;
+      if (!topResult) {
+        return await sock.sendMessage(chatId, { text: '❌ No songs found!' }, { quoted: message });
+      }
+      const videoUrl = topResult.url || topResult.videoId ? `https://youtu.be/${topResult.videoId || ''}` : '';
+      const title = topResult.title || topResult.name || 'Unknown Title';
+      const duration = topResult.timestamp || topResult.duration || 'Unknown';
+      const author = (topResult.author && topResult.author.name) || topResult.author || 'Unknown Artist';
+      const thumbnail = topResult.thumbnail || (topResult.image && topResult.image.url) || '';
 
       const infoText = `╭───〔 🎵 *SONG INFO* 〕───
 │
