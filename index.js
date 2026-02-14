@@ -1,5 +1,10 @@
 /* process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; */
 
+// Load environment variables from .env (do NOT commit your real .env to git)
+try {
+    require('dotenv').config();
+} catch (e) {}
+
 require('./config');
 require('./settings');
 
