@@ -200,14 +200,28 @@ server.listen(PORT, () => {
     printLog('success', `Server listening on port ${PORT}`);
 });
 
+let _startingQasim = false;
 async function startQasimDev() {
     try {
+        if (_startingQasim) {
+            printLog('info', 'startQasimDev already running, skipping duplicate start');
+            return;
+        }
+        _startingQasim = true;
         let { version, isLatest } = await fetchLatestBaileysVersion();
         
         ensureSessionDirectory();
         await delay(1000);
         
-        const { state, saveCreds } = await useMultiFileAuthState(`./session`);
+        let state, saveCreds;
+        try {
+            ({ state, saveCreds } = await useMultiFileAuthState(`./session`));
+        } catch (err) {
+            printLog('error', `Failed to load auth state: ${err.message}. Clearing session and retrying.`);
+            try { rmSync('./session', { recursive: true, force: true }); } catch (e) {}
+            await delay(1000);
+            ({ state, saveCreds } = await useMultiFileAuthState(`./session`));
+        }
         const msgRetryCounterCache = new NodeCache();
 
         const hasRegisteredCreds = state.creds && state.creds.registered !== undefined;
@@ -523,9 +537,16 @@ async function startQasimDev() {
                 }
                 
                 if (shouldReconnect) {
+                    // attempt to cleanly shutdown previous socket and listeners before restarting
+                    try {
+                        QasimDev.ev.removeAllListeners();
+                    } catch (e) {}
+                    try { if (QasimDev.end) await QasimDev.end(); } catch (e) {}
+
                     const waitTime = [440, 503, 515].includes(statusCode) ? 10000 : 5000;
                     printLog('connection', `Reconnecting in ${waitTime / 1000} seconds...`);
                     await delay(waitTime);
+                    _startingQasim = false;
                     startQasimDev();
                 }
             }
@@ -547,6 +568,7 @@ async function startQasimDev() {
             await handleStatus(QasimDev, reaction);
         });
 
+        _startingQasim = false;
         return QasimDev;
     } catch (error) {
         printLog('error', `Error in startQasimDev: ${error.message}`);
@@ -555,7 +577,7 @@ async function startQasimDev() {
             rl.close();
             rl = null;
         }
-        
+        _startingQasim = false;
         await delay(5000);
         startQasimDev();
     }
