@@ -87,8 +87,7 @@
     "syntax-error": "^1.4.0",
     "wa-sticker-formatter": "^4.4.4",
     "yt-search": "^2.12.1",
-    "ytdl-core": "^4.11.5",
-    "groq-sdk": "^1.0.0"
+    "ytdl-core": "^4.11.5"
   },
   "overrides": {
     "wa-sticker-formatter": {
