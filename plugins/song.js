@@ -221,90 +221,17 @@ module.exports = {
       }
 
       if (!audioBuffer) {
-        // Fallback: try streaming directly with ytdl-core
-        try {
-          console.log('[Song] Attempting ytdl-core fallback...');
-          const tmpFile = path.join(os.tmpdir(), `song_ytdl_${Date.now()}_${Math.random().toString(36).slice(2,8)}.tmp`);
-          const stream = ytdl(videoUrl, { quality: 'highestaudio', filter: 'audioonly' });
-          const writer = fs.createWriteStream(tmpFile);
-          await new Promise((resolve, reject) => {
-            stream.pipe(writer);
-            stream.on('error', reject);
-            writer.on('finish', resolve);
-            writer.on('error', reject);
-          });
 
-          const stats = fs.statSync(tmpFile);
-          if (stats.size >= 5000) {
-            if (stats.size <= 25 * 1024 * 1024) {
-              audioBuffer = fs.readFileSync(tmpFile);
-              downloadedFrom = 'ytdl-core';
-              try { fs.unlinkSync(tmpFile); } catch {}
-              console.log(`[Song] ✓ ytdl-core fallback succeeded (${audioBuffer.length} bytes)`);
-            } else {
-              // Send large files as documents
-              const streamOut = fs.createReadStream(tmpFile);
-              downloadedFrom = 'ytdl-core';
-              await sock.sendMessage(chatId, {
-                document: streamOut,
-                mimetype: 'audio/mpeg',
-                fileName: `${title.replace(/[^a-zA-Z0-9 _.-]/g, '_')}.mp3`
-              }, { quoted: message });
-              try { fs.unlinkSync(tmpFile); } catch (e) {}
-              return;
-            }
-          } else {
-            try { fs.unlinkSync(tmpFile); } catch (e) {}
-            throw new Error('ytdl produced too small file');
-          }
-        } catch (e) {
-          console.warn('[Song] ytdl-core fallback failed:', e.message || e);
-          // Last resort: try yt-dlp approach via RapidAPI
-          try {
-            console.log('[Song] Attempting last resort API...');
-            const lastResortUrl = `https://yt-dlp-api.p.rapidapi.com/dl?url=${encodeURIComponent(videoUrl)}`;
-            const response = await axios.get(lastResortUrl, {
-              headers: {
-                'X-RapidAPI-Key': '6c8e5e7f31mshc0a5f8c5a3e9f8f8f8f',
-                'X-RapidAPI-Host': 'yt-dlp-api.p.rapidapi.com'
-              },
-              timeout: 60000
-            });
-
-            if (response.data?.data?.formats) {
-              const audioFormat = response.data.data.formats
-                .filter(f => f.vcodec === 'none' || f.acodec)
-                .sort((a, b) => (b.abr || 0) - (a.abr || 0))[0];
-              if (audioFormat?.url) {
-                const fileResponse = await axios.get(audioFormat.url, {
-                  responseType: 'arraybuffer',
-                  timeout: 120000,
-                  maxRedirects: 5
-                });
-                audioBuffer = Buffer.from(fileResponse.data, 'binary');
-                downloadedFrom = 'Last Resort API';
-                console.log(`[Song] ✓ Last resort API succeeded`);
-              }
-            }
-          } catch (le) {
-            console.error('[Song] Last resort failed:', le.message || le);
-          }
-        }
-      }
-
-      if (!audioBuffer) {
-        // Try alternative plugin before failing
-        try {
-          const alt = require('./song_alt');
-          console.log('[Song] Trying alternative song handler (song_alt)');
-          await alt.handler(sock, message, args, context);
-          return;
-        } catch (altErr) {
-          console.error('[Song] Alternative handler failed:', altErr && altErr.message);
-        }
-
+      // All main APIs failed, fallback to alternative handler immediately
+      try {
+        const alt = require('./song_alt');
+        console.log('[Song] All main APIs failed, using alternative song handler (song_alt)');
+        await alt.handler(sock, message, args, context);
+        return;
+      } catch (altErr) {
+        console.error('[Song] Alternative handler failed:', altErr && altErr.message);
         return await sock.sendMessage(chatId, {
-          text: '❌ *Download failed!*\n\nAll APIs are currently unavailable. Please try again in a moment.'
+          text: '❌ *Download failed!*\n\nAll APIs and fallback methods are currently unavailable. Please try again later.'
         }, { quoted: message });
       }
 
