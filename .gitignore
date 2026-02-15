@@ -34,4 +34,4 @@
  *.njsproj
  *.sln
  *.sw?
-session/
+ # session/  # Removed to allow session files to be tracked by git

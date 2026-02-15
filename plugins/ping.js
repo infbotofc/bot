@@ -82,48 +82,10 @@ module.exports = {
 
   async handler(sock, message) {
     const chatId = message.key.remoteJid;
-
     const ms = await dnsPing('google.com', 2000);
-    const g = grade(ms);
-
-    const mem = process.memoryUsage();
-    const rss = mb(mem.rss || 0);
-    const heapU = mb(mem.heapUsed || 0);
-    const heapT = mb(mem.heapTotal || 0);
-
-    const botName = (settings.botName || 'Infinity MD').toString();
-    const version = (settings.version || 'unknown').toString();
-
-    // MOBILE-FIRST LINES (short!)
-    const lines = [
-      '  ⚡ INFINITY MD PING ⚡  ',
-      '────────────────────────',
-      `🏓 Ping : ${ms < 0 ? 'N/A' : ms.toFixed(0) + 'ms'}  ${g.icon} ${g.txt}`,
-      `⏱ Up   : ${uptimeShort(process.uptime())}`,
-      `💾 RAM  : ${rss}MB`,
-      `📦 Heap : ${heapU}/${heapT}MB`,
-      `🖥 OS   : ${os.type()} ${os.arch()}`,
-      `🏷 Ver  : v${version}`,
-      '────────────────────────',
-      '  ✅ Online & Ready  ',
-    ];
-
-    const caption = box(lines);
-
-    try {
-      const imgPath = pickRandomAsset();
-      if (imgPath && fs.existsSync(imgPath)) {
-        await sock.sendMessage(
-          chatId,
-          { image: fs.readFileSync(imgPath), caption },
-          { quoted: message }
-        );
-      } else {
-        await sock.sendMessage(chatId, { text: caption }, { quoted: message });
-      }
-    } catch {
-      await sock.sendMessage(chatId, { text: caption }, { quoted: message });
-    }
+    const uptime = uptimeShort(process.uptime());
+    const statusMsg = `╭━━〔 🤖 BOT STATUS 〕━━⬣\n┃ ⚡ Speed     : ${ms < 0 ? 'N/A' : ms.toFixed(0) + ' ms'}\n┃ 🧠 Response  : Active\n┃ ⏱ Uptime    : ${uptime}\n┃ 📡 Server    : Online\n╰━━━━━━━━━━━━━━⬣\n\n✨ Everything working perfectly!`;
+    await sock.sendMessage(chatId, { text: statusMsg }, { quoted: message });
   }
 };
 
