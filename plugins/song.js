@@ -1,5 +1,6 @@
 const yts = require('yt-search');
-const ytdl = require('ytdl-core');
+// use patched ytdl-core from distube which handles YouTube changes more reliably
+const ytdl = require('@distube/ytdl-core');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -19,19 +20,24 @@ module.exports = {
         text: '🎵 *Which song do you want to download?*\n\nUsage: .song <song name>'
       }, { quoted: message });
     }
+
     const tmpFile = path.join(os.tmpdir(), `song_${Date.now()}.mp3`);
     try {
       await sock.sendPresenceUpdate('composing', chatId);
+
+      // perform search
       const search = await yts(query);
       const video = (search?.videos || []).find(v => (v.seconds || 0) > 30 && (v.seconds || 0) < 2 * 60 * 60) || (search?.videos || [])[0];
       if (!video || !video.url) {
         return sock.sendMessage(chatId, { text: '❌ No YouTube songs found!' }, { quoted: message });
       }
+
       const videoUrl = video.url;
       const title = video.title || 'Unknown Title';
       const duration = video.timestamp || 'Unknown';
       const author = video.author?.name || video.author || 'Unknown Artist';
       const thumbnail = video.thumbnail || '';
+
       const infoText =
         `╭───〔 🎵 *SONG INFO* 〕───\n` +
         `│ 📝 *Title:* ${title}\n` +
@@ -41,23 +47,31 @@ module.exports = {
         `╰───────────────────\n\n` +
         `⏳ *Downloading audio...*\n\n` +
         `> 💫 *INFINITY MD BOT*`;
+
       await sock.sendMessage(chatId, {
         image: { url: thumbnail },
         caption: infoText
       }, { quoted: message });
+
       await sock.sendPresenceUpdate('recording', chatId);
+
+      // download via ytdl-core (patched version)
       await new Promise((resolve, reject) => {
         const stream = ytdl(videoUrl, {
           filter: 'audioonly',
           quality: 'highestaudio',
           highWaterMark: 1 << 25
         });
+        stream.on('error', err => {
+          console.error('[Song] ytdl error:', err.message || err);
+          reject(err);
+        });
         const write = fs.createWriteStream(tmpFile);
         stream.pipe(write);
-        stream.on('error', reject);
         write.on('error', reject);
         write.on('finish', resolve);
       });
+
       const size = fs.statSync(tmpFile).size;
       const safeName = title.replace(/[^a-zA-Z0-9 _.-]/g, '_');
       if (size <= 25 * 1024 * 1024) {
@@ -80,7 +94,9 @@ module.exports = {
         text: `❌ *Download failed!*\n\n*Error:* ${err.message || err}`
       }, { quoted: message });
     } finally {
-      try { if (fs.existsSync(tmpFile)) fs.unlinkSync(tmpFile); } catch {}
+      try {
+        if (fs.existsSync(tmpFile)) fs.unlinkSync(tmpFile);
+      } catch {}
       await sock.sendPresenceUpdate('paused', chatId);
     }
   }
