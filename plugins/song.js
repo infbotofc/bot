@@ -1,4 +1,3 @@
-const axios = require('axios');
 const yts = require('yt-search');
 const ytdl = require('ytdl-core');
 const fs = require('fs');
@@ -23,16 +22,13 @@ module.exports = {
     const tmpFile = path.join(os.tmpdir(), `song_${Date.now()}.mp3`);
     try {
       await sock.sendPresenceUpdate('composing', chatId);
-      // Search YouTube
+      // Search YouTube only
       const search = await yts(query);
       const video = (search?.videos || []).find(v => (v.seconds || 0) > 30 && (v.seconds || 0) < 2 * 60 * 60) || (search?.videos || [])[0];
-      if (!video) {
-        return sock.sendMessage(chatId, { text: '❌ No songs found!' }, { quoted: message });
+      if (!video || !video.url) {
+        return sock.sendMessage(chatId, { text: '❌ No YouTube songs found!' }, { quoted: message });
       }
-      const videoUrl = video.url || (video.videoId ? `https://youtu.be/${video.videoId}` : '');
-      if (!videoUrl) {
-        return sock.sendMessage(chatId, { text: '❌ Could not build YouTube URL.' }, { quoted: message });
-      }
+      const videoUrl = video.url;
       const title = video.title || 'Unknown Title';
       const duration = video.timestamp || 'Unknown';
       const author = video.author?.name || video.author || 'Unknown Artist';
@@ -51,7 +47,7 @@ module.exports = {
         caption: infoText
       }, { quoted: message });
       await sock.sendPresenceUpdate('recording', chatId);
-      // Download audio using ytdl-core
+      // Download audio using ytdl-core (YouTube only)
       await new Promise((resolve, reject) => {
         const stream = ytdl(videoUrl, {
           filter: 'audioonly',
