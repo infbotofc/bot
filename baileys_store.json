@@ -2,7 +2,7 @@
   "contacts": {
     "228209480200306@lid": {
       "id": "228209480200306@lid",
-      "name": "Infintiy AI"
+      "name": "Savi"
     },
     "55138840477821@lid": {
       "id": "55138840477821@lid",
@@ -13,7 +13,7 @@
     "228209480200306@lid": {
       "id": "228209480200306@lid",
       "name": "",
-      "conversationTimestamp": 1770183884,
+      "conversationTimestamp": 1771119773,
       "unreadCount": 1
     },
     "55138840477821@lid": {
@@ -30,7 +30,7 @@
     "171713513922633@lid": {
       "id": "171713513922633@lid",
       "name": "",
-      "conversationTimestamp": 1771087720
+      "conversationTimestamp": 1771122023
     }
   },
   "botMode": "public",
@@ -539,97 +539,6 @@
       {
         "key": {
           "remoteJid": "228209480200306@lid",
-          "fromMe": true,
-          "id": "3EB021B4D52FA09E323EE7"
-        },
-        "message": {
-          "extendedTextMessage": {
-            "text": "*🤖 INFINITY MD IS ACTIVE!*\n\n*Version:* 5.1.0\n*Uptime:* 2m 29s\n*RAM Usage:* 3276.31 MB / 7944.66 MB\n*CPU Load:* 0.81\n*Platform:* linux (x64)\n*Node.js:* v24.11.1\n\n> 💫 *INFINITY MD BOT* - Powered by AI",
-            "contextInfo": {
-              "stanzaId": "AC73E2F71B3A6F6270836FFBD7975F36",
-              "participant": "228209480200306@lid",
-              "quotedMessage": {
-                "conversation": ".status"
-              }
-            }
-          }
-        },
-        "messageTimestamp": {
-          "low": 1770138153,
-          "high": 0,
-          "unsigned": true
-        },
-        "participant": null,
-        "pushName": null,
-        "broadcast": null
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": false,
-          "id": "AC0D625D0CB316C8AB32B468C549338E",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "message": {
-          "conversation": ".song natabo",
-          "messageContextInfo": {
-            "deviceListMetadata": {
-              "senderKeyHash": "VjoITV7ta09cdQ==",
-              "senderTimestamp": "1770078384",
-              "recipientKeyHash": "tISlBz230BWlQg==",
-              "recipientTimestamp": "1770138046"
-            },
-            "deviceListMetadataVersion": 2,
-            "messageSecret": "r79+kc92Oh+l7OtFO12jpUx+GE9iQiXMswEBxbsqMXc="
-          }
-        },
-        "messageTimestamp": 1770138222,
-        "pushName": "Infintiy AI",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "fromMe": true,
-          "id": "3EB05D2032880095626028"
-        },
-        "message": {
-          "imageMessage": {
-            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m232/AQMD5TAJvJSk8pP4Cc7uqN3YPfYJJeyHkrsN-DMqBZCZXJdq2BKY0msvUvnn6NlpPUXs4uDUb8Ca9WK8_RabGZgHGRUVgBTVfPN4JMmrng?ccb=9-4&oh=01_Q5Aa3gFV29sD7z3t-g4Q4-w2OjDQcJkvx5m9W3uNGsKNmRXy9Q&oe=69A987FC&_nc_sid=e6ed6c&mms3=true",
-            "mimetype": "image/jpeg",
-            "caption": "╭───〔 🎵 *SONG INFO* 〕───\n│\n│ 📝 *Title:* Pokaz mody retro Natabo 2021 Polish Boogie Festival\n│ 👤 *Artist:* Natabo\n│ ⏱️ *Duration:* 2:23\n│ 🔗 *Link:* https://youtube.com/watch?v=kxvCTCROObs\n│\n╰───────────────────\n\n⏳ *Downloading audio...*\n\n> 💫 *INFINITY MD BOT*",
-            "fileSha256": "TQGUnOLzMSh51AkOBub/Zu0ANExPUi5QU8OWd9jXQvY=",
-            "fileLength": "9409",
-            "height": 360,
-            "width": 480,
-            "mediaKey": "ymsjf04yYycFYoXkZ5cGV45nHZz5ea1jgsnnUWvLwtU=",
-            "fileEncSha256": "2iBijRSOUjPKqGXusJ0RfeTokIX74jANj2gHnK6Koa8=",
-            "directPath": "/o1/v/t24/f2/m232/AQMD5TAJvJSk8pP4Cc7uqN3YPfYJJeyHkrsN-DMqBZCZXJdq2BKY0msvUvnn6NlpPUXs4uDUb8Ca9WK8_RabGZgHGRUVgBTVfPN4JMmrng?ccb=9-4&oh=01_Q5Aa3gFV29sD7z3t-g4Q4-w2OjDQcJkvx5m9W3uNGsKNmRXy9Q&oe=69A987FC&_nc_sid=e6ed6c",
-            "mediaKeyTimestamp": "1770138225",
-            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAYACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQCAwYF/8QAKRAAAgEDAwIEBwAAAAAAAAAAAQIDAAQRBRIhBjETFBYiQ1FxgZLB0f/EABYBAQEBAAAAAAAAAAAAAAAAAAECAP/EABgRAQEBAQEAAAAAAAAAAAAAAAABESFB/9oADAMBAAIRAxEAPwDPHR7MIziSYjOB2qsaXaFwoaU845YD9U/ZXfmLmOJreMK5780zq0RijVIIgviZy6ryDU2sRttBsbgcST5+ox9uKuPTNkPjS/kP5Tun3EgtRbBGWWAcrtzipzyzxhJWIEW7DZXFTtPrL2Wox21zHIwcqhzwK6j9TQi5EkSS7R2DAUUVeC9T9UwM8jtC4eQe5wozmoy9S27iH2SkrnfkDB+WBmiitZokzr//2Q==",
-            "contextInfo": {
-              "stanzaId": "AC0D625D0CB316C8AB32B468C549338E",
-              "participant": "228209480200306@lid",
-              "quotedMessage": {
-                "conversation": ".song natabo"
-              }
-            }
-          }
-        },
-        "messageTimestamp": {
-          "low": 1770138225,
-          "high": 0,
-          "unsigned": true
-        },
-        "participant": null,
-        "pushName": null,
-        "broadcast": null
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
           "remoteJidAlt": "94770612011@s.whatsapp.net",
           "fromMe": true,
           "id": "AC270C175B9C13CA646D62C8AE8A4B70",
@@ -1060,6 +969,111 @@
         "participant": null,
         "pushName": null,
         "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "remoteJidAlt": "94770612011@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACEA1C2EE9E171266B6A3ED4C7C94C1D",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": ".ping",
+            "previewType": "NONE",
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderTimestamp": "1771081999",
+              "recipientKeyHash": "U4oLWNFLnSCVug==",
+              "recipientTimestamp": "1771088794"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "UupYRiKlXFVb9lkvuS+Kk4M6aOzRoS/bmWtwqLlu0SI="
+          }
+        },
+        "messageTimestamp": 1771089171,
+        "pushName": "Savi",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "fromMe": true,
+          "id": "3EB01D8A8B7A5DFB10F16E"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m238/AQOD0a8jXqtuEOngoSkRDmoafcoYAz--qctOvZkUzHEGAFZzw42-mO2-Tm_hnj51R6GT7rm2sos_GuK6kVp1v2jgWwRDwdrAIbFIsXgtnw?ccb=9-4&oh=01_Q5Aa3wFfoq00lO_5e0QuqSpQ2VCtUavcKX8r2Mxnt6EEhfPtvw&oe=69B832FF&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "┌────────────────────────┐\n│  ⚡ INFINITY MD PING ⚡  │\n│────────────────────────│\n│🏓 Ping : 5ms  🟢 FAST  │\n│⏱ Up   : 3m             │\n│💾 RAM  : 198MB         │\n│📦 Heap : 75/78MB       │\n│🖥 OS   : Linux x64     │\n│🏷 Ver  : v1.0.1        │\n│────────────────────────│\n│  ✅ Online & Ready      │\n└────────────────────────┘",
+            "fileSha256": "dAMFMEyPcGB9tixbJmoGYbJVPOo5Jjt7wubgodlk14Y=",
+            "fileLength": "115913",
+            "height": 412,
+            "width": 1024,
+            "mediaKey": "muLWm6ZQLr1qQzPwNAA7NbvuS3clpaa/L+rlaTl0vjs=",
+            "fileEncSha256": "yMGbc1/Ls9TvRt6OkoShaLGpxsHRuoc2aEbDyGyhHrU=",
+            "directPath": "/o1/v/t24/f2/m238/AQOD0a8jXqtuEOngoSkRDmoafcoYAz--qctOvZkUzHEGAFZzw42-mO2-Tm_hnj51R6GT7rm2sos_GuK6kVp1v2jgWwRDwdrAIbFIsXgtnw?ccb=9-4&oh=01_Q5Aa3wFfoq00lO_5e0QuqSpQ2VCtUavcKX8r2Mxnt6EEhfPtvw&oe=69B832FF&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771089173",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAANACADASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAABAUAAwb/xAAjEAACAgICAgEFAAAAAAAAAAABAgMREiEABBMicTFRYaGx/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAME/8QAGBEAAwEBAAAAAAAAAAAAAAAAAAECERL/2gAMAwEAAhEDEQA/AMjB1gQScjo4473+eMet42jwjgLvGmT2Bejv54JketIXjrY+lckUxQMd25skGuSe0aZyA/sJ4FdmgRTGaZfUkXdfv+cVT9ZkiyItj7WDoD45fJMZExOX3218HlSyLY0OJWC30f/Z",
+            "contextInfo": {
+              "stanzaId": "ACEA1C2EE9E171266B6A3ED4C7C94C1D",
+              "participant": "228209480200306@lid",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".ping",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771089173,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "remoteJidAlt": "94770612011@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC5F8259183E5B7DAF05EB5DE4CC4FAE",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": ".ping",
+            "previewType": "NONE",
+            "contextInfo": {
+              "entryPointConversionSource": "phone_number_hyperlink",
+              "entryPointConversionApp": "whatsapp",
+              "entryPointConversionDelaySeconds": 30605
+            },
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderTimestamp": "1771081999",
+              "recipientKeyHash": "U4oLWNFLnSCVug==",
+              "recipientTimestamp": "1771088794"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "dN8aIaYGNeO3KGixRR/6xg2vvB6R8quja45KK7jhwVo="
+          }
+        },
+        "messageTimestamp": 1771119773,
+        "pushName": "Savi",
+        "broadcast": false
       }
     ],
     "55138840477821@lid": [
@@ -1924,6 +1938,45 @@
         },
         "messageTimestamp": 1771086785,
         "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "94702958515@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC9220936795A2BDF0A49930D925BC03",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "APP_STATE_SYNC_KEY_SHARE",
+            "appStateSyncKeyShare": {
+              "keys": [
+                {
+                  "keyId": {
+                    "keyId": "AAAAAFK4"
+                  },
+                  "keyData": {
+                    "keyData": "ognGbnk8+z7FpC9lCv7yFivKPbnNCdFl1RUpS9FzFW4=",
+                    "fingerprint": {
+                      "rawId": 329920034,
+                      "currentIndex": 4,
+                      "deviceIndexes": [
+                        0,
+                        1,
+                        2,
+                        3
+                      ]
+                    },
+                    "timestamp": "1771088795686"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "messageTimestamp": 1771088796,
+        "broadcast": false
       }
     ],
     "171713513922633@lid": [
@@ -2118,6 +2171,286 @@
         "messageTimestamp": 1771087720,
         "pushName": "Infinity BOT",
         "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "remoteJidAlt": "94702958515@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB04F6EB4A0757CC28935",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "conversation": ".ping"
+        },
+        "messageTimestamp": 1771088201,
+        "pushName": "Infinity BOT",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "fromMe": true,
+          "id": "3EB00248CC33DDF04AE0C5"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m238/AQOsJOt9sCZmFUqG_E7N7ZLEeCf6JJC-N0acBlpaggj1zYiZQs6s4ajDp1owUdbwA0NHpgEyBInhv6Dh5ncL2_AG9SCpZcUvmHQ5pQ8BDQ?ccb=9-4&oh=01_Q5Aa3wHj5plKrn3ikT9gu7tXTMBJv5QF4b8Hrwned0MOTLXL7A&oe=69B82E67&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "┌────────────────────────┐\n│  ⚡ INFINITY MD PING ⚡  │\n│────────────────────────│\n│🏓 Ping : 3ms  🟢 FAST  │\n│⏱ Up   : 18m            │\n│💾 RAM  : 198MB         │\n│📦 Heap : 71/74MB       │\n│🖥 OS   : Linux x64     │\n│🏷 Ver  : v1.0.1        │\n│────────────────────────│\n│  ✅ Online & Ready      │\n└────────────────────────┘",
+            "fileSha256": "L3VpZ7FYkMpErx531B5ViPFR34aU8HF7Dg6geHNFOdc=",
+            "fileLength": "51496",
+            "mediaKey": "4+m6StwszGNabwrUZGQUQwvxAX7jkUuLKlC2zuiqJ14=",
+            "fileEncSha256": "GkY1d2kgGb+ODFlRQ3HXJA6g5InoblBCnZK2a8+Z92A=",
+            "directPath": "/o1/v/t24/f2/m238/AQOsJOt9sCZmFUqG_E7N7ZLEeCf6JJC-N0acBlpaggj1zYiZQs6s4ajDp1owUdbwA0NHpgEyBInhv6Dh5ncL2_AG9SCpZcUvmHQ5pQ8BDQ?ccb=9-4&oh=01_Q5Aa3wHj5plKrn3ikT9gu7tXTMBJv5QF4b8Hrwned0MOTLXL7A&oe=69B82E67&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771088203",
+            "contextInfo": {
+              "stanzaId": "3EB04F6EB4A0757CC28935",
+              "participant": "94702958515@s.whatsapp.net",
+              "quotedMessage": {
+                "conversation": ".ping"
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771088203,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "remoteJidAlt": "94702958515@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0AC25325E8FFFA104C1",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "conversation": ".allmenu"
+        },
+        "messageTimestamp": 1771088248,
+        "pushName": "Infinity BOT",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "fromMe": true,
+          "id": "3EB0B999BA4935FDBF8EBE"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m238/AQMlpI9ahYrYpeITAMTqe-B5wKrIB7Sh6nNjvaXW5ko5CE1UgOlhbaXv4ddTQR1aMEt3QJh5xGn5Jmo9xYd9dc5O9sKvwPtDS-omMa-qBQ?ccb=9-4&oh=01_Q5Aa3wHdoYLJUpVmZhuAl-EHrWHYzItw0zVO3XwVsP-_x7YyeQ&oe=69B80AA6&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "🤖 *INFINITY MD - ALL COMMANDS* 🤖\n\n*╭───〔 MENU 〕───*\n│ ├ .aimenu\n│ ├ .animes\n│ ├ .animu\n│ ├ .audiofx\n│ ├ .canvas\n│ ├ .dlmenu\n│ ├ .ephoto\n│ ├ .groupmenu\n│ ├ .images\n│ ├ .notes\n│ ├ .ownermenu\n│ ├ .searchmenu\n│ ├ .stext\n│ ├ .stickermenu\n│ ├ .toolsmenu\n*╰────────────────────*\n\n*╭───〔 DOWNLOAD 〕───*\n│ ├ .alamy\n│ ├ .dlstatus\n│ ├ .facebook\n│ ├ .getty\n│ ├ .gimage\n│ ├ .gitclone2\n│ ├ .instagram\n│ ├ .istock\n│ ├ .mediafire\n│ ├ .mega\n│ ├ .sharechat\n│ ├ .snack\n│ ├ .snapchat\n│ ├ .song\n│ ├ .spotify\n│ ├ .terabox\n│ ├ .tiktok\n│ ├ .twitter\n│ ├ .video\n│ ├ .vidsplay\n│ ├ .ytmp4\n*╰────────────────────*\n\n*╭───〔 GENERAL 〕───*\n│ ├ .alive\n│ ├ .audiomenu\n│ ├ .channelid\n│ ├ .convertmenu\n│ ├ .dbmenu\n│ ├ .echo\n│ ├ .find\n│ ├ .funmenu\n│ ├ .getpp\n│ ├ .othermenu\n│ ├ .pair\n│ ├ .perf\n│ ├ .ping\n│ ├ .pingweb\n│ ├ .settingsmenu\n│ ├ .smenu\n│ ├ .uptime\n│ ├ .videomenu\n│ ├ .viewonce\n*╰────────────────────*\n\n*╭───〔 MAIN 〕───*\n│ ├ .allmenu\n│ ├ .menu\n*╰────────────────────*\n\n*╭───〔 APKS 〕───*\n│ ├ .android\n│ ├ .apkmirror\n│ ├ .apkpure\n│ ├ .hmod\n│ ├ .pstore\n│ ├ .sfile\n*╰────────────────────*\n\n*╭───〔 ADMIN 〕───*\n│ ├ .antibadword\n│ ├ .antilink\n│ ├ .antitag\n│ ├ .chatbot\n│ ├ .delete\n│ ├ .demote\n│ ├ .goodbye\n│ ├ .hidetag\n│ ├ .kick\n│ ├ .mute\n│ ├ .promote\n│ ├ .resetlink\n│ ├ .setgdesc\n│ ├ .setgname\n│ ├ .setgpp\n│ ├ .tag\n│ ├ .tagall\n│ ├ .tagnotadmin\n│ ├ .unban\n│ ├ .unmute\n│ ├ .warn\n│ ├ .welcome\n*╰────────────────────*\n\n*╭───〔 OWNER 〕───*\n│ ├ .addplugin\n│ ├ .anticall\n│ ├ .antidelete\n│ ├ .antiviewonce\n│ ├ .autoreact\n│ ├ .autoread\n│ ├ .autostatus\n│ ├ .autotyping\n│ ├ .clear\n│ ├ .clearsession\n│ ├ .cleartmp\n│ ├ .creact\n│ ├ .delcmd\n│ ├ .delplugin\n│ ├ .fullrest\n│ ├ .getfile\n│ ├ .ghost\n│ ├ .gitclone\n│ ├ .gitinfo\n│ ├ .gitpull\n│ ├ .inspect\n│ ├ .listcmd\n│ ├ .listrent\n│ ├ .maintenance\n│ ├ .manage\n│ ├ .mention\n│ ├ .mode\n│ ├ .pmblocker\n│ ├ .reload\n│ ├ .rentbot\n│ ├ .secretonlyownermegamdmenupass=savi\n│ ├ .setbio\n│ ├ .setcmd\n│ ├ .setpp\n│ ├ .settings\n│ ├ .status\n│ ├ .stealth\n│ ├ .stoprent\n│ ├ .sudo\n│ ├ .unlink\n│ ├ .update\n*╰────────────────────*\n\n*╭───〔 STICKERS 〕───*\n│ ├ .attp\n│ ├ .crop\n│ ├ .emojimix\n│ ├ .gif\n│ ├ .igs\n│ ├ .igsc\n│ ├ .quoted\n│ ├ .s2img\n│ ├ .sticker\n│ ├ .sticker2\n│ ├ .stickers\n│ ├ .take\n│ ├ .tgstk\n*╰────────────────────*\n\n*╭───〔 GROUP 〕───*\n│ ├ .add\n│ ├ .ban\n│ ├ .character\n│ ├ .compliment\n│ ├ .groupinfo\n│ ├ .insult\n│ ├ .rank\n│ ├ .ship\n│ ├ .simp\n│ ├ .staff\n│ ├ .stupid\n│ ├ .warnings\n│ ├ .wasted\n*╰────────────────────*\n\n*╭───〔 TOOLS 〕───*\n│ ├ .base64\n│ ├ .bfdecode\n│ ├ .blur\n│ ├ .brainfuck\n│ ├ .chhistory\n│ ├ .convert\n│ ├ .customqr\n│ ├ .excard\n│ ├ .fetch\n│ ├ .flip\n│ ├ .forwarded\n│ ├ .getpage\n│ ├ .grayscale\n│ ├ .handwrite\n│ ├ .invert\n│ ├ .length\n│ ├ .qmaker\n│ ├ .qrcode\n│ ├ .readmore\n│ ├ .readqr\n│ ├ .remini\n│ ├ .removebg\n│ ├ .reverse\n│ ├ .screenshot\n│ ├ .seo\n│ ├ .sepia\n│ ├ .sharpen\n│ ├ .smallcaps\n│ ├ .spoof\n│ ├ .summ\n│ ├ .tinyurl\n│ ├ .tourl\n│ ├ .translate\n│ ├ .tts\n│ ├ .unshorten\n│ ├ .url\n│ ├ .vnote\n│ ├ .walink\n*╰────────────────────*\n\n*╭───〔 SEARCH 〕───*\n│ ├ .bing\n│ ├ .define\n│ ├ .element\n│ ├ .wattpad\n│ ├ .whoisip\n│ ├ .wiki\n*╰────────────────────*\n\n*╭───〔 MOVIES 〕───*\n│ ├ .cinesubz\n│ ├ .srihub\n*╰────────────────────*\n\n*╭───〔 IMAGES 〕───*\n│ ├ .coding\n│ ├ .cyberimg\n│ ├ .game\n│ ├ .islamic\n│ ├ .mountain\n│ ├ .pies\n│ ├ .tech\n*╰────────────────────*\n\n*╭───〔 GAMES 〕───*\n│ ├ .dado\n│ ├ .dare\n│ ├ .hangman\n│ ├ .math\n│ ├ .tictactoe\n│ ├ .trivia\n│ ├ .truth\n*╰────────────────────*\n\n*╭───〔 FUN 〕───*\n│ ├ .8ball\n│ ├ .fact\n│ ├ .flirt\n│ ├ .hack\n│ ├ .joke\n│ ├ .joke2\n│ ├ .meme\n│ ├ .teddy\n│ ├ .why\n*╰────────────────────*\n\n*╭───〔 STALK 〕───*\n│ ├ .genshin\n│ ├ .github\n│ ├ .npmstalk\n│ ├ .pinstalk\n│ ├ .tgstalk\n│ ├ .thrstalk\n│ ├ .ttstalk\n│ ├ .xstalk\n*╰────────────────────*\n\n*╭───〔 INFO 〕───*\n│ ├ .imdb\n│ ├ .itunes\n│ ├ .news\n│ ├ .owner\n│ ├ .pokedex\n│ ├ .script\n│ ├ .shazam\n│ ├ .string\n│ ├ .trends\n│ ├ .weather\n│ ├ .whois\n*╰────────────────────*\n\n*╭───〔 QUOTES 〕───*\n│ ├ .goodnight\n│ ├ .quote\n│ ├ .quote2\n│ ├ .roseday\n│ ├ .shayari\n│ ├ .wyr\n*╰────────────────────*\n\n*╭───〔 AI 〕───*\n│ ├ .imagine\n│ ├ .sora\n*╰────────────────────*\n\n*╭───〔 MUSIC 〕───*\n│ ├ .lyrics\n│ ├ .play\n│ ├ .ringtone\n│ ├ .scloud\n│ ├ .ytsearch\n*╰────────────────────*\n\n> 💫 *INFINITY MD BOT* - Powered by AI",
+            "fileSha256": "3BHRrtO4/BK/M9tFc1MsU1ofPmznEvw872iyYm1WRGk=",
+            "fileLength": "102203",
+            "height": 412,
+            "width": 1024,
+            "mediaKey": "cT4Sz/yRsK/Zod3ApNflwbIpt6H0ExvqvQM55LmfZnk=",
+            "fileEncSha256": "66bZN0RKU7TwqueL3X8IRAntaINCP/cenihqJAptO/o=",
+            "directPath": "/o1/v/t24/f2/m238/AQMlpI9ahYrYpeITAMTqe-B5wKrIB7Sh6nNjvaXW5ko5CE1UgOlhbaXv4ddTQR1aMEt3QJh5xGn5Jmo9xYd9dc5O9sKvwPtDS-omMa-qBQ?ccb=9-4&oh=01_Q5Aa3wHdoYLJUpVmZhuAl-EHrWHYzItw0zVO3XwVsP-_x7YyeQ&oe=69B80AA6&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771088250",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAANACADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQMEBv/EACIQAAICAgICAgMAAAAAAAAAAAECAxEAIQQSMUETYSJRcf/EABcBAAMBAAAAAAAAAAAAAAAAAAACAwX/xAAZEQEAAwEBAAAAAAAAAAAAAAABAAIhEjH/2gAMAwEAAhEDEQA/AMfHEHZuwZtHp034/f1lkaceUlYuM0jRqGYE0aHmheA3xJTLHVkXVfeKEzxB2ViDId1o5oGeyY9SqbijiqXbjRj467KXs7utA+LGQTwtHTFNsO34nQX+Y5pGmWnZj72cU0A72WJA9YW0yOVSf//Z",
+            "contextInfo": {
+              "stanzaId": "3EB0AC25325E8FFFA104C1",
+              "participant": "94702958515@s.whatsapp.net",
+              "quotedMessage": {
+                "conversation": ".allmenu"
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771088250,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "remoteJidAlt": "94702958515@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0C7A427455331F1FD90",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "conversation": ".secretonlyownermegamdmenupass=savi"
+        },
+        "messageTimestamp": 1771088264,
+        "pushName": "Infinity BOT",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "fromMe": true,
+          "id": "3EB0E9C22A993AA2F9C3A2"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "╭───〔 🔒 *INTERNAL SYSTEM* 〕───\n│\n│ 🛠️ *Database:* SQLite/JSON\n│ 🔗 *DB URL:* N/A\n│ 📊 *DB Version:* N/A\n│ ⚙️ *Bot Mode:* public\n│ 🕒 *Uptime:* 0h 19m\n│ 🖥️ *Platform:* linux (x64)\n│ 💾 *Memory Usage:* 72.39 MB\n│ 📁 *Session Folder:* exists (true)\n│ 🔑 *Prefixes:* . ! / #\n│ 🌐 *Firebase:* Connected\n│\n╰──────────────────────────────\n\n> 💫 *INFINITY MD SECRET ACCESS*",
+            "contextInfo": {
+              "stanzaId": "3EB0C7A427455331F1FD90",
+              "participant": "94702958515@s.whatsapp.net",
+              "quotedMessage": {
+                "conversation": ".secretonlyownermegamdmenupass=savi"
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771088264,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "remoteJidAlt": "94702958515@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB012337F1D1A8551E350",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "conversation": ".ping"
+        },
+        "messageTimestamp": 1771088387,
+        "pushName": "Infinity BOT",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "remoteJidAlt": "94702958515@s.whatsapp.net",
+          "fromMe": true,
+          "id": "AC01394B83AA9E94E29A33634C138B2F",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": ".ping",
+            "previewType": "NONE",
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          }
+        },
+        "messageTimestamp": 1771089047,
+        "pushName": "Infinity BOT",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "fromMe": true,
+          "id": "3EB0265F8BE27BCFFE30B8"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m235/AQP20v9U5cXrnmuQsIbVRwru7iRCi89BqO6YewlZrfsvjwalsEZTp72r-qBwgds6qk6zCeYD32tVqyFsK9dhnkLWikorgNz5KGwg1jc3eg?ccb=9-4&oh=01_Q5Aa3wGDTms8nWiueID0TlmR4kfAL_tUPwd-7vjH6UE_NBZzPA&oe=69B8342A&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "┌────────────────────────┐\n│  ⚡ INFINITY MD PING ⚡  │\n│────────────────────────│\n│🏓 Ping : 3ms  🟢 FAST  │\n│⏱ Up   : 1m             │\n│💾 RAM  : 242MB         │\n│📦 Heap : 77/206MB      │\n│🖥 OS   : Linux x64     │\n│🏷 Ver  : v1.0.1        │\n│────────────────────────│\n│  ✅ Online & Ready      │\n└────────────────────────┘",
+            "fileSha256": "i/FLzfje8gMqKL5VvlAQzzLPmqRb+2LtvjEEv8QNHM8=",
+            "fileLength": "112224",
+            "height": 412,
+            "width": 1024,
+            "mediaKey": "3exUpJah9BhSxGoiriQw+lcpY8rD1vYRfwbu259puk8=",
+            "fileEncSha256": "PO3XTgyxVwKUHExMMSiRCvCwYtccXoiuZwKf4Zj2gyA=",
+            "directPath": "/o1/v/t24/f2/m235/AQP20v9U5cXrnmuQsIbVRwru7iRCi89BqO6YewlZrfsvjwalsEZTp72r-qBwgds6qk6zCeYD32tVqyFsK9dhnkLWikorgNz5KGwg1jc3eg?ccb=9-4&oh=01_Q5Aa3wGDTms8nWiueID0TlmR4kfAL_tUPwd-7vjH6UE_NBZzPA&oe=69B8342A&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771089048",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAANACADASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAABQADBAb/xAAkEAACAgIBBAEFAAAAAAAAAAABAgMEABESITFRcRMigaGx0f/EABYBAQEBAAAAAAAAAAAAAAAAAAABA//EABkRAAMBAQEAAAAAAAAAAAAAAAABAiEREv/aAAwDAQACEQMRAD8A46pUEsTOysxYHgEI7jziFQRPGYYqXyzQpyk2g3oHr7wulbkpuzxgEka65clt0eRhsNIdkqdZsrU6RKn0VtIaivI1OJDGQHUhSRvYH5/WFWaTRV+bJykb6+SnoF9ffJYtySpwZiR37j+ZlZmdgGYkAecVfoOWlp//2Q==",
+            "contextInfo": {
+              "stanzaId": "AC01394B83AA9E94E29A33634C138B2F",
+              "participant": "94702958515@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".ping",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771089048,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "remoteJidAlt": "94702958515@s.whatsapp.net",
+          "fromMe": true,
+          "id": "3EB0CFD2F23BFC7048D040",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "conversation": ".ping"
+        },
+        "messageTimestamp": 1771122022,
+        "pushName": "Infinity BOT",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "fromMe": true,
+          "id": "3EB0C6784DC60B349D0265"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m231/AQPaQi8MLPpyfWzVRNtlgjUuS4TITH45vZDB_zf_Hj_pbM2p4TEYLoQqNrKEIPOwKynU_142yNsUteq6djYLFtLIX3Uch27IuPNanExeRw?ccb=9-4&oh=01_Q5Aa3wFOGSVcCb7F3J_zv2Ex0wGxuvqjwcLCLLDpZ8EHjaUi1Q&oe=69B8B98A&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "┌────────────────────────┐\n│  ⚡ INFINITY MD PING ⚡  │\n│────────────────────────│\n│🏓 Ping : 3ms  🟢 FAST  │\n│⏱ Up   : 0m             │\n│💾 RAM  : 246MB         │\n│📦 Heap : 73/205MB      │\n│🖥 OS   : Linux x64     │\n│🏷 Ver  : v1.0.1        │\n│────────────────────────│\n│  ✅ Online & Ready      │\n└────────────────────────┘",
+            "fileSha256": "3BHRrtO4/BK/M9tFc1MsU1ofPmznEvw872iyYm1WRGk=",
+            "fileLength": "102203",
+            "height": 412,
+            "width": 1024,
+            "mediaKey": "tYkTRSr/YQx8GRkMjQOiTmkaGvxUH2hJ92TU6mCz4CI=",
+            "fileEncSha256": "VBX1nRXgr+cXhHANT5419vQijO/A3JyvbLyPTv7KYT4=",
+            "directPath": "/o1/v/t24/f2/m231/AQPaQi8MLPpyfWzVRNtlgjUuS4TITH45vZDB_zf_Hj_pbM2p4TEYLoQqNrKEIPOwKynU_142yNsUteq6djYLFtLIX3Uch27IuPNanExeRw?ccb=9-4&oh=01_Q5Aa3wFOGSVcCb7F3J_zv2Ex0wGxuvqjwcLCLLDpZ8EHjaUi1Q&oe=69B8B98A&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771122023",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAANACADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAQMEBv/EACIQAAICAgICAgMAAAAAAAAAAAECAxEAIQQSMUETYSJRcf/EABcBAAMBAAAAAAAAAAAAAAAAAAACAwX/xAAZEQEAAwEBAAAAAAAAAAAAAAABAAIhEjH/2gAMAwEAAhEDEQA/AMfHEHZuwZtHp034/f1lkaceUlYuM0jRqGYE0aHmheA3xJTLHVkXVfeKEzxB2ViDId1o5oGeyY9SqbijiqXbjRj467KXs7utA+LGQTwtHTFNsO34nQX+Y5pGmWnZj72cU0A72WJA9YW0yOVSf//Z",
+            "contextInfo": {
+              "stanzaId": "3EB0CFD2F23BFC7048D040",
+              "participant": "94702958515@s.whatsapp.net",
+              "quotedMessage": {
+                "conversation": ".ping"
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771122023,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
       }
     ]
   }

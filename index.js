@@ -439,8 +439,11 @@ async function startQasimDev() {
                 try {
                     let code = await QasimDev.requestPairingCode(phoneNumberInput);
                     code = code || '';
-                    console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(code)));
-                    printLog('success', `Pairing code generated: ${code}`);
+                    // Ensure code is formatted in 4-digit groups with dashes
+                    const helper = require('./lib/baileys_helper');
+                    const formattedCode = helper.formatPairingCode(code);
+                    console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(formattedCode)));
+                    printLog('success', `Pairing code generated: ${formattedCode}`);
                     
                     if (rl && !rl.closed) {
                         rl.close();
