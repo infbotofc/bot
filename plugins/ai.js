@@ -1,5 +1,7 @@
 
 
+const axios = require('axios');
+
 module.exports = {
   command: 'ai',
   aliases: ['ask','gpt','chat'],
@@ -7,21 +9,17 @@ module.exports = {
   description: 'Ask the AI (requires AI_API_KEY in env)',
   usage: '.ai <prompt>',
 
-    async handler(sock, message, args, context = {}) {
-      const chatId = context.chatId || message.key.remoteJid;
-      await sock.sendMessage(chatId, { text: 'AI feature is temporarily unavailable.' }, { quoted: message });
-    }
-  };
-  usage: '.gpt <question> or .gemini <question>',
   async handler(sock, message, args, context = {}) {
     const chatId = context.chatId || message.key.remoteJid;
     const query = args.join(' ').trim();
+
     if (!query) {
       await sock.sendMessage(chatId, {
         text: "Please provide a query after .ai\n\nExample: .ai write a basic HTML code"
       }, { quoted: message });
       return;
     }
+
     try {
       await sock.sendMessage(chatId, {
         react: { text: '🤖', key: message.key }

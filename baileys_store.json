@@ -7,19 +7,23 @@
     "55138840477821@lid": {
       "id": "55138840477821@lid",
       "name": "ΣDamDam 🔥♟️🎨➗"
+    },
+    "171713513922633@lid": {
+      "id": "171713513922633@lid",
+      "name": "Infinity BOT"
     }
   },
   "chats": {
     "228209480200306@lid": {
       "id": "228209480200306@lid",
       "name": "",
-      "conversationTimestamp": 1771119773,
+      "conversationTimestamp": 1771130850,
       "unreadCount": 1
     },
     "55138840477821@lid": {
       "id": "55138840477821@lid",
       "name": "",
-      "conversationTimestamp": 1770222906,
+      "conversationTimestamp": 1771131076,
       "unreadCount": 1
     },
     "126611458408464@lid": {
@@ -30,7 +34,14 @@
     "171713513922633@lid": {
       "id": "171713513922633@lid",
       "name": "",
-      "conversationTimestamp": 1771122023
+      "conversationTimestamp": 1771132139,
+      "unreadCount": 1
+    },
+    "120363417115554694@newsletter": {
+      "id": "120363417115554694@newsletter",
+      "name": "",
+      "conversationTimestamp": 1771131405,
+      "unreadCount": 1
     }
   },
   "botMode": "public",
@@ -539,74 +550,27 @@
       {
         "key": {
           "remoteJid": "228209480200306@lid",
-          "remoteJidAlt": "94770612011@s.whatsapp.net",
           "fromMe": true,
-          "id": "AC270C175B9C13CA646D62C8AE8A4B70",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "message": {
-          "conversation": ".status off"
-        },
-        "messageTimestamp": 1770138259,
-        "pushName": "Infinity-MD",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "fromMe": true,
-          "id": "3EB025CE9542829569114E"
+          "id": "3EB0F536982FF0A09FF889"
         },
         "message": {
           "extendedTextMessage": {
-            "text": "✅ Status updated: Bot will appear OFFLINE now.",
+            "text": "╭───〔 🎮 FUN MENU 〕───\n│\n│ 🎲 *Games*\n│ ├ .tictactoe - Tic Tac Toe\n│ ├ .hangman - Hangman game\n│ ├ .trivia - Trivia quiz\n│ ├ .guess - Guess the number\n│\n│ 😂 *Fun Commands*\n│ ├ .meme - Random meme\n│ ├ .joke - Random joke\n│ ├ .8ball - Magic 8 ball\n│ ├ .dare - Dare challenge\n│ ├ .truth - Truth question\n│ ├ .wyr - Would you rather\n│\n│ 💕 *Love & Social*\n│ ├ .ship - Ship two people\n│ ├ .character - Character info\n│ ├ .simp - Simp rate\n│ ├ .stupid - Stupid rate\n│\n│ 📝 *Text Fun*\n│ ├ .shayari - Random shayari\n│ ├ .quote - Random quote\n│ ├ .why - Random why\n│ ├ .teddy - Teddy message\n│\n╰────────────────────\n\n> 💫 *INFINITY MD BOT* - Powered by AI",
             "contextInfo": {
-              "stanzaId": "AC270C175B9C13CA646D62C8AE8A4B70",
-              "participant": "94778507806@s.whatsapp.net",
+              "stanzaId": "AC9AAE3918F710CFF663D89802F807F0",
+              "participant": "94770612011@s.whatsapp.net",
               "quotedMessage": {
-                "conversation": ".status off"
+                "extendedTextMessage": {
+                  "text": ".funmenu",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
               }
             }
           }
         },
         "messageTimestamp": {
-          "low": 1770138259,
-          "high": 0,
-          "unsigned": true
-        },
-        "participant": null,
-        "pushName": null,
-        "broadcast": null
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "fromMe": true,
-          "id": "3EB0FDE727E90B41CA8FA5"
-        },
-        "message": {
-          "audioMessage": {
-            "url": "https://mmg.whatsapp.net/v/t62.7114-24/625319315_1461025299015095_2126994921423866569_n.enc?ccb=11-4&oh=01_Q5Aa3gGs1nQAZzwh-FmHIE1ljxIE0qurLIUUYchHnN0UGHkIuQ&oe=69A99335&_nc_sid=5e03e0&mms3=true",
-            "mimetype": "audio/mpeg",
-            "fileSha256": "GVJiK27/rBlo8trN1C/D53cQsBa8pTbzmwdD6QQqA1U=",
-            "fileLength": "5721264",
-            "seconds": 142,
-            "mediaKey": "F5qcaJNwoJgRBciqpQ+ITsFJFiMIXr6DNbmqG1wpYFk=",
-            "fileEncSha256": "GXrw0cEVgLjknrTmrRrkQh8S7PMsvnKaIDx0mol6gyc=",
-            "directPath": "/v/t62.7114-24/625319315_1461025299015095_2126994921423866569_n.enc?ccb=11-4&oh=01_Q5Aa3gGs1nQAZzwh-FmHIE1ljxIE0qurLIUUYchHnN0UGHkIuQ&oe=69A99335&_nc_sid=5e03e0",
-            "mediaKeyTimestamp": "1770138268",
-            "contextInfo": {
-              "stanzaId": "AC0D625D0CB316C8AB32B468C549338E",
-              "participant": "228209480200306@lid",
-              "quotedMessage": {
-                "conversation": ".song natabo"
-              }
-            }
-          }
-        },
-        "messageTimestamp": {
-          "low": 1770138268,
+          "low": 1771130355,
           "high": 0,
           "unsigned": true
         },
@@ -618,48 +582,46 @@
         "key": {
           "remoteJid": "228209480200306@lid",
           "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": false,
-          "id": "AC067F7958DA5E3F83B48046AE78C275",
+          "fromMe": true,
+          "id": "AC9FAB6B679F1E68DEDAC7EE5A98ABC6",
           "participant": "",
           "addressingMode": "lid"
         },
         "message": {
-          "conversation": ".cinesubz spider man",
-          "messageContextInfo": {
-            "deviceListMetadata": {
-              "senderKeyHash": "VjoITV7ta09cdQ==",
-              "senderTimestamp": "1770078384",
-              "recipientKeyHash": "RzqflFAuWO4d+Q==",
-              "recipientTimestamp": "1770138243"
-            },
-            "deviceListMetadataVersion": 2,
-            "messageSecret": "TT0W+J1ko6bMBgolTYx2sSk4PQOXDCAPX2SUqJ1qy64="
+          "extendedTextMessage": {
+            "text": ".cinesubz spider man",
+            "previewType": "NONE",
+            "inviteLinkGroupTypeV2": "DEFAULT"
           }
         },
-        "messageTimestamp": 1770138349,
-        "pushName": "Infintiy AI",
+        "messageTimestamp": 1771130368,
+        "pushName": "Savi",
         "broadcast": false
       },
       {
         "key": {
           "remoteJid": "228209480200306@lid",
           "fromMe": true,
-          "id": "3EB0CD079DF7CD5B050C40"
+          "id": "3EB022B887D4EFF89464AA"
         },
         "message": {
           "extendedTextMessage": {
             "text": "🔎 Searching Cinesubz...",
             "contextInfo": {
-              "stanzaId": "AC067F7958DA5E3F83B48046AE78C275",
-              "participant": "228209480200306@lid",
+              "stanzaId": "AC9FAB6B679F1E68DEDAC7EE5A98ABC6",
+              "participant": "94770612011@s.whatsapp.net",
               "quotedMessage": {
-                "conversation": ".cinesubz spider man"
+                "extendedTextMessage": {
+                  "text": ".cinesubz spider man",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
               }
             }
           }
         },
         "messageTimestamp": {
-          "low": 1770138349,
+          "low": 1771130368,
           "high": 0,
           "unsigned": true
         },
@@ -671,33 +633,37 @@
         "key": {
           "remoteJid": "228209480200306@lid",
           "fromMe": true,
-          "id": "3EB07EE5DE5273EC188074"
+          "id": "3EB0DAC7B19D32C6E16A57"
         },
         "message": {
           "imageMessage": {
-            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m235/AQPpObGB1sSqf_Wmxnjqesbu4v4UsGc0QHBvq05A_9NgGJssv3qBzH3hc6xGC0kpgpn1Ef5z6GUC5BIt9cXR5UqfCLE5APQaT8FS0TMJhg?ccb=9-4&oh=01_Q5Aa3gE2TgrcQWxq0pppwTxqFvS2_RBafl8nAd6xvShqXFK74Q&oe=69A98571&_nc_sid=e6ed6c&mms3=true",
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m269/AQNn52m94SJPvOEWoB1OOzooegF2-J1RgnZc2ZkafOPLi6NjYW3DEFM4zcEMTY0aSPoVf-FhBB1xaWoSI5Fv_bc3xu-d_Ng-DyBjPbylIg?ccb=9-4&oh=01_Q5Aa3wH77MXoYPosu_3RGaPeIu6hGYELKIPw8uMjffa92ehMeA&oe=69B8AEB6&_nc_sid=e6ed6c&mms3=true",
             "mimetype": "image/jpeg",
-            "caption": "🎬 *Cinesubz Results for:* *spider man*\n\n↩️ *Reply with a number to download*\n\n*1.* Kiss of the Spider Woman (2025) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 5.7\n🔗 https://cinesubz.lk/movies/kiss-of-the-spider-woman-2025-sinhala-subtitles/\n\n*2.* Your Friendly Neighborhood Spider-Man (2024) TV Series | Season 01 | Complete\n⭐ IMDB: 8.0\n🔗 https://cinesubz.lk/tvshows/your-friendly-neighborhood-spider-man-2024-tv-series/\n\n*3.* Spider-Man: Across the Spider-Verse (2023) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 8.9\n🔗 https://cinesubz.lk/movies/spider-man-across-the-spider-verse-2023-sinhala-subtitles/\n\n*4.* Spider-Man: No Way Home (2021) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 8.8\n🔗 https://cinesubz.lk/movies/spider-man-no-way-home-2021-sinhala-sub/\n\n*5.* Spider-Man: Into the Spider-Verse (2018) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 8.4\n🔗 https://cinesubz.lk/movies/spider-man-into-the-spider-verse-2018-sinhala-subtitles/\n\n*6.* The Amazing Spider-Man 2 (2014) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.6\n🔗 https://cinesubz.lk/movies/the-amazing-spider-man-2-2014-sinhala-subtitles/\n\n*7.* The Amazing Spider-Man (2012) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.9\n🔗 https://cinesubz.lk/movies/the-amazing-spider-man-2012-sinhala-subtitles/\n\n*8.* Spider-Man 3 (2007) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.2\n🔗 https://cinesubz.lk/movies/spider-man-3-2007-sinhala-subtitles/\n\n*9.* Spider-Man 2 (2004) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 7.3\n🔗 https://cinesubz.lk/movies/spider-man-2-2004-sinhala-subtitles/\n\n*10.* Spider-Man (2002) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 7.3\n🔗 https://cinesubz.lk/movies/spider-man-2002-sinhala-subtitles/\n\n*11.* Spider-Man: Homecoming (2017) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 7.4\n🔗 https://cinesubz.lk/movies/spider-man-homecoming-2017-sinhala-subtitles/\n\n*12.* Spider-Man: Far from Home (2019) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 7.5\n🔗 https://cinesubz.lk/movies/spider-man-far-from-home-2019-sinhala-subtitles/\n\n*13.* Aquaman and the Lost Kingdom (2023) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 5.9\n🔗 https://cinesubz.lk/movies/aquaman-and-the-lost-kingdom-2023-sinhala-subtitles/\n\n*14.* American Assassin (2017) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.2\n🔗 https://cinesubz.lk/movies/american-assassin-2017-sinhala-subtitles/\n\n*15.* Predators (2010) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.4\n🔗 https://cinesubz.lk/movies/predators-2010-sinhala-subtitles/\n\n*16.* Inside (2023) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 5.7\n🔗 https://cinesubz.lk/movies/inside-2023-sinhala-subtitles/\n\n*17.* Puss in Boots: The Last Wish (2022) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 7.8\n🔗 https://cinesubz.lk/movies/puss-in-boots-the-last-wish-2022-sinhala-subtitles/\n\n*18.* Kraven the Hunter (2024) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n⭐ IMDB: 5.4\n🔗 https://cinesubz.lk/movies/kraven-the-hunter-2024-sinhala-subtitles/\n\n*19.* Madame Web (2024) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 3.8\n🔗 https://cinesubz.lk/movies/madame-web-2024-sinhala-subtitles/\n\n*20.* Echo (2024) TV S01 EP01-05 [Complete]\n⭐ IMDB: 6.7\n🔗 https://cinesubz.lk/tvshows/echo-2024-tv-s01/\n\n*21.* Ghosts of Girlfriends Past (2009) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 5.8\n🔗 https://cinesubz.lk/movies/ghosts-of-girlfriends-past-2009-sinhala-subtitles/\n\n*22.* In the Heart of the Sea (2015) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.9\n🔗 https://cinesubz.lk/movies/in-the-heart-of-the-sea-2015-sinhala-subtitles/\n\n",
+            "caption": "🎬 *Cinesubz Results for:* *spider man*\n\n↩️ *Reply with a number to download*\n\n*1.* Kiss of the Spider Woman (2025) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 5.7\n🔗 https://cinesubz.lk/movies/kiss-of-the-spider-woman-2025-sinhala-subtitles/\n\n*2.* Your Friendly Neighborhood Spider-Man (2024) TV Series | Season 01 | Complete\n⭐ IMDB: 8.0\n🔗 https://cinesubz.lk/tvshows/your-friendly-neighborhood-spider-man-2024-tv-series/\n\n*3.* Spider-Man: Across the Spider-Verse (2023) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 8.9\n🔗 https://cinesubz.lk/movies/spider-man-across-the-spider-verse-2023-sinhala-subtitles/\n\n*4.* Spider-Man: No Way Home (2021) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 8.8\n🔗 https://cinesubz.lk/movies/spider-man-no-way-home-2021-sinhala-sub/\n\n*5.* Spider-Man: Into the Spider-Verse (2018) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 8.4\n🔗 https://cinesubz.lk/movies/spider-man-into-the-spider-verse-2018-sinhala-subtitles/\n\n*6.* The Amazing Spider-Man 2 (2014) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.6\n🔗 https://cinesubz.lk/movies/the-amazing-spider-man-2-2014-sinhala-subtitles/\n\n*7.* The Amazing Spider-Man (2012) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.9\n🔗 https://cinesubz.lk/movies/the-amazing-spider-man-2012-sinhala-subtitles/\n\n*8.* Spider-Man 3 (2007) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.2\n🔗 https://cinesubz.lk/movies/spider-man-3-2007-sinhala-subtitles/\n\n*9.* Spider-Man 2 (2004) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 7.3\n🔗 https://cinesubz.lk/movies/spider-man-2-2004-sinhala-subtitles/\n\n*10.* Spider-Man (2002) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 7.3\n🔗 https://cinesubz.lk/movies/spider-man-2002-sinhala-subtitles/\n\n*11.* Spider-Man: Homecoming (2017) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 7.4\n🔗 https://cinesubz.lk/movies/spider-man-homecoming-2017-sinhala-subtitles/\n\n*12.* Spider-Man: Far from Home (2019) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 7.5\n🔗 https://cinesubz.lk/movies/spider-man-far-from-home-2019-sinhala-subtitles/\n\n*13.* Aquaman and the Lost Kingdom (2023) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 5.9\n🔗 https://cinesubz.lk/movies/aquaman-and-the-lost-kingdom-2023-sinhala-subtitles/\n\n*14.* American Assassin (2017) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.2\n🔗 https://cinesubz.lk/movies/american-assassin-2017-sinhala-subtitles/\n\n*15.* Predators (2010) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.4\n🔗 https://cinesubz.lk/movies/predators-2010-sinhala-subtitles/\n\n*16.* Inside (2023) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 5.7\n🔗 https://cinesubz.lk/movies/inside-2023-sinhala-subtitles/\n\n*17.* Puss in Boots: The Last Wish (2022) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 7.8\n🔗 https://cinesubz.lk/movies/puss-in-boots-the-last-wish-2022-sinhala-subtitles/\n\n*18.* Redux Redux (2026) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEB\n⭐ IMDB: 6.5\n🔗 https://cinesubz.lk/movies/redux-redux-2026-sinhala-subtitles/\n\n*19.* Ejen Ali: The Movie 2 (2025) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEB\n⭐ IMDB: 7.7\n🔗 https://cinesubz.lk/movies/ejen-ali-the-movie-2-2025-sinhala-subtitles/\n\n*20.* Kraven the Hunter (2024) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n⭐ IMDB: 5.4\n🔗 https://cinesubz.lk/movies/kraven-the-hunter-2024-sinhala-subtitles/\n\n*21.* Madame Web (2024) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: WEBRip\n⭐ IMDB: 3.8\n🔗 https://cinesubz.lk/movies/madame-web-2024-sinhala-subtitles/\n\n*22.* Echo (2024) TV S01 EP01-05 [Complete]\n⭐ IMDB: 6.7\n🔗 https://cinesubz.lk/tvshows/echo-2024-tv-s01/\n\n*23.* Ghosts of Girlfriends Past (2009) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 5.8\n🔗 https://cinesubz.lk/movies/ghosts-of-girlfriends-past-2009-sinhala-subtitles/\n\n*24.* In the Heart of the Sea (2015) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ\n🔊 Quality: BluRay\n⭐ IMDB: 6.9\n🔗 https://cinesubz.lk/movies/in-the-heart-of-the-sea-2015-sinhala-subtitles/\n\n",
             "fileSha256": "Q7A6zRp332xDcDNYUbCt2QHhElW7A8icHmPeCPtCoCw=",
             "fileLength": "74509",
             "height": 1170,
             "width": 780,
-            "mediaKey": "PwGAthMlaItxADmVwpWV/May8FW3PxxoZUQvKLMmyDs=",
-            "fileEncSha256": "Z5yoxU8sTeIzjbuUn08UGPDZslr4Ks8hqpe9bsJLxPQ=",
-            "directPath": "/o1/v/t24/f2/m235/AQPpObGB1sSqf_Wmxnjqesbu4v4UsGc0QHBvq05A_9NgGJssv3qBzH3hc6xGC0kpgpn1Ef5z6GUC5BIt9cXR5UqfCLE5APQaT8FS0TMJhg?ccb=9-4&oh=01_Q5Aa3gE2TgrcQWxq0pppwTxqFvS2_RBafl8nAd6xvShqXFK74Q&oe=69A98571&_nc_sid=e6ed6c",
-            "mediaKeyTimestamp": "1770138355",
+            "mediaKey": "Cl9xgmqoB+Wfx66QoxquAhB26gzwSSfRYC+POk+3ZO4=",
+            "fileEncSha256": "nUrcOZtSesO+ryJDDQKu8kCEJ4drHD2WhWN8CfdoMZo=",
+            "directPath": "/o1/v/t24/f2/m269/AQNn52m94SJPvOEWoB1OOzooegF2-J1RgnZc2ZkafOPLi6NjYW3DEFM4zcEMTY0aSPoVf-FhBB1xaWoSI5Fv_bc3xu-d_Ng-DyBjPbylIg?ccb=9-4&oh=01_Q5Aa3wH77MXoYPosu_3RGaPeIu6hGYELKIPw8uMjffa92ehMeA&oe=69B8AEB6&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771130372",
             "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAwACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAABQYBAwQH/8QALRAAAgIBAwIDBgcAAAAAAAAAAQIDBBEABRIhQQYxcRMUUWGBkRUiM0KxwfD/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgD/xAAaEQADAQEBAQAAAAAAAAAAAAAAARECIUES/9oADAMBAAIRAxEAPwB60v8Aire59mjr+7IuZCcs6kjp29dGbdgVac9hvKKNnP0Gdcvks3d3vKdwkZ2ChsMcBQfIgDp31DcVLSrh0fbNxh3OktiHp2dD5o3cHV7aBeFqNqAWbk9n2qWjlQR1OCRyPzOjjHUsS04ZSrAEEYIPkdJF/Ya9fdLUdOOQ4jVkTl0TlyHqB0+mm17sKOyM55KQCACcH/HQ+5BFbsrZqSGO2U4ElTh48nKkfH4HRqtcHHGYvCl2xFF+FXypmiTnEynPJO49R/B0fY6Utvilj8VQzsycXSSLhjDL0J/rTSzaFqqlaz86gNvpI1mQqJOOAfypkE4GppLItoFg+ByAzHgDPz+/rrdyz31BfWoQVp7ksXiN9yXi1CKx7tIw/aSoBb7nz00s2NDH2qs01t+cwW3+rGHwh6YzjWGlTv16K1JQrMmVWUztgrnp0HfWc8N30//Z",
             "contextInfo": {
-              "stanzaId": "AC067F7958DA5E3F83B48046AE78C275",
-              "participant": "228209480200306@lid",
+              "stanzaId": "AC9FAB6B679F1E68DEDAC7EE5A98ABC6",
+              "participant": "94770612011@s.whatsapp.net",
               "quotedMessage": {
-                "conversation": ".cinesubz spider man"
+                "extendedTextMessage": {
+                  "text": ".cinesubz spider man",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
               }
             }
           }
         },
         "messageTimestamp": {
-          "low": 1770138355,
+          "low": 1771130372,
           "high": 0,
           "unsigned": true
         },
@@ -709,8 +675,8 @@
         "key": {
           "remoteJid": "228209480200306@lid",
           "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": false,
-          "id": "AC65D7160BBF1BC80B37AD1562E486CF",
+          "fromMe": true,
+          "id": "AC82FB30095EC8F8CFF37DC18CD078CF",
           "participant": "",
           "addressingMode": "lid"
         },
@@ -719,34 +685,24 @@
             "text": "3",
             "previewType": "NONE",
             "inviteLinkGroupTypeV2": "DEFAULT"
-          },
-          "messageContextInfo": {
-            "deviceListMetadata": {
-              "senderKeyHash": "VjoITV7ta09cdQ==",
-              "senderTimestamp": "1770078384",
-              "recipientKeyHash": "RzqflFAuWO4d+Q==",
-              "recipientTimestamp": "1770138243"
-            },
-            "deviceListMetadataVersion": 2,
-            "messageSecret": "pgpxyza97/OvLoTN1VIXyyjsAX2s/0NERMVDYrd6odM="
           }
         },
-        "messageTimestamp": 1770138370,
-        "pushName": "Infintiy AI",
+        "messageTimestamp": 1771130384,
+        "pushName": "Savi",
         "broadcast": false
       },
       {
         "key": {
           "remoteJid": "228209480200306@lid",
           "fromMe": true,
-          "id": "3EB064CE59E9FB025F3A81"
+          "id": "3EB095E0275336DECD23F1"
         },
         "message": {
           "extendedTextMessage": {
             "text": "ℹ️ Fetching download details for selection #3...",
             "contextInfo": {
-              "stanzaId": "AC65D7160BBF1BC80B37AD1562E486CF",
-              "participant": "228209480200306@lid",
+              "stanzaId": "AC82FB30095EC8F8CFF37DC18CD078CF",
+              "participant": "94770612011@s.whatsapp.net",
               "quotedMessage": {
                 "extendedTextMessage": {
                   "text": "3",
@@ -758,7 +714,7 @@
           }
         },
         "messageTimestamp": {
-          "low": 1770138370,
+          "low": 1771130384,
           "high": 0,
           "unsigned": true
         },
@@ -770,25 +726,25 @@
         "key": {
           "remoteJid": "228209480200306@lid",
           "fromMe": true,
-          "id": "3EB0D7599022981CBCD38B"
+          "id": "3EB0567F99291F0723FE8E"
         },
         "message": {
           "imageMessage": {
-            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m269/AQPBli7gto318PwPLDRB4wYUA76N1x-hEnQPvIfKI9Sjlus1VJSF8T6RMLEnTxewYT_ezbwDJUJxhZjxETNVRVMdkIVW2oyZMFpfqt95GQ?ccb=9-4&oh=01_Q5Aa3gFeUGj7R05DKlsgMm12noEt1ceaLyrQLljD_5H39Y5LYw&oe=69A996D6&_nc_sid=e6ed6c&mms3=true",
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m233/AQNbj1-huXbN7HCJMPkMVAsDOqpilAL41IOwdJanekmtJwJ6oAzaEWA1PxjlE2kosFY7azqdiFRdUixn8gOl9PSIMxKccz4Aq8Lt-Wpeyw?ccb=9-4&oh=01_Q5Aa3wFQqOQxn-IE9sbwqf3yKqzQT0MR13dF6GA8P1lCjNya3Q&oe=69B8B7EE&_nc_sid=e6ed6c&mms3=true",
             "mimetype": "image/jpeg",
-            "caption": "📥 *Download Details - Spider-Man: Across the Spider-Verse (2023) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ*\n\n📆 Year: 2023\n⭐ IMDB: 8.9\n\nඅවුරුදු ගානක් ෆිල්ම්/සීරිස් වලින් දැකගන්න ලැබුනු පීටර් පාකර් ගේ ස්පයිඩර්මෑන් වෙනුවට පලවෙනි පාරට තමයි කොමික් වල අපිට හමුවුනු තවත් ස්පයිඩර්මෑන් කෙනෙක්ට ෆිල්ම් එකක් ලැබුනේ. ඒ තමයි මයිල්ස් මොරාලස් ස්පයිඩර්මෑන්. මයිල්ස් කියන්නේ මාර්වල් මල්ටිවර්ස් එකේ Earth-1610 ස්පයිඩර්මෑන්. Earth-1610 එකටම තමයි අල්ටිමේට් මාර්වල් යුනිවර්ස් කියලත් කියන්නෙ. 1610 හිටපු පීටර් පාකර් මැරුනට පස්සෙ තමයි මයිල්ස් එයාගේ තැන අරන් ස්පයිඩර්මෑන් විදියට වැඩ කරන්නේ.පොඩ්ඩක් බලමු මයිල්ස් ගැන.මයිල්ස් මොරාලෙස් ඉපදෙන්නේ පොලිස් නිලධාරියෙක් වෙච්ච ජෙෆර්සන් ඩේවිස් සහ නර්ස් කෙනෙක් වෙච්ච රියෝ මොරාලෙස්ට දාවයි. මෙයාලා ජීවත් උනේ බෘක්ලීන් වල. ඒ වලේම මයිල්ස් කියන්නේ අප්‍රිකානු-ඇමරිකන් ජාතිකයෙක්.ඒ යුනිවර්ස් එකෙත් ග්‍රීන් ගොබ්ලින් වෙච්ච Norman Osborn ව S.H.I.E.L.D විසින් අත්අඩංගුවට අරන් ප්‍රසිද්ධියේ හෙළිදරව් කරාට පස්සෙ මයිල්ස්ගේ මාමා වෙච්ච ආරොන් ඩේවිස් අත්හැර දාපු ඔස්බෝන් කර්මාන්තශාලාවකට කඩා පැනල Oz Formula හොරකම් කරා. හැබැයි ඒත් එක්ක ජානමය වශයෙන් වැඩිදියුණු කළ මකුළුවෙක් එයාගේ බෑග් එකට රිංගුවා.අම්මලට හොරෙන් මාමව බලන්න ගියපු මයිල්ස්ව මාමාගේ මහල් නිවාසයේදී අර බෑග් එකේ හිටපු මකුලුවා දශ්ට කරනවා. මයිල්ස් එයාට නොපෙනී යාම, වේගවත් කඩිසරකමක් ලැබීම, ඇඟිලි වලින් බයෝ ඉලෙක්ට්‍ර්ක් පිටකරන්න හැකි වීම සහ දෙයක් වෙන්න කලින් දැනීම (ස්පයිඩර් සෙන්ස්) වගේ දේවල් පුලුවන් කියල දැනගන්නවා. එයාගේ හොඳම යාලුවා වෙච්ච Ganke Lee පෙන්නලා දුන්නෙ මයිල්ස්ට බිත්ති දිගේත් යන්න පුලුවන් වගේ ස්පයිඩර්මෑන්ට තියෙන බලයන් ලැබිලා තියෙනවා කියල.හැබැයි මයිල්ස්ට වීරයෙක් වෙන්න ඕනි උනේ නැති නිසා එයා වීරයෙක් වෙන එක ⁣ඒ වෙද්දි හිටපු ස්පයිඩර්මෑන්ටම බාර දීලා ඉන්නවා. මාස කිහිපයකට පස්සෙ ස්පයිඩර් මෑන් මැරෙනවා. ඒ ඔස්බෝර්න් ගෙන් ඔහුගේ පවුල බේරා ගැනීම සඳහා. මේ සිද්දිය වෙන තැනට මයිල්ස්ට යන්න පරක්කු උන නිසා එයා තමන්ටම දොස් කියාගන්නවා. ඒ නිසා එයා තීරණය කරනවා පීටර් පාකර්ගේ ස්පයිඩර්මෑන් ලෙගසි එක ඉදිරියට අරන් යන්න.ඉතින් ඔය තමයි මයිල්ස් ගේ ස්ටෝරි එක කෙටියෙන්. හැබැයි අපි මේ කතා කරන මූවි යුනිවර්ස් එකේ මයිල්ස්ට අමතරව චරිත බරගානක් ඉන්නවා. ඉතින් ඔයාලට ඒ කිහිප දෙනෙක් ගැන මෙතනින් මංසලට ගිහින් බලන්න පුලුවන්. ඒ වගේම මෙතනින් පලවෙනි ෆිල්ම් එකට චාමර සහෝ ලිව්ව ලිපියත් බලන්න පුලුවන්.අති සාර්තක ෆිල්ම් හදපු පික්සර්, ඩිස්නි ඇනිමේෂන්, ඉලුමිනේෂන්, බ්ලූ ස්කයි, ඩ්‍රීම්වර්ක්ස් වගේ කම්පැණි එක්ක බලද්දි Sony Animation හිටියෙ ටිකක් යට තැනක. හැබැයි ඩොලර් මිලියන අනූවකින් හදපු මේ ෆිල්ම් එකත් එක්ක සෝනි ඇනිමේෂන් එක නොහිතපු ලෙවල් එකකට යනවා. මේ ගන කෙලවර වෙන්නේ අවුරුද්දේ හොඳම ඇනිමේෂන් එකට හිමි ඔස්කාර් සම්මානෙත් උස්සලා.එයාල මේ ෆිල්ම් එකෙන් ඇනිමේෂන් රටාවේ කරපු වෙනස්කම අති සාර්තක උනා. විශේෂයෙන්ම ඒ වෙද්දි තිබුනු ටොම් හොලන්ඩ්ගේ ෆැන්චයිස් එකේ සාර්තකත්වය සහ සෝනිලා තනියම කරල අසාර්තක උන amazing spider-man ෆැන්චයිස් එක නිසා රසිකයො මේ ෆිල්ම් එක ගැන ලොකු බලාපොරොත්තු තියන් හිටියෙ නෑ. හැබැයි රිලීස් උනාට පස්සෙ ලෝකයම මේ ගැන කතා කරා.දැන් අපි එමු අලුත්ම ෆිල්ම් එක දිහාට. පලවෙනි ෆිල්ම් එකේ සාර්තකත්වය නිසාම දෙවෙනි ෆිල්ම් එකටත් ග්‍රීන් ලයිට් හම්බුනා. ඔන්න ඉතින් අවුරුදු පහකට පස්සෙ තමයි දෙවෙනි ෆිල්ම් එක අපිට බලන්න හම්බුනේ. ඒ වගේම එයාල මුලදිම එනවුන්ස් කරා මේ ෆිල්ම් දෙකක් එනවා කියල සහ Across the Spider-Verse එක පලවෙනි පාර්ට් එක කියලා. (Part 01) 2021 දෙසැම්බර් ආපු ටීසර් එකේ නම උනෙත් Across the Spider-Verse Part one කියලා. හැබැයි පස්සෙ නිවේදනය කරා දෙවෙනි පාර්ට් එකේ නම Spider-Man | Beyond The Spider-Verse කියලා. මේක රිලීස් වෙන දවසක් දැනට නම් සඳහන් කරලා නැහැ. හොලිවුඩ් වර්ජනයත් එක්ක ටිකක් පරක්කු වෙයි මේක.ඩොලර් මිලියන 100ක් තමා මේ ෆිල්ම් එකේ බජට් එක. ඒ වගේම මේ ලිපිය ලියද්දි ඩොලර් මිලියන 649ක් හොයා තියෙනවා ආදායම විදියට. මේ පාර ෆිල්ම් එක ඩිරෙක්ට් කරේ Joaquim Dos Santos, Justin K. Thompson, Kemp Powers කියන තුන්දෙනා. ඒ වගේම වොයිස් ආටිස්ට්ලා විදියට Shameik Moore, Hailee Steinfeld, Brian Tyree Henry, Luna Lauren Vélez, Jake Johnson, Jason Schwartzman, Issa Rae, Karan Soni ,Shea Whigham ,Greta Lee ,Daniel Kaluuya, Mahershala Ali, Oscar Isaac වගේ අය එකතු උනා.මේ ෆිල්ම් එක එක තප්පරයක්වක් ඇහැ අහකට ගන්න බැරි විදියට ඇනිමේෂන් කරල තියෙනවා. ඒ වගේම යුනිවර්ස් එකෙන් යුනිවර්ස් එකට යුනික් ඇනිමේෂන් ස්ටයිල් දීල තියෙන නිසා සියගානක ඇනිමේෂන් ස්ටයිල් මේ ෆිල්ම් එක ඇතුලේ දකින්න හම්බෙනවා. මුලු ෆිල්ම් එකම කොමික් එකක් කියවන් යනවා වගේ දැනෙන්නේ අපිට. ඒ තරමට ලස්සන ෆිල්ම් එකක් මේක.ඩිරෙක්ටර් Justin K Thompson විසින් 2023 මැයි වලදී තහවුරු කරා මේ මූවි එකේදී ස්පයිඩර්-පීපල්ස්ලා 280ක් දකින්න පුලුවන් කියලා. එ අයගෙනුත් 95 දෙනෙක් නම් කරපු යුනික් කැරැක්ටර් බවත් එයා හෙලි කරා. ඉතින් බලපු අය දන්නවා මේ ෆිල්ම් එක තමයි රියල්ම මල්ටිවර්ස් ඔෆ් මෑඩ්නස් ෆිල්ම් එක කියලා.මේ ෆිල්ම් එකේ හිටපු Lego Spider-Man’ව සජීවිකරණය කරලා තියෙන්නෙ අවුරුදු 14ක Preston Mutanga කියල ලමයා එයා හදපු ට්‍රේලර් එකක් දැකල තමයි මේ ෆිල්ම් එකට එකතු කරන් තියෙන්නෙ.ඉතින් මං වැඩිය කතා කරන්න යන් නෑ ෆිල්ම් එක ගැන. ඔයාලත් මේ ෆිල්ම් එක බලලම රස විඳින්න. ඒ වගේම බියොන්ඩ්ද ස්පයඩර්වර්ස් එක 2024 එන්න තිබුනත් මේ දවස් වල තියෙන රයිටර්ස්ලගෙ වගේම ඒයාලට එකතු උන නලු නිලියන්ගේ වර්ජනය නිසා 2025ටවත් කල් යන්න ඉඩ තියෙනවා.\n\n🔰 *Direct Download Links*\n• WEBRip SD 480p (1. 3 GB) - https://cinesubz.lk/api-rwjdzuehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdruehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdrwjdzuehbwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0a/baoki08agy/\n• WEBRip HD 720p (2.5 GB) - https://cinesubz.lk/api-rwjdzuehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdruehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdrwjdzuehbwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0a/d1k54nqwbz/\n• FHD WEBRip 1080p (4.5 GB) - https://cinesubz.lk/api-rwjdzuehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdruehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdrwjdzuehbwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0a/vnwhnaig0v/\n• WEBRip SD 480p (1.3 GB) - https://cinesubz.lk/api-rwjdzuehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdruehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdrwjdzuehbwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0a/dwotxoz9so/\n• WEBRip HD 720p (2.5 GB) - https://cinesubz.lk/api-rwjdzuehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdruehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdrwjdzuehbwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0a/i02rk7sm0k/\n• FHD WEBRip 1080p (4.5 GB) - https://cinesubz.lk/api-rwjdzuehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdruehbdrwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0auehbdrwjdzuehbwjdzuehbdzjyvxo2bhh0azjyvxo2bhh0a/0mwomczeua/\n\n",
+            "caption": "📥 *Download Details - Spider-Man: Across the Spider-Verse (2023) Sinhala Subtitles | සිංහල උපසිරැසි සමඟ*\n\n📆 Year: 2023\n⭐ IMDB: 8.9\n\nඅවුරුදු ගානක් ෆිල්ම්/සීරිස් වලින් දැකගන්න ලැබුනු පීටර් පාකර් ගේ ස්පයිඩර්මෑන් වෙනුවට පලවෙනි පාරට තමයි කොමික් වල අපිට හමුවුනු තවත් ස්පයිඩර්මෑන් කෙනෙක්ට ෆිල්ම් එකක් ලැබුනේ. ඒ තමයි මයිල්ස් මොරාලස් ස්පයිඩර්මෑන්. මයිල්ස් කියන්නේ මාර්වල් මල්ටිවර්ස් එකේ Earth-1610 ස්පයිඩර්මෑන්. Earth-1610 එකටම තමයි අල්ටිමේට් මාර්වල් යුනිවර්ස් කියලත් කියන්නෙ. 1610 හිටපු පීටර් පාකර් මැරුනට පස්සෙ තමයි මයිල්ස් එයාගේ තැන අරන් ස්පයිඩර්මෑන් විදියට වැඩ කරන්නේ.පොඩ්ඩක් බලමු මයිල්ස් ගැන.මයිල්ස් මොරාලෙස් ඉපදෙන්නේ පොලිස් නිලධාරියෙක් වෙච්ච ජෙෆර්සන් ඩේවිස් සහ නර්ස් කෙනෙක් වෙච්ච රියෝ මොරාලෙස්ට දාවයි. මෙයාලා ජීවත් උනේ බෘක්ලීන් වල. ඒ වලේම මයිල්ස් කියන්නේ අප්‍රිකානු-ඇමරිකන් ජාතිකයෙක්.ඒ යුනිවර්ස් එකෙත් ග්‍රීන් ගොබ්ලින් වෙච්ච Norman Osborn ව S.H.I.E.L.D විසින් අත්අඩංගුවට අරන් ප්‍රසිද්ධියේ හෙළිදරව් කරාට පස්සෙ මයිල්ස්ගේ මාමා වෙච්ච ආරොන් ඩේවිස් අත්හැර දාපු ඔස්බෝන් කර්මාන්තශාලාවකට කඩා පැනල Oz Formula හොරකම් කරා. හැබැයි ඒත් එක්ක ජානමය වශයෙන් වැඩිදියුණු කළ මකුළුවෙක් එයාගේ බෑග් එකට රිංගුවා.අම්මලට හොරෙන් මාමව බලන්න ගියපු මයිල්ස්ව මාමාගේ මහල් නිවාසයේදී අර බෑග් එකේ හිටපු මකුලුවා දශ්ට කරනවා. මයිල්ස් එයාට නොපෙනී යාම, වේගවත් කඩිසරකමක් ලැබීම, ඇඟිලි වලින් බයෝ ඉලෙක්ට්‍ර්ක් පිටකරන්න හැකි වීම සහ දෙයක් වෙන්න කලින් දැනීම (ස්පයිඩර් සෙන්ස්) වගේ දේවල් පුලුවන් කියල දැනගන්නවා. එයාගේ හොඳම යාලුවා වෙච්ච Ganke Lee පෙන්නලා දුන්නෙ මයිල්ස්ට බිත්ති දිගේත් යන්න පුලුවන් වගේ ස්පයිඩර්මෑන්ට තියෙන බලයන් ලැබිලා තියෙනවා කියල.හැබැයි මයිල්ස්ට වීරයෙක් වෙන්න ඕනි උනේ නැති නිසා එයා වීරයෙක් වෙන එක ⁣ඒ වෙද්දි හිටපු ස්පයිඩර්මෑන්ටම බාර දීලා ඉන්නවා. මාස කිහිපයකට පස්සෙ ස්පයිඩර් මෑන් මැරෙනවා. ඒ ඔස්බෝර්න් ගෙන් ඔහුගේ පවුල බේරා ගැනීම සඳහා. මේ සිද්දිය වෙන තැනට මයිල්ස්ට යන්න පරක්කු උන නිසා එයා තමන්ටම දොස් කියාගන්නවා. ඒ නිසා එයා තීරණය කරනවා පීටර් පාකර්ගේ ස්පයිඩර්මෑන් ලෙගසි එක ඉදිරියට අරන් යන්න.ඉතින් ඔය තමයි මයිල්ස් ගේ ස්ටෝරි එක කෙටියෙන්. හැබැයි අපි මේ කතා කරන මූවි යුනිවර්ස් එකේ මයිල්ස්ට අමතරව චරිත බරගානක් ඉන්නවා. ඉතින් ඔයාලට ඒ කිහිප දෙනෙක් ගැන මෙතනින් මංසලට ගිහින් බලන්න පුලුවන්. ඒ වගේම මෙතනින් පලවෙනි ෆිල්ම් එකට චාමර සහෝ ලිව්ව ලිපියත් බලන්න පුලුවන්.අති සාර්තක ෆිල්ම් හදපු පික්සර්, ඩිස්නි ඇනිමේෂන්, ඉලුමිනේෂන්, බ්ලූ ස්කයි, ඩ්‍රීම්වර්ක්ස් වගේ කම්පැණි එක්ක බලද්දි Sony Animation හිටියෙ ටිකක් යට තැනක. හැබැයි ඩොලර් මිලියන අනූවකින් හදපු මේ ෆිල්ම් එකත් එක්ක සෝනි ඇනිමේෂන් එක නොහිතපු ලෙවල් එකකට යනවා. මේ ගන කෙලවර වෙන්නේ අවුරුද්දේ හොඳම ඇනිමේෂන් එකට හිමි ඔස්කාර් සම්මානෙත් උස්සලා.එයාල මේ ෆිල්ම් එකෙන් ඇනිමේෂන් රටාවේ කරපු වෙනස්කම අති සාර්තක උනා. විශේෂයෙන්ම ඒ වෙද්දි තිබුනු ටොම් හොලන්ඩ්ගේ ෆැන්චයිස් එකේ සාර්තකත්වය සහ සෝනිලා තනියම කරල අසාර්තක උන amazing spider-man ෆැන්චයිස් එක නිසා රසිකයො මේ ෆිල්ම් එක ගැන ලොකු බලාපොරොත්තු තියන් හිටියෙ නෑ. හැබැයි රිලීස් උනාට පස්සෙ ලෝකයම මේ ගැන කතා කරා.දැන් අපි එමු අලුත්ම ෆිල්ම් එක දිහාට. පලවෙනි ෆිල්ම් එකේ සාර්තකත්වය නිසාම දෙවෙනි ෆිල්ම් එකටත් ග්‍රීන් ලයිට් හම්බුනා. ඔන්න ඉතින් අවුරුදු පහකට පස්සෙ තමයි දෙවෙනි ෆිල්ම් එක අපිට බලන්න හම්බුනේ. ඒ වගේම එයාල මුලදිම එනවුන්ස් කරා මේ ෆිල්ම් දෙකක් එනවා කියල සහ Across the Spider-Verse එක පලවෙනි පාර්ට් එක කියලා. (Part 01) 2021 දෙසැම්බර් ආපු ටීසර් එකේ නම උනෙත් Across the Spider-Verse Part one කියලා. හැබැයි පස්සෙ නිවේදනය කරා දෙවෙනි පාර්ට් එකේ නම Spider-Man | Beyond The Spider-Verse කියලා. මේක රිලීස් වෙන දවසක් දැනට නම් සඳහන් කරලා නැහැ. හොලිවුඩ් වර්ජනයත් එක්ක ටිකක් පරක්කු වෙයි මේක.ඩොලර් මිලියන 100ක් තමා මේ ෆිල්ම් එකේ බජට් එක. ඒ වගේම මේ ලිපිය ලියද්දි ඩොලර් මිලියන 649ක් හොයා තියෙනවා ආදායම විදියට. මේ පාර ෆිල්ම් එක ඩිරෙක්ට් කරේ Joaquim Dos Santos, Justin K. Thompson, Kemp Powers කියන තුන්දෙනා. ඒ වගේම වොයිස් ආටිස්ට්ලා විදියට Shameik Moore, Hailee Steinfeld, Brian Tyree Henry, Luna Lauren Vélez, Jake Johnson, Jason Schwartzman, Issa Rae, Karan Soni ,Shea Whigham ,Greta Lee ,Daniel Kaluuya, Mahershala Ali, Oscar Isaac වගේ අය එකතු උනා.මේ ෆිල්ම් එක එක තප්පරයක්වක් ඇහැ අහකට ගන්න බැරි විදියට ඇනිමේෂන් කරල තියෙනවා. ඒ වගේම යුනිවර්ස් එකෙන් යුනිවර්ස් එකට යුනික් ඇනිමේෂන් ස්ටයිල් දීල තියෙන නිසා සියගානක ඇනිමේෂන් ස්ටයිල් මේ ෆිල්ම් එක ඇතුලේ දකින්න හම්බෙනවා. මුලු ෆිල්ම් එකම කොමික් එකක් කියවන් යනවා වගේ දැනෙන්නේ අපිට. ඒ තරමට ලස්සන ෆිල්ම් එකක් මේක.ඩිරෙක්ටර් Justin K Thompson විසින් 2023 මැයි වලදී තහවුරු කරා මේ මූවි එකේදී ස්පයිඩර්-පීපල්ස්ලා 280ක් දකින්න පුලුවන් කියලා. එ අයගෙනුත් 95 දෙනෙක් නම් කරපු යුනික් කැරැක්ටර් බවත් එයා හෙලි කරා. ඉතින් බලපු අය දන්නවා මේ ෆිල්ම් එක තමයි රියල්ම මල්ටිවර්ස් ඔෆ් මෑඩ්නස් ෆිල්ම් එක කියලා.මේ ෆිල්ම් එකේ හිටපු Lego Spider-Man’ව සජීවිකරණය කරලා තියෙන්නෙ අවුරුදු 14ක Preston Mutanga කියල ලමයා එයා හදපු ට්‍රේලර් එකක් දැකල තමයි මේ ෆිල්ම් එකට එකතු කරන් තියෙන්නෙ.ඉතින් මං වැඩිය කතා කරන්න යන් නෑ ෆිල්ම් එක ගැන. ඔයාලත් මේ ෆිල්ම් එක බලලම රස විඳින්න. ඒ වගේම බියොන්ඩ්ද ස්පයඩර්වර්ස් එක 2024 එන්න තිබුනත් මේ දවස් වල තියෙන රයිටර්ස්ලගෙ වගේම ඒයාලට එකතු උන නලු නිලියන්ගේ වර්ජනය නිසා 2025ටවත් කල් යන්න ඉඩ තියෙනවා.\n\n\n*Available Downloads:*\n\n*1.* Direct Download Links - WEBRip SD 480p (1. 3 GB)\n*2.* Direct Download Links - WEBRip HD 720p (2.5 GB)\n*3.* Direct Download Links - FHD WEBRip 1080p (4.5 GB)\n*4.* Direct Download Links - WEBRip SD 480p (1.3 GB)\n*5.* Direct Download Links - WEBRip HD 720p (2.5 GB)\n*6.* Direct Download Links - FHD WEBRip 1080p (4.5 GB)\n\n↩️ *Reply with the number to download the file (will be sent to chat).*",
             "fileSha256": "UruOw/RjYgL7h+BFu6WcP3iScS28hNEz3es0MnNDh34=",
             "fileLength": "2730675",
             "height": 2160,
             "width": 3840,
-            "mediaKey": "cf3G1adlQpSTtauOon2ZlrljwVvY9Frver6PrxMn0uA=",
-            "fileEncSha256": "9tA+0HyMYJP0KvLmGHUlcBpZke1wh8lOX9siH3LXxSY=",
-            "directPath": "/o1/v/t24/f2/m269/AQPBli7gto318PwPLDRB4wYUA76N1x-hEnQPvIfKI9Sjlus1VJSF8T6RMLEnTxewYT_ezbwDJUJxhZjxETNVRVMdkIVW2oyZMFpfqt95GQ?ccb=9-4&oh=01_Q5Aa3gFeUGj7R05DKlsgMm12noEt1ceaLyrQLljD_5H39Y5LYw&oe=69A996D6&_nc_sid=e6ed6c",
-            "mediaKeyTimestamp": "1770138375",
+            "mediaKey": "xMJOzbWAaC/1dby8UqVgI1pXWkR9lprVdyZDDpCv2EA=",
+            "fileEncSha256": "Cs2HRZbGNwBPuJPt+js2s1m+V2Pa8stUq/7WLPOrGZM=",
+            "directPath": "/o1/v/t24/f2/m233/AQNbj1-huXbN7HCJMPkMVAsDOqpilAL41IOwdJanekmtJwJ6oAzaEWA1PxjlE2kosFY7azqdiFRdUixn8gOl9PSIMxKccz4Aq8Lt-Wpeyw?ccb=9-4&oh=01_Q5Aa3wFQqOQxn-IE9sbwqf3yKqzQT0MR13dF6GA8P1lCjNya3Q&oe=69B8B7EE&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771130387",
             "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAASACADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAAQDBQYB/8QAKxAAAgEDAgQDCQAAAAAAAAAAAQIDAAQREiEFEzFBBhRhFjJRcYGRscHh/8QAFQEBAQAAAAAAAAAAAAAAAAAABAX/xAAdEQACAgMAAwAAAAAAAAAAAAAAAQIDERIyNEPw/9oADAMBAAIRAxEAPwBW0cLdaL5NS5LMnTPr60MnOvJo7dQsTopCkdyelMS2guLZ2YtPHkgMvvHB7fyouFQ3MTPpQpCeplYAjHeiq9OLS+ZVUVnbIq9rMOM8x7l4gFIXfAGkbqfjn91HAFk1RxqrMNmKnJU/erDxZCYbWAScuRLluY8q7gMOgHzFUvAbO3u7ieLDLIqh43VypAzv+RSKJutYaB3LeW0GafgijyUq4GlZ2AHYDPSrC4A8pdHG4ibB+lFFTp+UI9ZjZnc+DoELsUFwwC52G4rnhAn2ihHYxuD67UUVQnxIGukf/9k=",
             "contextInfo": {
-              "stanzaId": "AC65D7160BBF1BC80B37AD1562E486CF",
-              "participant": "228209480200306@lid",
+              "stanzaId": "AC82FB30095EC8F8CFF37DC18CD078CF",
+              "participant": "94770612011@s.whatsapp.net",
               "quotedMessage": {
                 "extendedTextMessage": {
                   "text": "3",
@@ -800,7 +756,7 @@
           }
         },
         "messageTimestamp": {
-          "low": 1770138375,
+          "low": 1771130387,
           "high": 0,
           "unsigned": true
         },
@@ -813,37 +769,76 @@
           "remoteJid": "228209480200306@lid",
           "remoteJidAlt": "94770612011@s.whatsapp.net",
           "fromMe": true,
-          "id": "AC4471E75BFF10A9E6074C042953D90D",
+          "id": "AC626BC2AC19A38DCFE7D191DBBA0229",
           "participant": "",
           "addressingMode": "lid"
-        },
-        "message": {
-          "conversation": ".status"
-        },
-        "messageTimestamp": 1770138450,
-        "pushName": "Infinity-MD",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "fromMe": true,
-          "id": "3EB09FA71B303E8A6F69D4"
         },
         "message": {
           "extendedTextMessage": {
-            "text": "🤖 *Status Command*\nCurrent: OFF (appearing offline)\n\nUsage: .status <on|off>\n• .status off - Bot will appear offline even when connected\n• .status on  - Bot will appear online normally",
+            "text": "1",
+            "previewType": "NONE",
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          }
+        },
+        "messageTimestamp": 1771130400,
+        "pushName": "Savi",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "fromMe": true,
+          "id": "3EB062C33F885B1A473369"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "⬇️ Downloading selection #1... This may take a while depending on file size.",
             "contextInfo": {
-              "stanzaId": "AC4471E75BFF10A9E6074C042953D90D",
-              "participant": "94778507806@s.whatsapp.net",
+              "stanzaId": "AC626BC2AC19A38DCFE7D191DBBA0229",
+              "participant": "94770612011@s.whatsapp.net",
               "quotedMessage": {
-                "conversation": ".status"
+                "extendedTextMessage": {
+                  "text": "1",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
               }
             }
           }
         },
         "messageTimestamp": {
-          "low": 1770138450,
+          "low": 1771130401,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "fromMe": true,
+          "id": "3EB05AD47CE7E58D9C58B8"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "❌ Failed to download or send the file. The source may block direct downloads or file is too large.",
+            "contextInfo": {
+              "stanzaId": "AC626BC2AC19A38DCFE7D191DBBA0229",
+              "participant": "94770612011@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": "1",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771130404,
           "high": 0,
           "unsigned": true
         },
@@ -855,127 +850,8 @@
         "key": {
           "remoteJid": "228209480200306@lid",
           "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": false,
-          "id": "ACB0F130B5C0FDDE63CA83C462583802",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "message": {
-          "conversation": "Hi",
-          "messageContextInfo": {
-            "deviceListMetadata": {
-              "senderKeyHash": "VjoITV7ta09cdQ==",
-              "senderTimestamp": "1770078384",
-              "recipientKeyHash": "RzqflFAuWO4d+Q==",
-              "recipientTimestamp": "1770138243"
-            },
-            "deviceListMetadataVersion": 2,
-            "messageSecret": "DoeL3LbDANTq0+T7c4ku9EDTqjsXnul8gqkqpf4xHNg="
-          }
-        },
-        "messageTimestamp": 1770138509,
-        "pushName": "Infintiy AI",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "remoteJidAlt": "94770612011@s.whatsapp.net",
           "fromMe": true,
-          "id": "AC24555EB74B7B7DDAC0B2766C3E7929",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "messageTimestamp": 1770177467,
-        "pushName": "Infinity-MD",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": true,
-          "id": "AC4CFD4C9A087E1D6912E23366D614FC",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "messageTimestamp": 1770177548,
-        "pushName": "Infinity-MD",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": true,
-          "id": "AC4CFD4C9A087E1D6912E23366D614FC",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "messageTimestamp": 1770177549,
-        "pushName": "Infinity-MD",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": true,
-          "id": "AC1E002D37087F7C36D8357C79C6C9FF",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "message": {
-          "conversation": ".ping"
-        },
-        "messageTimestamp": 1770183883,
-        "pushName": "Infinity-MD",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "fromMe": true,
-          "id": "3EB07BB4AFB95588ADB2EC"
-        },
-        "message": {
-          "imageMessage": {
-            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m234/AQNbL3LP8d6K7yTkCHgd23YIH0EdSpp8d3LshsCYNx3vB8WuPVT4cnyFBdbvf69o944QbFZ5Wo8rOo0J4jHOcgYUwfVkIjt_uEL83u-Jww?ccb=9-4&oh=01_Q5Aa3gHxLMHi0p10VY5C_Ptd4hnchJsIKWF--ohWhbEi-c_5gg&oe=69AA3AF7&_nc_sid=e6ed6c&mms3=true",
-            "mimetype": "image/jpeg",
-            "caption": "╭─〔 ⚡ INFINITY MD — STATUS 〕─╮\n│ 💠 Infinity MD — v5.1.0\n│\n│ 🏓 RTT        : 2.27 ms\n│ ⏱ Uptime     : 0d 0h 5m 38s\n│ 💾 RSS        : 205.6 MB\n│ 📦 Heap       : 75.1 / 80.2 MB\n│ 🧮 Load(1m)   : 0.72    │ CPU Cores: 4\n│ 🖥 Platform   : Linux x64\n│ ⚙️ CPU Model  : AMD EPYC 7763 64-Core Processor\n│\n│ ✨ Stay awesome — Infinity MD ✨\n╰──────────────────────────────╯",
-            "fileSha256": "dAMFMEyPcGB9tixbJmoGYbJVPOo5Jjt7wubgodlk14Y=",
-            "fileLength": "115913",
-            "height": 412,
-            "width": 1024,
-            "mediaKey": "nEGVLbPDD1GvXE5Ai8huZsU8ZVMHLPixd+JyQ8687+I=",
-            "fileEncSha256": "FR5iiuEXd+XvAEVbmpNXDsFnNUTe6rLbn/PdLg+vjbE=",
-            "directPath": "/o1/v/t24/f2/m234/AQNbL3LP8d6K7yTkCHgd23YIH0EdSpp8d3LshsCYNx3vB8WuPVT4cnyFBdbvf69o944QbFZ5Wo8rOo0J4jHOcgYUwfVkIjt_uEL83u-Jww?ccb=9-4&oh=01_Q5Aa3gHxLMHi0p10VY5C_Ptd4hnchJsIKWF--ohWhbEi-c_5gg&oe=69AA3AF7&_nc_sid=e6ed6c",
-            "mediaKeyTimestamp": "1770183884",
-            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAANACADASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAABAUAAwb/xAAjEAACAgICAgEFAAAAAAAAAAABAgMREiEABBMicTFRYaGx/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAME/8QAGBEAAwEBAAAAAAAAAAAAAAAAAAECERL/2gAMAwEAAhEDEQA/AMjB1gQScjo4473+eMet42jwjgLvGmT2Bejv54JketIXjrY+lckUxQMd25skGuSe0aZyA/sJ4FdmgRTGaZfUkXdfv+cVT9ZkiyItj7WDoD45fJMZExOX3218HlSyLY0OJWC30f/Z",
-            "contextInfo": {
-              "stanzaId": "AC1E002D37087F7C36D8357C79C6C9FF",
-              "participant": "94778507806@s.whatsapp.net",
-              "quotedMessage": {
-                "conversation": ".ping"
-              }
-            }
-          }
-        },
-        "messageTimestamp": {
-          "low": 1770183884,
-          "high": 0,
-          "unsigned": true
-        },
-        "participant": null,
-        "pushName": null,
-        "broadcast": null
-      },
-      {
-        "key": {
-          "remoteJid": "228209480200306@lid",
-          "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": false,
-          "id": "ACEA1C2EE9E171266B6A3ED4C7C94C1D",
+          "id": "AC3E33F3E41C33F3BE262214B39C9FB9",
           "participant": "",
           "addressingMode": "lid"
         },
@@ -984,18 +860,9 @@
             "text": ".ping",
             "previewType": "NONE",
             "inviteLinkGroupTypeV2": "DEFAULT"
-          },
-          "messageContextInfo": {
-            "deviceListMetadata": {
-              "senderTimestamp": "1771081999",
-              "recipientKeyHash": "U4oLWNFLnSCVug==",
-              "recipientTimestamp": "1771088794"
-            },
-            "deviceListMetadataVersion": 2,
-            "messageSecret": "UupYRiKlXFVb9lkvuS+Kk4M6aOzRoS/bmWtwqLlu0SI="
           }
         },
-        "messageTimestamp": 1771089171,
+        "messageTimestamp": 1771130639,
         "pushName": "Savi",
         "broadcast": false
       },
@@ -1003,25 +870,14 @@
         "key": {
           "remoteJid": "228209480200306@lid",
           "fromMe": true,
-          "id": "3EB01D8A8B7A5DFB10F16E"
+          "id": "3EB0A43121934872A8B61F"
         },
         "message": {
-          "imageMessage": {
-            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m238/AQOD0a8jXqtuEOngoSkRDmoafcoYAz--qctOvZkUzHEGAFZzw42-mO2-Tm_hnj51R6GT7rm2sos_GuK6kVp1v2jgWwRDwdrAIbFIsXgtnw?ccb=9-4&oh=01_Q5Aa3wFfoq00lO_5e0QuqSpQ2VCtUavcKX8r2Mxnt6EEhfPtvw&oe=69B832FF&_nc_sid=e6ed6c&mms3=true",
-            "mimetype": "image/jpeg",
-            "caption": "┌────────────────────────┐\n│  ⚡ INFINITY MD PING ⚡  │\n│────────────────────────│\n│🏓 Ping : 5ms  🟢 FAST  │\n│⏱ Up   : 3m             │\n│💾 RAM  : 198MB         │\n│📦 Heap : 75/78MB       │\n│🖥 OS   : Linux x64     │\n│🏷 Ver  : v1.0.1        │\n│────────────────────────│\n│  ✅ Online & Ready      │\n└────────────────────────┘",
-            "fileSha256": "dAMFMEyPcGB9tixbJmoGYbJVPOo5Jjt7wubgodlk14Y=",
-            "fileLength": "115913",
-            "height": 412,
-            "width": 1024,
-            "mediaKey": "muLWm6ZQLr1qQzPwNAA7NbvuS3clpaa/L+rlaTl0vjs=",
-            "fileEncSha256": "yMGbc1/Ls9TvRt6OkoShaLGpxsHRuoc2aEbDyGyhHrU=",
-            "directPath": "/o1/v/t24/f2/m238/AQOD0a8jXqtuEOngoSkRDmoafcoYAz--qctOvZkUzHEGAFZzw42-mO2-Tm_hnj51R6GT7rm2sos_GuK6kVp1v2jgWwRDwdrAIbFIsXgtnw?ccb=9-4&oh=01_Q5Aa3wFfoq00lO_5e0QuqSpQ2VCtUavcKX8r2Mxnt6EEhfPtvw&oe=69B832FF&_nc_sid=e6ed6c",
-            "mediaKeyTimestamp": "1771089173",
-            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAANACADASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAABAUAAwb/xAAjEAACAgICAgEFAAAAAAAAAAABAgMREiEABBMicTFRYaGx/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAME/8QAGBEAAwEBAAAAAAAAAAAAAAAAAAECERL/2gAMAwEAAhEDEQA/AMjB1gQScjo4473+eMet42jwjgLvGmT2Bejv54JketIXjrY+lckUxQMd25skGuSe0aZyA/sJ4FdmgRTGaZfUkXdfv+cVT9ZkiyItj7WDoD45fJMZExOX3218HlSyLY0OJWC30f/Z",
+          "extendedTextMessage": {
+            "text": "╭━━〔 🤖 BOT STATUS 〕━━⬣\n┃ ⚡ Speed     : 1 ms\n┃ 🧠 Response  : Active\n┃ ⏱ Uptime    : 0m\n┃ 📡 Server    : Online\n╰━━━━━━━━━━━━━━⬣\n\n✨ Everything working perfectly!",
             "contextInfo": {
-              "stanzaId": "ACEA1C2EE9E171266B6A3ED4C7C94C1D",
-              "participant": "228209480200306@lid",
+              "stanzaId": "AC3E33F3E41C33F3BE262214B39C9FB9",
+              "participant": "94770612011@s.whatsapp.net",
               "quotedMessage": {
                 "extendedTextMessage": {
                   "text": ".ping",
@@ -1033,7 +889,7 @@
           }
         },
         "messageTimestamp": {
-          "low": 1771089173,
+          "low": 1771130640,
           "high": 0,
           "unsigned": true
         },
@@ -1045,8 +901,101 @@
         "key": {
           "remoteJid": "228209480200306@lid",
           "remoteJidAlt": "94770612011@s.whatsapp.net",
-          "fromMe": false,
-          "id": "AC5F8259183E5B7DAF05EB5DE4CC4FAE",
+          "fromMe": true,
+          "id": "ACE1C776281A4619FFC215C654F8F0C3",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": ".song menike mage",
+            "previewType": "NONE",
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          }
+        },
+        "messageTimestamp": 1771130654,
+        "pushName": "Savi",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "fromMe": true,
+          "id": "3EB0940176C3D7D064F5B0"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m232/AQNfwGA70Wm3wcv1W3SLU2eOUjF_5OCZseddqFREMSTMuwe2epCdaOKr_gwj-NTPCJWsvcnrwc3MOiCtXecbauGb71hmOHRq7Rt2FISw6Q?ccb=9-4&oh=01_Q5Aa3wExqGVsMZxR0-Yb2V29shhkHRQ2Fc10UDUxC0LIr3j-OA&oe=69B8CCE5&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭───〔 🎵 *SONG INFO* 〕───\n│ 📝 *Title:* Manike Mage Hithe  මැණිකේ මගේ හිතේ  - Official Cover - Yohani & Satheeshan\n│ 👤 *Artist:* Yohani\n│ ⏱️ *Duration:* 2:48\n│ 🔗 *Link:* https://youtube.com/watch?v=PgCliOxl41o\n╰───────────────────\n\n⏳ *Downloading audio...*\n\n> 💫 *INFINITY MD BOT*",
+            "fileSha256": "uTymo+IYL6qkVrp+JdjS78NS+Iboe9bJb3+FsrGmoLM=",
+            "fileLength": "124389",
+            "height": 720,
+            "width": 1280,
+            "mediaKey": "ee/xUbwbzP7NBNigtMXC7Urm8H45KbNSu+mRzK1v+VI=",
+            "fileEncSha256": "Z+fKaQbVFoNvxSzztmIWyaflkaihXqA/UJvTJEMiVbU=",
+            "directPath": "/o1/v/t24/f2/m232/AQNfwGA70Wm3wcv1W3SLU2eOUjF_5OCZseddqFREMSTMuwe2epCdaOKr_gwj-NTPCJWsvcnrwc3MOiCtXecbauGb71hmOHRq7Rt2FISw6Q?ccb=9-4&oh=01_Q5Aa3wExqGVsMZxR0-Yb2V29shhkHRQ2Fc10UDUxC0LIr3j-OA&oe=69B8CCE5&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771130657",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAASACADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAUBBAYCA//EACcQAAIBAwMCBgMAAAAAAAAAAAECAwAEERIhMQUTQUJRYXGxQ6Gy/8QAFwEBAAMAAAAAAAAAAAAAAAAAAwABBP/EAB0RAAMAAQUBAAAAAAAAAAAAAAABAhEDEiExQXH/2gAMAwEAAhEDEQA/AMXHZM6hlkQgj359K9DZsvnU1MNxDGoALEBRtp8fH7pha9WtreJ0MTOWbOrA49PuiuqS4WTbU6CjPv0rdowWrIyRMWOdeMsPbJ4HxXM1lotYJgwYyAsQpzpGcDNXmvY7iWN4oD24htHgEAb/AKp8kvS1s9AtokleNY8SjYYG+T81Jy5y+Ab2rpGETipoopQBl0cnuTb/AIJP5NPrZ2dJ2dixCggk5xRRVLoS/D//2Q==",
+            "contextInfo": {
+              "stanzaId": "ACE1C776281A4619FFC215C654F8F0C3",
+              "participant": "94770612011@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".song menike mage",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771130657,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "fromMe": true,
+          "id": "3EB032D6596394388687F2"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "❌ *Download failed!*\n\n*Error:* Status code: 410",
+            "contextInfo": {
+              "stanzaId": "ACE1C776281A4619FFC215C654F8F0C3",
+              "participant": "94770612011@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".song menike mage",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771130658,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "remoteJidAlt": "94770612011@s.whatsapp.net",
+          "fromMe": true,
+          "id": "AC15996143458A10A6199735C55079B6",
           "participant": "",
           "addressingMode": "lid"
         },
@@ -1054,26 +1003,136 @@
           "extendedTextMessage": {
             "text": ".ping",
             "previewType": "NONE",
-            "contextInfo": {
-              "entryPointConversionSource": "phone_number_hyperlink",
-              "entryPointConversionApp": "whatsapp",
-              "entryPointConversionDelaySeconds": 30605
-            },
             "inviteLinkGroupTypeV2": "DEFAULT"
-          },
-          "messageContextInfo": {
-            "deviceListMetadata": {
-              "senderTimestamp": "1771081999",
-              "recipientKeyHash": "U4oLWNFLnSCVug==",
-              "recipientTimestamp": "1771088794"
-            },
-            "deviceListMetadataVersion": 2,
-            "messageSecret": "dN8aIaYGNeO3KGixRR/6xg2vvB6R8quja45KK7jhwVo="
           }
         },
-        "messageTimestamp": 1771119773,
+        "messageTimestamp": 1771130836,
         "pushName": "Savi",
         "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "fromMe": true,
+          "id": "3EB0B5817EA91968E2970F"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "╭━━〔 🤖 BOT STATUS 〕━━⬣\n┃ ⚡ Speed     : 4 ms\n┃ 🧠 Response  : Active\n┃ ⏱ Uptime    : 0m\n┃ 📡 Server    : Online\n╰━━━━━━━━━━━━━━⬣\n\n✨ Everything working perfectly!",
+            "contextInfo": {
+              "stanzaId": "AC15996143458A10A6199735C55079B6",
+              "participant": "94770612011@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".ping",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771130836,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "remoteJidAlt": "94770612011@s.whatsapp.net",
+          "fromMe": true,
+          "id": "AC9273770C0B3AD76F651DE79F8986F6",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": ".song menike mage",
+            "previewType": "NONE",
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          }
+        },
+        "messageTimestamp": 1771130846,
+        "pushName": "Savi",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "fromMe": true,
+          "id": "3EB089459667B38D68F21E"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m232/AQM2_7M9Fc5J2AH9As4F-sKpGGUDuLkWNAvNEk5hlNIJUnSq4SLsgWAySO0zTrhMc4_gtQu7D9Sq8Jm_TZg4f3QLxr96qHqBuNSiGWqOoA?ccb=9-4&oh=01_Q5Aa3wGfaZjYCtRxZxiLrryJUy1GXZy6TLmBjKpj3YZFBuCkuA&oe=69B8B556&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭───〔 🎵 *SONG INFO* 〕───\n│ 📝 *Title:* Manike Mage Hithe  මැණිකේ මගේ හිතේ  - Official Cover - Yohani & Satheeshan\n│ 👤 *Artist:* Yohani\n│ ⏱️ *Duration:* 2:48\n│ 🔗 *Link:* https://youtube.com/watch?v=PgCliOxl41o\n╰───────────────────\n\n⏳ *Downloading audio...*\n\n> 💫 *INFINITY MD BOT*",
+            "fileSha256": "uTymo+IYL6qkVrp+JdjS78NS+Iboe9bJb3+FsrGmoLM=",
+            "fileLength": "124389",
+            "height": 720,
+            "width": 1280,
+            "mediaKey": "JpzQX/6M82OE6KboOaDOBcVzOztDOWQESSuC3Ff6A3I=",
+            "fileEncSha256": "qcxlpP+maHUaMdS8adm4BW23Pq4WwjOHMDKsN1UxQeY=",
+            "directPath": "/o1/v/t24/f2/m232/AQM2_7M9Fc5J2AH9As4F-sKpGGUDuLkWNAvNEk5hlNIJUnSq4SLsgWAySO0zTrhMc4_gtQu7D9Sq8Jm_TZg4f3QLxr96qHqBuNSiGWqOoA?ccb=9-4&oh=01_Q5Aa3wGfaZjYCtRxZxiLrryJUy1GXZy6TLmBjKpj3YZFBuCkuA&oe=69B8B556&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771130849",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAASACADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAUBBAYCA//EACcQAAIBAwMCBgMAAAAAAAAAAAECAwAEERIhMQUTQUJRYXGxQ6Gy/8QAFwEBAAMAAAAAAAAAAAAAAAAAAwABBP/EAB0RAAMAAQUBAAAAAAAAAAAAAAABAhEDEiExQXH/2gAMAwEAAhEDEQA/AMXHZM6hlkQgj359K9DZsvnU1MNxDGoALEBRtp8fH7pha9WtreJ0MTOWbOrA49PuiuqS4WTbU6CjPv0rdowWrIyRMWOdeMsPbJ4HxXM1lotYJgwYyAsQpzpGcDNXmvY7iWN4oD24htHgEAb/AKp8kvS1s9AtokleNY8SjYYG+T81Jy5y+Ab2rpGETipoopQBl0cnuTb/AIJP5NPrZ2dJ2dixCggk5xRRVLoS/D//2Q==",
+            "contextInfo": {
+              "stanzaId": "AC9273770C0B3AD76F651DE79F8986F6",
+              "participant": "94770612011@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".song menike mage",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771130849,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "228209480200306@lid",
+          "fromMe": true,
+          "id": "3EB0915E4D0EFD0331452D"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "❌ *Download failed!*\n\n*Error:* Sign in to confirm you’re not a bot",
+            "contextInfo": {
+              "stanzaId": "AC9273770C0B3AD76F651DE79F8986F6",
+              "participant": "94770612011@s.whatsapp.net",
+              "quotedMessage": {
+                "extendedTextMessage": {
+                  "text": ".song menike mage",
+                  "previewType": "NONE",
+                  "inviteLinkGroupTypeV2": "DEFAULT"
+                }
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771130850,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
       }
     ],
     "55138840477821@lid": [
@@ -1309,6 +1368,43 @@
         },
         "messageTimestamp": 1770222906,
         "pushName": "Infinity-MD",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "55138840477821@lid",
+          "remoteJidAlt": "94769709748@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACD88A33A1D3F729F14E6FAEA365377D",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "Hello",
+            "previewType": "NONE",
+            "contextInfo": {
+              "expiration": 0,
+              "ephemeralSettingTimestamp": "1768702203",
+              "disappearingMode": {
+                "initiator": "CHANGED_IN_CHAT",
+                "trigger": "UNKNOWN",
+                "initiatedByMe": false
+              }
+            },
+            "inviteLinkGroupTypeV2": "DEFAULT"
+          },
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "recipientKeyHash": "9HpfUQr7GWR8cg==",
+              "recipientTimestamp": "1771130265"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "r6bsuq0GZvlIqNeJhVXhbcItBguarmdpq/lV5hmH6Ic="
+          }
+        },
+        "messageTimestamp": 1771131076,
+        "pushName": "ΣDamDam 🔥♟️🎨➗",
         "broadcast": false
       }
     ],
@@ -1983,65 +2079,6 @@
       {
         "key": {
           "remoteJid": "171713513922633@lid",
-          "remoteJidAlt": "94702958515@s.whatsapp.net",
-          "fromMe": true,
-          "id": "3EB094AF66F3085746CC09",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "message": {
-          "conversation": ".son menike mage"
-        },
-        "messageTimestamp": 1771087540,
-        "pushName": "Infinity BOT",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "171713513922633@lid",
-          "fromMe": true,
-          "id": "3EB0B55CBCE4F6F8FEF84A"
-        },
-        "message": {
-          "extendedTextMessage": {
-            "text": "❓ Did you mean *.song*?",
-            "contextInfo": {
-              "stanzaId": "3EB094AF66F3085746CC09",
-              "participant": "94702958515@s.whatsapp.net",
-              "quotedMessage": {
-                "conversation": ".son menike mage"
-              }
-            }
-          }
-        },
-        "messageTimestamp": {
-          "low": 1771087541,
-          "high": 0,
-          "unsigned": true
-        },
-        "participant": null,
-        "pushName": null,
-        "broadcast": null
-      },
-      {
-        "key": {
-          "remoteJid": "171713513922633@lid",
-          "remoteJidAlt": "94702958515@s.whatsapp.net",
-          "fromMe": true,
-          "id": "3EB048CFDBDEEF2ACF5FD8",
-          "participant": "",
-          "addressingMode": "lid"
-        },
-        "message": {
-          "conversation": ".song menike mage"
-        },
-        "messageTimestamp": 1771087551,
-        "pushName": "Infinity BOT",
-        "broadcast": false
-      },
-      {
-        "key": {
-          "remoteJid": "171713513922633@lid",
           "fromMe": true,
           "id": "3EB07EDEA995E1AE931BAC"
         },
@@ -2451,6 +2488,371 @@
         "participant": null,
         "pushName": null,
         "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "remoteJidAlt": "94702958515@s.whatsapp.net",
+          "fromMe": false,
+          "id": "3EB01D0AF69DC9E0CA162B",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "conversation": ".ping",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "fSEz8YZvpHuBlQ==",
+              "senderTimestamp": "1771088794",
+              "senderAccountType": "E2EE",
+              "receiverAccountType": "E2EE",
+              "recipientKeyHash": "9HpfUQr7GWR8cg==",
+              "recipientTimestamp": "1771130265"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "Xddo1BPo3vLN0blukny7E8oqZSnGSsl/6tPGdrejPso="
+          }
+        },
+        "messageTimestamp": 1771132119,
+        "pushName": "Infinity BOT",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "fromMe": true,
+          "id": "3EB02F35FC0B2F08569B69"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "╭━━〔 🤖 BOT STATUS 〕━━⬣\n┃ ⚡ Speed     : 3 ms\n┃ 🧠 Response  : Active\n┃ ⏱ Uptime    : 0m\n┃ 📡 Server    : Online\n╰━━━━━━━━━━━━━━⬣\n\n✨ Everything working perfectly!",
+            "contextInfo": {
+              "stanzaId": "3EB01D0AF69DC9E0CA162B",
+              "participant": "171713513922633@lid",
+              "quotedMessage": {
+                "conversation": ".ping"
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771132119,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "remoteJidAlt": "94702958515@s.whatsapp.net",
+          "fromMe": false,
+          "id": "3EB0ACFB1AB890483305AE",
+          "participant": "",
+          "addressingMode": "lid"
+        },
+        "message": {
+          "conversation": ".song menike mage",
+          "messageContextInfo": {
+            "deviceListMetadata": {
+              "senderKeyHash": "fSEz8YZvpHuBlQ==",
+              "senderTimestamp": "1771088794",
+              "senderAccountType": "E2EE",
+              "receiverAccountType": "E2EE",
+              "recipientKeyHash": "9HpfUQr7GWR8cg==",
+              "recipientTimestamp": "1771130265"
+            },
+            "deviceListMetadataVersion": 2,
+            "messageSecret": "ihaHLBUwna0k4b0LQQliQHyWCGAj+P37wkK98xkoU6Q="
+          }
+        },
+        "messageTimestamp": 1771132135,
+        "pushName": "Infinity BOT",
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "fromMe": true,
+          "id": "3EB02098F0C127CD4AEC5E"
+        },
+        "message": {
+          "imageMessage": {
+            "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m234/AQOV5KuRxgJ-u0ltG1bKlwq1Un2fJAJOw6c4yvpiX7Pd3qTBPbKnd-7Mlj2IHgYdOZOIpYKkEds2LeYSbUnV_LD_n4suWfPfg1vTU0-RIg?ccb=9-4&oh=01_Q5Aa3wG_NIiXnYA8auRxgVEQ2qEBRiBSHrb3i5HAVgZpPFax_Q&oe=69B8CCAF&_nc_sid=e6ed6c&mms3=true",
+            "mimetype": "image/jpeg",
+            "caption": "╭───〔 🎵 *SONG INFO* 〕───\n│ 📝 *Title:* Manike Mage Hithe  මැණිකේ මගේ හිතේ  - Official Cover - Yohani & Satheeshan\n│ 👤 *Artist:* Yohani\n│ ⏱️ *Duration:* 2:48\n│ 🔗 *Link:* https://youtube.com/watch?v=PgCliOxl41o\n╰───────────────────\n\n⏳ *Downloading audio...*\n\n> 💫 *INFINITY MD BOT*",
+            "fileSha256": "uTymo+IYL6qkVrp+JdjS78NS+Iboe9bJb3+FsrGmoLM=",
+            "fileLength": "124389",
+            "height": 720,
+            "width": 1280,
+            "mediaKey": "1OYZQWDPw9gQH7vosI/RWqtvgYj7pg/HuSw2XN2PBM8=",
+            "fileEncSha256": "7upv7yy4+ZUneXXlayWpsnkDQjeXJBGVFbacwQRmvB0=",
+            "directPath": "/o1/v/t24/f2/m234/AQOV5KuRxgJ-u0ltG1bKlwq1Un2fJAJOw6c4yvpiX7Pd3qTBPbKnd-7Mlj2IHgYdOZOIpYKkEds2LeYSbUnV_LD_n4suWfPfg1vTU0-RIg?ccb=9-4&oh=01_Q5Aa3wG_NIiXnYA8auRxgVEQ2qEBRiBSHrb3i5HAVgZpPFax_Q&oe=69B8CCAF&_nc_sid=e6ed6c",
+            "mediaKeyTimestamp": "1771132138",
+            "jpegThumbnail": "/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAASACADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAUBBAYCA//EACcQAAIBAwMCBgMAAAAAAAAAAAECAwAEERIhMQUTQUJRYXGxQ6Gy/8QAFwEBAAMAAAAAAAAAAAAAAAAAAwABBP/EAB0RAAMAAQUBAAAAAAAAAAAAAAABAhEDEiExQXH/2gAMAwEAAhEDEQA/AMXHZM6hlkQgj359K9DZsvnU1MNxDGoALEBRtp8fH7pha9WtreJ0MTOWbOrA49PuiuqS4WTbU6CjPv0rdowWrIyRMWOdeMsPbJ4HxXM1lotYJgwYyAsQpzpGcDNXmvY7iWN4oD24htHgEAb/AKp8kvS1s9AtokleNY8SjYYG+T81Jy5y+Ab2rpGETipoopQBl0cnuTb/AIJP5NPrZ2dJ2dixCggk5xRRVLoS/D//2Q==",
+            "contextInfo": {
+              "stanzaId": "3EB0ACFB1AB890483305AE",
+              "participant": "171713513922633@lid",
+              "quotedMessage": {
+                "conversation": ".song menike mage"
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771132138,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      },
+      {
+        "key": {
+          "remoteJid": "171713513922633@lid",
+          "fromMe": true,
+          "id": "3EB07EDA4BF5A8EC0FB5A2"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "❌ *Download failed!*\n\n*Error:* Sign in to confirm you’re not a bot",
+            "contextInfo": {
+              "stanzaId": "3EB0ACFB1AB890483305AE",
+              "participant": "171713513922633@lid",
+              "quotedMessage": {
+                "conversation": ".song menike mage"
+              }
+            }
+          }
+        },
+        "messageTimestamp": {
+          "low": 1771132139,
+          "high": 0,
+          "unsigned": true
+        },
+        "participant": null,
+        "pushName": null,
+        "broadcast": null
+      }
+    ],
+    "94770612011@s.whatsapp.net": [
+      {
+        "key": {
+          "remoteJid": "94770612011@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACF182D379090F7F49C5F48F4A612D6C",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "INITIAL_SECURITY_NOTIFICATION_SETTING_SYNC",
+            "initialSecurityNotificationSettingSync": {
+              "securityNotificationEnabled": false
+            }
+          }
+        },
+        "messageTimestamp": 1771130281,
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "94770612011@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACB97B6FA4A05C268EE4F5772728680C",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "APP_STATE_SYNC_KEY_SHARE",
+            "appStateSyncKeyShare": {
+              "keys": [
+                {
+                  "keyId": {
+                    "keyId": "AAAAAHhj"
+                  },
+                  "keyData": {
+                    "keyData": "jQcYKWhag/bDSt0YUSztxMdyWsxY1oX8eaTXBTronAc=",
+                    "fingerprint": {
+                      "rawId": 1297188705,
+                      "currentIndex": 1,
+                      "deviceIndexes": [
+                        0,
+                        1
+                      ]
+                    },
+                    "timestamp": "1771130281024"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "messageTimestamp": 1771130281,
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "94770612011@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACA66BFD45FD0D458556D8B20FF288FA",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileLength": "0",
+              "syncType": "INITIAL_BOOTSTRAP",
+              "initialHistBootstrapInlinePayload": "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"
+            }
+          }
+        },
+        "messageTimestamp": 1771130281,
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "94770612011@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC7B5A2F9E4978105BBB3D4B7AE17C9C",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileLength": "0",
+              "syncType": "INITIAL_STATUS_V3",
+              "initialHistBootstrapInlinePayload": "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"
+            }
+          }
+        },
+        "messageTimestamp": 1771130281,
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "94770612011@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC052227A8392B7CE98B7C630645E8F5",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileLength": "0",
+              "syncType": "PUSH_NAME",
+              "chunkOrder": 1,
+              "initialHistBootstrapInlinePayload": "eAF9kTFLw0AUx5cOIk4pLp2Co0N57+5e7i5TEZcudfELBIxNIMZiAmqn9guoQ6F1qBFUENTFQfRL+CHyBcxH8JI6lJbI3f/g4P3e/93/Nhqu2mxpIR0tQUuhOkn7PPDSxBsM2rGfWq3vh33vxGy7yCZP+W3283ldZFfP+d3U5RWJClAR0Sq53QvPTpPAs7tR5MV9LwnjfuC7OwuIMwUM2CrUKLLZ2O1VNSBBAF+vgWI+fTN6N/oy+ijms/Hf/aXtX/h2Pprk96N8flOej6/u7qIf06QI1wbd6sbHYRyml/beweEQ/31Uk5EmScA1ao5adKLwaAgVUpegRYRcKQFCSsWwIhYmUDNQE6VZ3GCaMYfzJZO6TCyFaDxIOFIQ0BKBNUlbDIXQiLL8BlIl8Qs5UKy7"
+            }
+          }
+        },
+        "messageTimestamp": 1771130281,
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "94770612011@s.whatsapp.net",
+          "fromMe": false,
+          "id": "AC100566FE129DA1E64DEDB1634DB256",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileSha256": "NxNmy97OHVTpvjaj19/Vo++VySfHtgIDK0kiyd3fjo8=",
+              "fileLength": "10",
+              "mediaKey": "4LlZ+kraGlYJTWEpm3Qq2deZYuDjT/SIa/FoueLWFEM=",
+              "fileEncSha256": "iuLptEbVh64m5SMFF5ECAnLAswoOOUvhe6zPRjr6svY=",
+              "directPath": "/v/t62.31111-24/40333225_1587383822508198_8021782094128706187_n.enc?ccb=11-4&oh=01_Q5Aa3wGpdmcTDqMMESU2YQg9GMllL4bI0OWJF-bqpV9IZd_3pA&oe=69B8C872&_nc_sid=5e03e0",
+              "syncType": "NON_BLOCKING_DATA",
+              "encHandle": "AQLc2MH-nr0-q4m5gglhi8GQu0RcK_vMV5-Krk2vDxx3ptP6V1_4Gr5_3JMuLQH1H6kDhy_evZhi7auZqVffXC6dFy_pOGs6DRQkQ0UqObc2ipIUiusIAwzLbj6uxT9TNHI"
+            }
+          }
+        },
+        "messageTimestamp": 1771130282,
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "94770612011@s.whatsapp.net",
+          "fromMe": false,
+          "id": "ACDFAE5E7E484E27B963962F9A216653",
+          "participant": "",
+          "addressingMode": "pn"
+        },
+        "message": {
+          "protocolMessage": {
+            "type": "HISTORY_SYNC_NOTIFICATION",
+            "historySyncNotification": {
+              "fileSha256": "euB9w+6OBcBBJQwslA0YW/2fCafqJUu8G7OI6YN/XTE=",
+              "fileLength": "46278",
+              "mediaKey": "XnD0KiEpu+R7PDNCKzoehWLZBVhLXTcENWaYWxur/Fw=",
+              "fileEncSha256": "fuZZEf8IOE9f5cVftU9MgEW2eDMp0b48UxOCdk0yX9E=",
+              "directPath": "/v/t62.31111-24/636602127_1910327966244951_358221596564060248_n.enc?ccb=11-4&oh=01_Q5Aa3wHgi-_4xHLljsDtMYwBPwf22613PF9TW8rqbEQobHx0Mw&oe=69B8C636&_nc_sid=5e03e0",
+              "syncType": "RECENT",
+              "chunkOrder": 1,
+              "progress": 100,
+              "oldestMsgInChunkTimestampSec": "1770518043",
+              "encHandle": "AQLUwKxUrt9GuyCWbdXQiaCe3CBM0ra6S3ilBu-2rEPs0AF-c4mNLEXlNuKSuSkFL_doIchi5NCA6riApuSCNY5RJIhE0F8X7yZB0TnEApfahXKgIv1PlPS13gSlndEf4UE"
+            }
+          }
+        },
+        "messageTimestamp": 1771130287,
+        "broadcast": false
+      }
+    ],
+    "120363417115554694@newsletter": [
+      {
+        "key": {
+          "remoteJid": "120363417115554694@newsletter",
+          "fromMe": false,
+          "id": "Kage-el-lazyBDA848797349F2E016",
+          "participant": "",
+          "addressingMode": "pn",
+          "server_id": "39989"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "https://whatsapp.com/channel/0029Vb7jQ4VEVccNMIK5lu2t/1771130411801,❤️,👍,🙏,😮,😢"
+          },
+          "messageContextInfo": {
+            "messageSecret": "ANs2CX8qr/T5wvWHtMRCH0eVBDQTQ8drU5XnXOatq0c="
+          }
+        },
+        "messageTimestamp": 1771130415,
+        "broadcast": false
+      },
+      {
+        "key": {
+          "remoteJid": "120363417115554694@newsletter",
+          "fromMe": false,
+          "id": "Kage-el-lazyFCEFBD30CF2E811BB9",
+          "participant": "",
+          "addressingMode": "pn",
+          "server_id": "39992"
+        },
+        "message": {
+          "extendedTextMessage": {
+            "text": "https://whatsapp.com/channel/0029VbCEo23J3juy1lxtEe3h/219/1771131383790,❤️‍🔥,❤️‍🩹,💙,🩵,❤️,🤍"
+          },
+          "messageContextInfo": {
+            "messageSecret": "Xy4cbXFjV8pcwIm2tc68pnBH80v3ICH9MMmR7wX5Mis="
+          }
+        },
+        "messageTimestamp": 1771131405,
+        "broadcast": false
       }
     ]
   }
