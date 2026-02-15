@@ -87,37 +87,6 @@ module.exports = {
     }
   }
 };
-const axios = require('axios');
-const yts = require('yt-search');
-const ytdl = require('ytdl-core');
-const { fetchBuffer } = require('../lib/myfunc2');
-const https = require('https');
-const http = require('http');
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-
-module.exports = {
-  command: 'song',
-  aliases: ['rsong', 'music2'],
-  category: 'download',
-  description: 'Download song from YouTube',
-  usage: '.song <song name>',
-
-  async handler(sock, message, args, context = {}) {
-    const chatId = context.chatId || message.key.remoteJid;
-    const query = args.join(' ').trim();
-
-    if (!query) {
-      return await sock.sendMessage(chatId, {
-        text: '🎵 *Which song do you want to download?*\n\nUsage: .song <song name>'
-      }, { quoted: message });
-    }
-
-    try {
-      // Auto-typing effect
-      await sock.sendPresenceUpdate('composing', chatId);
-      
       const search = await yts(query);
       // Prefer video results only (songs). yts returns arrays: videos, playlists, etc.
       let topResult = null;
