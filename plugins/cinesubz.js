@@ -1,18 +1,12 @@
 /**
- * Cinesubz Plugin (FINAL) - ONLY ALLOW 1 NUMBER + TMDb 18+ RULES
+ * Cinesubz (FINAL) — New API + TMDb 18+ private-only for ONE JID
  * -------------------------------------------------------------
- * ✅ Only this number can use .cinesubz: +94 74 289 4413
- * ✅ Everyone else: blocked
- * ✅ 18+ detection: TMDb adult flag + keyword fallback
- * ✅ If movie is 18+ AND allowed user requests it:
- *      - ALLOW but NEVER send any media (no poster, no file)
- *      - ONLY send TEXT + LINKS
- * ✅ If movie is NOT 18+:
- *      - Can send file normally (file-or-link fallback) + can send poster image
- *
- * Setup:
- * - Put TMDB_KEY in env if you want: TMDB_KEY=xxxx
- * - MAX_SEND_MB safe limit for WhatsApp
+ * ✅ Uses Srihub API key: dew_kuKmHwBBCgIAdUty5TBY1VWWtUgwbQwKRtC8MFUF
+ * ✅ Non-18+ => allowed for ALL users (groups + private)
+ * ✅ 18+ => allowed ONLY when:
+ *    - sender is +94 74 289 4413 (94742894413)
+ *    - AND chat is private with that JID (chatId == 94742894413@s.whatsapp.net)
+ * ✅ 18+ delivery: TEXT + LINK ONLY (NO posters, NO media/files)
  */
 
 const axios = require('axios');
@@ -24,46 +18,46 @@ const os = require('os');
 const path = require('path');
 const { URL } = require('url');
 
-const MAX_SEND_MB = 90;
-
-// ===================== Allowlist =====================
-const ALLOWED_NUMBER_E164 = '+94742894413'; // +94 74 289 4413
-const ALLOWED_JID = '94742894413@s.whatsapp.net';
-
-function normalizeToE164Plus(raw = '') {
-  // raw can be "+94 74...", "9474...", "9474...@s.whatsapp.net"
-  const digits = String(raw).replace(/[^\d]/g, '');
-  if (!digits) return '';
-  // Sri Lanka: if starts with 94 already, keep, else try to prefix? (we keep simple)
-  return digits.startsWith('94') ? `+${digits}` : `+${digits}`;
-}
-
-function jidFromNumberPlus(e164Plus) {
-  const digits = String(e164Plus).replace(/[^\d]/g, '');
-  return digits ? `${digits}@s.whatsapp.net` : '';
-}
-
-function getSenderJid(message) {
-  // For groups, participant is actual sender. For private chat, remoteJid is sender.
-  return message?.key?.participant || message?.key?.remoteJid || '';
-}
-
-function isAllowedSender(message) {
-  const senderJid = getSenderJid(message);
-  if (!senderJid) return false;
-
-  // If already exact match
-  if (senderJid === ALLOWED_JID) return true;
-
-  // normalize by digits
-  const senderDigits = senderJid.split('@')[0]?.replace(/[^\d]/g, '') || '';
-  const allowedDigits = ALLOWED_JID.split('@')[0];
-  return senderDigits === allowedDigits;
-}
-
-// ===================== Adult Filter (TMDb) =====================
+const SRIHUB_API_KEY = 'dew_kuKmHwBBCgIAdUty5TBY1VWWtUgwbQwKRtC8MFUF';
 const TMDB_KEY = process.env.TMDB_KEY || '3c3765d22672d49fd193b764324d3493';
 
+const ADULT_ALLOWED_DIGITS = '94742894413';            // +94 74 289 4413
+const ADULT_ALLOWED_JID = `${ADULT_ALLOWED_DIGITS}@s.whatsapp.net`;
+
+const MAX_SEND_MB = 90; // for non-18+ file sending
+
+// ---------- JID helpers ----------
+function jidToDigits(jid = '') {
+  const left = String(jid).split('@')[0] || '';
+  const noDevice = left.split(':')[0] || '';
+  return noDevice.replace(/[^\d]/g, '');
+}
+
+function getSenderJid(msg) {
+  return (
+    msg?.key?.participant ||
+    msg?.participant ||
+    msg?.key?.remoteJid ||
+    ''
+  );
+}
+
+function isPrivateChat(chatId = '') {
+  return String(chatId).endsWith('@s.whatsapp.net');
+}
+
+function isSenderAdultAllowed(msg) {
+  if (msg?.key?.fromMe) return true;
+  const sender = getSenderJid(msg);
+  return jidToDigits(sender) === ADULT_ALLOWED_DIGITS;
+}
+
+function isAdultAllowedContext(msg, chatId) {
+  // 18+ allowed only if sender is allowed AND chat is private with that allowed jid
+  return isSenderAdultAllowed(msg) && isPrivateChat(chatId) && (String(chatId) === ADULT_ALLOWED_JID);
+}
+
+// ---------- 18+ detection ----------
 const ADULT_KEYWORDS = [
   '18+', 'adult', 'nsfw', 'porn', 'xxx', 'sex', 'erotic', 'erotica', 'nude', 'nudity',
   'softcore', 'hardcore', 'bdsm', 'fetish', 'onlyfans',
@@ -85,19 +79,12 @@ function containsAdultKeyword(text = '') {
 async function isAdultByTMDB(title, year) {
   try {
     if (!TMDB_KEY || !title) return null;
-
     const url = 'https://api.themoviedb.org/3/search/movie';
-    const params = {
-      api_key: TMDB_KEY,
-      query: title,
-      include_adult: true
-    };
+    const params = { api_key: TMDB_KEY, query: title, include_adult: true };
     if (year) params.year = year;
-
     const r = await axios.get(url, { params, timeout: 12000 });
     const items = r.data?.results || [];
     if (!items.length) return null;
-
     return !!items[0].adult;
   } catch {
     return null;
@@ -105,15 +92,13 @@ async function isAdultByTMDB(title, year) {
 }
 
 async function isAdultMovie({ query, title, description, year }) {
-  if (containsAdultKeyword(query) || containsAdultKeyword(title) || containsAdultKeyword(description)) {
-    return true;
-  }
+  if (containsAdultKeyword(query) || containsAdultKeyword(title) || containsAdultKeyword(description)) return true;
   const tmdbAdult = await isAdultByTMDB(title || query, year);
   if (tmdbAdult === true) return true;
   return false;
 }
 
-// ===================== Download helper (for NON-18+ only) =====================
+// ---------- Download helpers (NON-18+ only) ----------
 async function downloadToTemp(url, referer, attempts = 3) {
   for (let i = 0; i < attempts; i++) {
     try {
@@ -135,7 +120,6 @@ async function downloadToTemp(url, referer, attempts = 3) {
       const ctype = (res.headers && res.headers['content-type']) || '';
       const clen = parseInt((res.headers && res.headers['content-length']) || '0');
 
-      // If HTML returned, try to extract direct media link then retry
       if (ctype.includes('text') || (ctype === '' && clen > 0 && clen < 10000)) {
         try {
           const textRes = await axios.get(url, {
@@ -164,9 +148,7 @@ async function downloadToTemp(url, referer, attempts = 3) {
             url = realUrl;
             continue;
           }
-        } catch (htmlErr) {
-          console.warn('Cinesubz: HTML resolution failed', htmlErr?.message);
-        }
+        } catch {}
         throw new Error('HTML response, could not resolve media');
       }
 
@@ -202,41 +184,27 @@ async function readChunk(file, len = 8192) {
   });
 }
 
-// ===================== Plugin =====================
+// ---------- Plugin ----------
 module.exports = {
   command: 'cinesubz',
   aliases: ['cinesub'],
   category: 'movies',
-  description: 'Search Cinesubz and get download links (ONLY allowed number; 18+ link-only)',
+  description: 'Cinesubz search + downloads (18+ only in private chat for one JID)',
   usage: '.cinesubz <movie name>',
 
   async handler(sock, message, args, context = {}) {
     const chatId = context.chatId || message.key.remoteJid;
-    const senderJid = getSenderJid(message);
+    const senderKey = getSenderJid(message); // per-user store key
     const query = args.join(' ').trim();
-
-    // 1) Restrict command to allowed number only
-    if (!isAllowedSender(message)) {
-      return await sock.sendMessage(
-        chatId,
-        { text: '🚫 Access denied.' },
-        { quoted: message }
-      );
-    }
 
     try {
       if (!query) {
-        return await sock.sendMessage(
-          chatId,
-          { text: '*Please provide a movie name.*\nExample: .cinesubz Ne Zha' },
-          { quoted: message }
-        );
+        return await sock.sendMessage(chatId, { text: '*Please provide a movie name.*\nExample: .cinesubz Ne Zha' }, { quoted: message });
       }
 
       await sock.sendMessage(chatId, { text: '🔎 Searching Cinesubz...' }, { quoted: message });
 
-      const apiKey = 'dew_kuKmHwBBCgIAdUty5TBY1VWWtUgwbQwKRtC8MFUF';
-      const searchUrl = `https://api.srihub.store/movie/cinesubz?q=${encodeURIComponent(query)}&apikey=${apiKey}`;
+      const searchUrl = `https://api.srihub.store/movie/cinesubz?q=${encodeURIComponent(query)}&apikey=${SRIHUB_API_KEY}`;
       const res = await axios.get(searchUrl, { timeout: 20000 });
 
       let results = res.data?.result;
@@ -244,8 +212,7 @@ module.exports = {
         return await sock.sendMessage(chatId, { text: '❌ No results found.' }, { quoted: message });
       }
 
-      // 2) DO NOT block 18+ for allowed user, BUT we must avoid sending media for 18+.
-      // We'll mark items as adult/non-adult using TMDb (best effort).
+      // Mark adult/non-adult
       const marked = [];
       for (const item of results) {
         const adult = await isAdultMovie({ query, title: item?.title });
@@ -253,65 +220,60 @@ module.exports = {
       }
       results = marked;
 
-      // Build list message (TEXT only if any adult results exist)
-      // (Because user said: "do not attach any media for message on this over 18 films")
-      const hasAnyAdultInList = results.some(r => r.__adult);
+      // If results include adult titles, allow them ONLY in allowed private context.
+      const adultAllowedHere = isAdultAllowedContext(message, chatId);
 
-      let caption =
-        `🎬 *Cinesubz Results for:* *${query}*\n\n` +
-        `↩️ *Reply with a number to continue*\n\n`;
+      if (!adultAllowedHere) {
+        // Remove adult items so other users never see them in list
+        results = results.filter(r => !r.__adult);
+        if (!results.length) {
+          return await sock.sendMessage(chatId, { text: '🚫 *Blocked:* 18+ content is only available in private chat for the allowed user.' }, { quoted: message });
+        }
+      }
 
+      const hasAdultInList = results.some(r => r.__adult);
+
+      let caption = `🎬 *Cinesubz Results for:* *${query}*\n\n↩️ *Reply with a number to continue*\n\n`;
       results.forEach((item, i) => {
-        const tag = item.__adult ? '🔞' : '✅';
-        caption += `*${i + 1}.* ${tag} ${item.title}\n`;
+        caption += `*${i + 1}.* ${item.__adult ? '🔞' : '✅'} ${item.title}\n`;
         if (item.quality) caption += `🔊 Quality: ${item.quality}\n`;
         if (item.imdb) caption += `⭐ IMDB: ${item.imdb}\n`;
         caption += `\n`;
       });
 
-      // If list contains adult items, send TEXT ONLY (no poster image).
-      // If list contains no adult items, allow image like normal.
+      // If adult list exists, do TEXT only (no images)
       const firstImg = results[0]?.image;
       const sentMsg = await sock.sendMessage(
         chatId,
-        (firstImg && !hasAnyAdultInList)
-          ? { image: { url: firstImg }, caption }
-          : { text: caption },
+        (firstImg && !hasAdultInList) ? { image: { url: firstImg }, caption } : { text: caption },
         { quoted: message }
       );
 
-      const urls = results.map(r => r.link);
-      await store.saveSetting(senderJid, 'cinesubz_results', urls);
+      // Save selection list (link + adult flag)
+      await store.saveSetting(senderKey, 'cinesubz_results', results.map(r => ({ link: r.link, adult: !!r.__adult, title: r.title })) );
 
       const timeout = setTimeout(async () => {
         sock.ev.off('messages.upsert', listener);
-        await store.saveSetting(senderJid, 'cinesubz_results', null);
-        try {
-          await sock.sendMessage(chatId, { text: '⌛ Selection expired. Please run the command again.' }, { quoted: sentMsg });
-        } catch {}
+        await store.saveSetting(senderKey, 'cinesubz_results', null);
+        try { await sock.sendMessage(chatId, { text: '⌛ Selection expired. Please run the command again.' }, { quoted: sentMsg }); } catch {}
       }, 5 * 60 * 1000);
 
       const listener = async ({ messages }) => {
         const m = messages[0];
         if (!m?.message || m.key.remoteJid !== chatId) return;
 
-        // keep restricted to allowed sender even in replies
-        if (!isAllowedSender(m)) return;
+        // only accept reply from same person
+        if (jidToDigits(getSenderJid(m)) !== jidToDigits(getSenderJid(message)) && !m.key?.fromMe) return;
 
         const ctx = m.message?.extendedTextMessage?.contextInfo;
         if (!ctx?.stanzaId || ctx.stanzaId !== sentMsg.key.id) return;
 
         const replyText = m.message.conversation || m.message.extendedTextMessage?.text || '';
         const choice = parseInt(replyText.trim(), 10);
+        if (isNaN(choice)) return;
 
-        if (isNaN(choice)) {
-          return await sock.sendMessage(chatId, { text: '❌ Invalid choice. Reply with the number.' }, { quoted: m });
-        }
-
-        const saved = (await store.getSetting(senderJid, 'cinesubz_results')) || urls;
-        if (!Array.isArray(saved) || !saved.length) {
-          return await sock.sendMessage(chatId, { text: '❌ Session expired. Run the command again.' }, { quoted: m });
-        }
+        const saved = (await store.getSetting(senderKey, 'cinesubz_results')) || [];
+        if (!Array.isArray(saved) || !saved.length) return;
 
         if (choice < 1 || choice > saved.length) {
           return await sock.sendMessage(chatId, { text: `❌ Invalid choice. Pick 1-${saved.length}.` }, { quoted: m });
@@ -319,37 +281,35 @@ module.exports = {
 
         clearTimeout(timeout);
         sock.ev.off('messages.upsert', listener);
-        await store.saveSetting(senderJid, 'cinesubz_results', null);
+        await store.saveSetting(senderKey, 'cinesubz_results', null);
 
-        const selectedUrl = saved[choice - 1];
-        const selectedTitle = results?.[choice - 1]?.title || query;
+        const selected = saved[choice - 1];
+        const selectedUrl = selected.link;
 
-        await sock.sendMessage(chatId, { text: `ℹ️ Fetching details for #${choice}...` }, { quoted: m });
+        await sock.sendMessage(chatId, { text: `ℹ️ Fetching download details for #${choice}...` }, { quoted: m });
 
         try {
-          const dlUrl = `https://api.srihub.store/movie/cinesubzdl?url=${encodeURIComponent(selectedUrl)}&apikey=${apiKey}`;
+          const dlUrl = `https://api.srihub.store/movie/cinesubzdl?url=${encodeURIComponent(selectedUrl)}&apikey=${SRIHUB_API_KEY}`;
           const dlRes = await axios.get(dlUrl, { timeout: 20000 });
-
           const movie = dlRes.data?.result;
-          if (!movie) {
-            return await sock.sendMessage(chatId, { text: '❌ Failed to fetch download details.' }, { quoted: m });
-          }
+          if (!movie) return await sock.sendMessage(chatId, { text: '❌ Failed to fetch download details.' }, { quoted: m });
 
-          // Determine if THIS movie is adult
           const isAdult = await isAdultMovie({
             query,
-            title: movie.title || selectedTitle,
+            title: movie.title || selected.title || query,
             description: movie.description,
             year: movie.year
           });
 
-          let info = `📥 *Download Details - ${movie.title || 'Movie'}*\n\n`;
-          if (movie.year) info += `📆 Year: ${movie.year}\n`;
-          if (movie.imdb) info += `⭐ IMDB: ${movie.imdb}\n`;
-          if (movie.description) info += `\n${movie.description}\n\n`;
-          if (isAdult) info += `🔞 *Adult/18+ detected — Link-only mode*\n\n`;
+          // 18+ is ONLY allowed in allowed private chat
+          const adultAllowedNow = isAdultAllowedContext(m, chatId);
+          if (isAdult && !adultAllowedNow) {
+            return await sock.sendMessage(chatId, {
+              text: '🚫 *Blocked:* 18+ content is only allowed in the private chat of the allowed user.'
+            }, { quoted: m });
+          }
 
-          // Flatten download links (no raw URLs in message list)
+          // Flatten download links
           const flatLinks = [];
           if (Array.isArray(movie.downloadOptions) && movie.downloadOptions.length > 0) {
             movie.downloadOptions.forEach(opt => {
@@ -366,28 +326,29 @@ module.exports = {
             flatLinks.push({ url: movie.sourceUrl, quality: 'N/A', size: '', server: '' });
           }
 
+          let info = `📥 *Download Details - ${movie.title || 'Movie'}*\n\n`;
+          if (movie.year) info += `📆 Year: ${movie.year}\n`;
+          if (movie.imdb) info += `⭐ IMDB: ${movie.imdb}\n`;
+          if (movie.description) info += `\n${movie.description}\n\n`;
+
           if (!flatLinks.length) {
             info += '\n❌ No downloadable links found.';
-            // If adult: TEXT ONLY; else you can attach image
             const image = movie.gallery?.length ? movie.gallery[0] : null;
-            await sock.sendMessage(
+            return await sock.sendMessage(
               chatId,
               (!isAdult && image) ? { image: { url: image }, caption: info } : { text: info },
               { quoted: m }
             );
-            return;
           }
 
-          info += '*Available Downloads:*\n\n';
+          info += `*Available Downloads:*\n\n`;
           flatLinks.forEach((l, idx) => {
             info += `*${idx + 1}.* ${l.server || 'Server'} - ${l.quality} ${l.size ? `(${l.size})` : ''}\n`;
           });
 
-          // For adult: reply number will send LINK only
-          // For non-adult: reply number will try FILE then fallback LINK
           info += isAdult
-            ? '\n↩️ *Reply with the number to get the LINK (no media will be sent).*'
-            : '\n↩️ *Reply with the number to get the FILE (or link if too big).*';
+            ? '\n🔞 *18+ mode:* Reply number to get LINK only (no media).'
+            : '\n↩️ Reply number to get FILE (or link if too big).';
 
           const image = movie.gallery?.length ? movie.gallery[0] : null;
           const sentDlMsg = await sock.sendMessage(
@@ -396,64 +357,60 @@ module.exports = {
             { quoted: m }
           );
 
-          await store.saveSetting(senderJid, 'cinesubz_dl_links', flatLinks.map(f => f.url));
-          await store.saveSetting(senderJid, 'cinesubz_is_adult_mode', isAdult);
+          await store.saveSetting(senderKey, 'cinesubz_dl_links', flatLinks.map(f => f.url));
+          await store.saveSetting(senderKey, 'cinesubz_is_adult_mode', !!isAdult);
+          await store.saveSetting(senderKey, 'cinesubz_ref_url', selectedUrl);
 
           const dlTimeout = setTimeout(async () => {
             sock.ev.off('messages.upsert', dlListener);
-            await store.saveSetting(senderJid, 'cinesubz_dl_links', null);
-            await store.saveSetting(senderJid, 'cinesubz_is_adult_mode', null);
-            try { await sock.sendMessage(chatId, { text: '⌛ Download selection expired. Run the command again.' }, { quoted: sentDlMsg }); } catch {}
+            await store.saveSetting(senderKey, 'cinesubz_dl_links', null);
+            await store.saveSetting(senderKey, 'cinesubz_is_adult_mode', null);
+            await store.saveSetting(senderKey, 'cinesubz_ref_url', null);
           }, 5 * 60 * 1000);
 
           const dlListener = async ({ messages }) => {
             const mm = messages[0];
             if (!mm?.message || mm.key.remoteJid !== chatId) return;
 
-            if (!isAllowedSender(mm)) return;
+            if (jidToDigits(getSenderJid(mm)) !== jidToDigits(getSenderJid(message)) && !mm.key?.fromMe) return;
 
             const ctx2 = mm.message?.extendedTextMessage?.contextInfo;
             if (!ctx2?.stanzaId || ctx2.stanzaId !== sentDlMsg.key.id) return;
 
             const replyText2 = mm.message.conversation || mm.message.extendedTextMessage?.text || '';
             const choice2 = parseInt(replyText2.trim(), 10);
+            if (isNaN(choice2)) return;
 
-            if (isNaN(choice2)) {
-              return await sock.sendMessage(chatId, { text: '❌ Invalid choice. Reply with the file number.' }, { quoted: mm });
-            }
+            const savedLinks = (await store.getSetting(senderKey, 'cinesubz_dl_links')) || [];
+            const adultMode = !!(await store.getSetting(senderKey, 'cinesubz_is_adult_mode'));
+            const refUrl = (await store.getSetting(senderKey, 'cinesubz_ref_url')) || '';
 
-            const savedLinks = (await store.getSetting(senderJid, 'cinesubz_dl_links')) || [];
-            const adultMode = !!(await store.getSetting(senderJid, 'cinesubz_is_adult_mode'));
-
-            if (!Array.isArray(savedLinks) || !savedLinks.length) {
-              return await sock.sendMessage(chatId, { text: '❌ Session expired. Run the command again.' }, { quoted: mm });
-            }
-
+            if (!Array.isArray(savedLinks) || !savedLinks.length) return;
             if (choice2 < 1 || choice2 > savedLinks.length) {
               return await sock.sendMessage(chatId, { text: `❌ Invalid choice. Pick 1-${savedLinks.length}.` }, { quoted: mm });
             }
 
             clearTimeout(dlTimeout);
             sock.ev.off('messages.upsert', dlListener);
-            await store.saveSetting(senderJid, 'cinesubz_dl_links', null);
-            await store.saveSetting(senderJid, 'cinesubz_is_adult_mode', null);
+            await store.saveSetting(senderKey, 'cinesubz_dl_links', null);
+            await store.saveSetting(senderKey, 'cinesubz_is_adult_mode', null);
+            await store.saveSetting(senderKey, 'cinesubz_ref_url', null);
 
             const finalUrl = savedLinks[choice2 - 1];
 
-            // ===== Adult mode => LINK ONLY (NO MEDIA) =====
+            // 18+ => ONLY allowed in allowed private chat, LINK ONLY
             if (adultMode) {
-              return await sock.sendMessage(
-                chatId,
-                { text: `🔞 *18+ Link (media disabled)*\n\n✅ ${finalUrl}` },
-                { quoted: mm }
-              );
+              if (!isAdultAllowedContext(mm, chatId)) {
+                return await sock.sendMessage(chatId, {
+                  text: '🚫 *Blocked:* 18+ content is only allowed in the private chat of the allowed user.'
+                }, { quoted: mm });
+              }
+              return await sock.sendMessage(chatId, { text: `🔞 *18+ LINK (media disabled)*\n\n${finalUrl}` }, { quoted: mm });
             }
 
-            // ===== Non-adult => try FILE, else LINK =====
-            await sock.sendMessage(chatId, { text: `⬇️ Preparing #${choice2}...` }, { quoted: mm });
-
+            // Non-18+ => file or link fallback
             try {
-              const dlResult = await downloadToTemp(finalUrl, selectedUrl, 3);
+              const dlResult = await downloadToTemp(finalUrl, refUrl, 3);
               const sizeMB = dlResult.size / (1024 * 1024);
 
               if (sizeMB > MAX_SEND_MB) {
@@ -466,38 +423,26 @@ module.exports = {
               const bufferStart = await readChunk(dlResult.tmpFile, 8192);
               const type = await fromBuffer(bufferStart);
 
-              const safeTitle = (movie.title || 'movie').replace(/[^a-zA-Z0-9 _.-]/g, '_').slice(0, 200);
+              const safeTitle = (query || 'movie').replace(/[^a-zA-Z0-9 _.-]/g, '_').slice(0, 200);
               const ext = (type && type.ext) ? type.ext : 'mp4';
               const fileName = `${safeTitle}_${choice2}.${ext}`;
 
-              if (type?.mime?.startsWith('image/')) {
-                const buf = fs.readFileSync(dlResult.tmpFile);
-                await sock.sendMessage(chatId, { image: buf, caption: `✅ ${fileName}` }, { quoted: mm });
-              } else if (type?.mime?.startsWith('video/')) {
-                const stream = fs.createReadStream(dlResult.tmpFile);
-                await sock.sendMessage(chatId, { document: stream, mimetype: type.mime, fileName }, { quoted: mm });
-              } else if (type?.mime?.startsWith('audio/')) {
-                const stream = fs.createReadStream(dlResult.tmpFile);
-                await sock.sendMessage(chatId, { audio: stream, mimetype: type.mime }, { quoted: mm });
-              } else {
-                const stream = fs.createReadStream(dlResult.tmpFile);
-                await sock.sendMessage(chatId, { document: stream, mimetype: type ? type.mime : 'application/octet-stream', fileName }, { quoted: mm });
-              }
+              const stream = fs.createReadStream(dlResult.tmpFile);
+              await sock.sendMessage(chatId, {
+                document: stream,
+                mimetype: type?.mime || 'application/octet-stream',
+                fileName
+              }, { quoted: mm });
 
               try { fs.unlinkSync(dlResult.tmpFile); } catch {}
-
             } catch (e) {
-              console.error('❌ Cinesubz Download Error:', e.message || e);
-              await sock.sendMessage(chatId, {
-                text: `❌ Failed to send file.\n\n✅ Link:\n${finalUrl}`
-              }, { quoted: mm });
+              await sock.sendMessage(chatId, { text: `❌ Failed to send file.\n\n✅ Link:\n${finalUrl}` }, { quoted: mm });
             }
           };
 
           sock.ev.on('messages.upsert', dlListener);
 
         } catch (e) {
-          console.error('❌ Cinesubz DL Error:', e.message || e);
           await sock.sendMessage(chatId, { text: '❌ Error fetching download details. Please try again later.' }, { quoted: m });
         }
       };
@@ -505,7 +450,6 @@ module.exports = {
       sock.ev.on('messages.upsert', listener);
 
     } catch (err) {
-      console.error('❌ Cinesubz Plugin Error:', err.message || err);
       await sock.sendMessage(chatId, { text: '❌ Failed to process request. Please try again later.' }, { quoted: message });
     }
   }
