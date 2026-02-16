@@ -237,10 +237,10 @@ module.exports = {
           `*Storage:* ${HAS_DB ? 'Database' : 'File System'}\n` +
           `*Send To:* ${config.notifyOwnerOnly ? 'Owner Only' : 'Same Chat'}\n\n` +
           `*Commands:*\n` +
-          `• \.antiviewonce on\` - Enable\n` +
-          `• \.antiviewonce off\` - Disable\n` +
-          `• \.antiviewonce on chat\` - Enable + send to same chat\n` +
-          `• \.antiviewonce on owner\` - Enable + send to owner only\n\n` +
+          `• \`.antiviewonce on\` - Enable\n` +
+          `• \`.antiviewonce off\` - Disable\n` +
+          `• \`.antiviewonce on chat\` - Enable + send to same chat\n` +
+          `• \`.antiviewonce on owner\` - Enable + send to owner only\n\n` +
           `*Notes:*\n` +
           `• Works for ViewOnce image/video\n` +
           `• Forwards captured media immediately`
