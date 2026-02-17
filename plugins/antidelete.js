@@ -1,49 +1,28 @@
-/**
- * AntiDelete + AntiViewOnce (Baileys / WhiskeySockets)
- * ---------------------------------------------------
- * Drop-in plugin file.
- *
- * REQUIRED WIRING:
- * 1) In messages.upsert: call plugin.storeMessage(sock, msg)
- * 2) In messages.upsert: when you receive protocolMessage REVOKE, call plugin.handleMessageRevocation(sock, msg)
- *
- * Example wiring:
- * sock.ev.on('messages.upsert', async ({ messages }) => {
- *   for (const msg of messages) {
- *     await antidelete.storeMessage(sock, msg);
- *     if (msg?.message?.protocolMessage?.type === 0) {
- *       await antidelete.handleMessageRevocation(sock, msg);
- *     }
- *   }
- * })
- */
-
 const fs = require('fs');
 const path = require('path');
-const { writeFile } = require('fs/promises');
 const { downloadContentFromMessage } = require('@whiskeysockets/baileys');
+const { writeFile } = require('fs/promises');
 const store = require('../lib/lightweight_store');
-const settings = (() => {
-  try {
-    // Optional (if you have settings.js with owner info)
-    // Expected: settings.owner = ['9477xxxxxxx'] OR settings.OWNER_NUMBER = '9477xxxxxxx'
-    // If not present, it will just be ignored.
-    // eslint-disable-next-line import/no-unresolved
-    return require('../settings');
-  } catch {
-    return {};
-  }
-})();
 
-// --------- ENV / STORAGE DETECTION ---------
-const HAS_DB = !!(
-  process.env.MONGO_URL ||
-  process.env.POSTGRES_URL ||
-  process.env.MYSQL_URL ||
-  process.env.DB_URL
-);
+// Optional settings owner number support (won't crash if missing)
+let settings = {};
+try {
+  // eslint-disable-next-line import/no-unresolved
+  settings = require('../settings');
+} catch {}
 
-// --------- PATHS ---------
+// -------------------------
+// ENV / STORAGE DETECTION
+// -------------------------
+const MONGO_URL = process.env.MONGO_URL;
+const POSTGRES_URL = process.env.POSTGRES_URL;
+const MYSQL_URL = process.env.MYSQL_URL;
+const SQLITE_URL = process.env.DB_URL;
+const HAS_DB = !!(MONGO_URL || POSTGRES_URL || MYSQL_URL || SQLITE_URL);
+
+// -------------------------
+// PATHS
+// -------------------------
 const DATA_DIR = path.join(process.cwd(), 'data');
 const TMP_DIR = path.join(process.cwd(), 'tmp');
 const CONFIG_PATH = path.join(DATA_DIR, 'antidelete.json');
@@ -54,7 +33,9 @@ function ensureDir(dir) {
 ensureDir(DATA_DIR);
 ensureDir(TMP_DIR);
 
-// --------- SAFE JSON ---------
+// -------------------------
+// SAFE JSON
+// -------------------------
 function safeJsonParse(text, fallback = {}) {
   try {
     const t = String(text || '').trim();
@@ -65,16 +46,18 @@ function safeJsonParse(text, fallback = {}) {
   }
 }
 
-// --------- TEMP CLEANUP ---------
+// -------------------------
+// TEMP CLEANUP (AGE + SIZE)
+// -------------------------
 const TMP_MAX_MB = 200;
 const TMP_MAX_AGE_MS = 6 * 60 * 60 * 1000; // 6 hours
 
-function folderSizeMB(folder) {
+function folderSizeMB(folderPath) {
   try {
-    const files = fs.readdirSync(folder);
+    const files = fs.readdirSync(folderPath);
     let total = 0;
     for (const f of files) {
-      const fp = path.join(folder, f);
+      const fp = path.join(folderPath, f);
       try {
         const st = fs.statSync(fp);
         if (st.isFile()) total += st.size;
@@ -88,10 +71,10 @@ function folderSizeMB(folder) {
 
 function cleanupTmp() {
   try {
-    const files = fs.readdirSync(TMP_DIR);
     const now = Date.now();
+    const files = fs.readdirSync(TMP_DIR);
 
-    // 1) Remove old files
+    // Remove old files first
     for (const f of files) {
       const fp = path.join(TMP_DIR, f);
       try {
@@ -102,7 +85,7 @@ function cleanupTmp() {
       } catch {}
     }
 
-    // 2) If still too large, remove oldest first
+    // If still too large, delete oldest
     let size = folderSizeMB(TMP_DIR);
     if (size <= TMP_MAX_MB) return;
 
@@ -112,9 +95,9 @@ function cleanupTmp() {
         const fp = path.join(TMP_DIR, f);
         try {
           const st = fs.statSync(fp);
-          return { fp, mtime: st.mtimeMs, size: st.size, ok: st.isFile() };
+          return { fp, mtime: st.mtimeMs, ok: st.isFile() };
         } catch {
-          return { fp, mtime: 0, size: 0, ok: false };
+          return { fp, mtime: 0, ok: false };
         }
       })
       .filter((x) => x.ok)
@@ -127,36 +110,16 @@ function cleanupTmp() {
       size = folderSizeMB(TMP_DIR);
       if (size <= TMP_MAX_MB) break;
     }
-  } catch (e) {
-    console.error('Tmp cleanup error:', e);
+  } catch (err) {
+    console.error('Temp cleanup error:', err);
   }
 }
 
 setInterval(cleanupTmp, 60 * 1000);
 
-// --------- SETTINGS (CACHED) ---------
-let SETTINGS_CACHE = null;
-let SETTINGS_CACHE_AT = 0;
-const SETTINGS_TTL_MS = 8000;
-
-async function getGlobalSettings() {
-  const now = Date.now();
-  if (SETTINGS_CACHE && now - SETTINGS_CACHE_AT < SETTINGS_TTL_MS) return SETTINGS_CACHE;
-
-  let all = {};
-  try {
-    // Your lightweight_store should provide this; if not, it will just be {}
-    all = await store.getAllSettings('global');
-  } catch {
-    all = {};
-  }
-
-  SETTINGS_CACHE = all || {};
-  SETTINGS_CACHE_AT = now;
-  return SETTINGS_CACHE;
-}
-
-// --------- CONFIG (DB or FILE) ---------
+// -------------------------
+// CONFIG (DB or FILE)
+// -------------------------
 async function loadAntideleteConfig() {
   try {
     if (HAS_DB) {
@@ -182,19 +145,21 @@ async function saveAntideleteConfig(config) {
       ensureDir(DATA_DIR);
       fs.writeFileSync(CONFIG_PATH, JSON.stringify(cfg, null, 2));
     }
-  } catch (e) {
-    console.error('Config save error:', e);
+  } catch (err) {
+    console.error('Config save error:', err);
   }
 }
 
-// --------- MESSAGE STORE (BOUNDED) ---------
+// -------------------------
+// BOUNDED MESSAGE STORE
+// -------------------------
 const MAX_STORE = 3000;
 const messageStore = new Map();
 
-function makeMsgKey(msg, overrideRemoteJid) {
-  const jid = overrideRemoteJid || msg?.key?.remoteJid || 'unknown';
-  const id = msg?.key?.id || 'noid';
-  return `${jid}:${id}`;
+function makeMsgKey(remoteJid, id) {
+  const jid = remoteJid || 'unknown';
+  const mid = id || 'noid';
+  return `${jid}:${mid}`;
 }
 
 function storeBounded(key, value) {
@@ -216,7 +181,9 @@ function storeBounded(key, value) {
   }
 }
 
-// --------- HELPERS ---------
+// -------------------------
+// HELPERS
+// -------------------------
 async function streamToBuffer(stream) {
   let buffer = Buffer.from([]);
   for await (const chunk of stream) buffer = Buffer.concat([buffer, chunk]);
@@ -229,16 +196,16 @@ function normalizeNumberToJid(num) {
 }
 
 function getOwnerJid(sock) {
-  // 1) If settings has owner
   const ownerCandidate =
     (Array.isArray(settings.owner) && settings.owner[0]) ||
     settings.OWNER_NUMBER ||
     settings.ownerNumber ||
     settings.owner_number;
+
   const fromSettings = normalizeNumberToJid(ownerCandidate);
   if (fromSettings) return fromSettings;
 
-  // 2) fallback: bot itself (useful for single-number self-bots)
+  // fallback: bot number
   const raw = sock?.user?.id || '';
   const num = raw.split(':')[0];
   return num ? `${num}@s.whatsapp.net` : null;
@@ -255,32 +222,31 @@ function extractText(msg) {
 }
 
 function unwrapEphemeral(message) {
-  // Sometimes WhatsApp wraps content in ephemeralMessage
-  return (
-    message?.message?.ephemeralMessage?.message ||
-    message?.message?.viewOnceMessageV2?.message ||
-    message?.message?.viewOnceMessage?.message ||
-    message?.message?.viewOnceMessageV2Extension?.message ||
-    null
-  );
+  return message?.message?.ephemeralMessage?.message || null;
 }
 
 function extractViewOnceContainer(message) {
   const m = message?.message;
-  return (
+  // direct
+  const direct =
     m?.viewOnceMessageV2?.message ||
     m?.viewOnceMessage?.message ||
     m?.viewOnceMessageV2Extension?.message ||
-    // If VO is wrapped inside ephemeral
-    m?.ephemeralMessage?.message?.viewOnceMessageV2?.message ||
-    m?.ephemeralMessage?.message?.viewOnceMessage?.message ||
-    m?.ephemeralMessage?.message?.viewOnceMessageV2Extension?.message ||
+    null;
+  if (direct) return direct;
+
+  // inside ephemeral
+  const e = m?.ephemeralMessage?.message;
+  return (
+    e?.viewOnceMessageV2?.message ||
+    e?.viewOnceMessage?.message ||
+    e?.viewOnceMessageV2Extension?.message ||
     null
   );
 }
 
-async function downloadMediaToFile(msgNode, type, outPath) {
-  const stream = await downloadContentFromMessage(msgNode, type);
+async function downloadMediaToFile(node, type, outPath) {
+  const stream = await downloadContentFromMessage(node, type);
   const buffer = await streamToBuffer(stream);
   await writeFile(outPath, buffer);
   return outPath;
@@ -290,34 +256,31 @@ function safeFileKey(chatJid, messageId) {
   return `${String(chatJid || 'chat').replace(/[^a-z0-9]/gi, '_')}_${String(messageId || 'id')}`;
 }
 
-// --------- STORE MESSAGE ---------
+// -------------------------
+// STORE MESSAGE (call on every messages.upsert)
+// -------------------------
 async function storeMessage(sock, message) {
   try {
-    if (!message?.key?.id || !message?.message) return;
-
-    const globalSettings = await getGlobalSettings();
     const cfg = await loadAntideleteConfig();
+    const globalEnabled = await store.getSetting('global', 'antidelete');
+    const enabled = !!(cfg.enabled || globalEnabled);
+    if (!enabled) return;
 
-    // Support both file/db config and globalSettings.antidelete boolean
-    const antideleteEnabled = !!(cfg.enabled || globalSettings.antidelete);
-    const antiviewonceEnabled = !!globalSettings.antiviewonce;
-
-    if (!antideleteEnabled && !antiviewonceEnabled) return;
+    if (!message?.key?.id || !message?.message) return;
 
     const messageId = message.key.id;
     const chatJid = message.key.remoteJid;
     const sender = message.key.participant || message.key.remoteJid;
     const isGroup = String(chatJid || '').endsWith('@g.us');
 
-    // antidelete_mode: owner/chat/private
-    const antideleteMode = globalSettings.antidelete_mode || 'owner';
-    if (antideleteMode === 'private' && isGroup) return;
-
     let content = '';
     let mediaType = '';
     let mediaPath = '';
 
-    // ---- ViewOnce handling (if enabled) ----
+    // -------- ViewOnce capture (auto-forward to owner) --------
+    const globalSettings = (await store.getAllSettings?.('global').catch(() => ({}))) || {};
+    const antiviewonceEnabled = !!globalSettings.antiviewonce;
+
     const vo = extractViewOnceContainer(message);
     if (vo && antiviewonceEnabled) {
       let voType = null;
@@ -338,71 +301,31 @@ async function storeMessage(sock, message) {
       }
 
       if (voType && mediaPath && fs.existsSync(mediaPath)) {
-        const mode = globalSettings.antiviewonce_mode || 'owner'; // owner/chat/warn
         const ownerJid = getOwnerJid(sock);
         const senderName = (sender || '').split('@')[0];
-
-        const reportText =
-          `*🌟 ANTI-VIEWONCE DETECTED 🌟*\n\n` +
-          `*👤 From:* @${senderName}\n` +
-          `*🕒 Type:* ${voType.toUpperCase()}\n` +
-          `*📅 Time:* ${new Date().toLocaleString('en-US', { timeZone: 'Asia/Colombo' })}`;
+        const cap = `*Anti-ViewOnce ${voType.toUpperCase()}*\nFrom: @${senderName}`;
 
         try {
-          if (mode === 'warn') {
-            const oldWarn = (await store.getSetting(sender, 'viewonce_warns')) || 0;
-            const newWarn = Number(oldWarn) + 1;
-            await store.saveSetting(sender, 'viewonce_warns', newWarn);
-
-            await sock.sendMessage(chatJid, {
-              text:
-                `*⚠️ VIEWONCE WARNING ⚠️*\n\n` +
-                `@${senderName}, ViewOnce media is not allowed! Warning *${newWarn}/3*.\n` +
-                `_Media detected and logged._`,
-              mentions: [sender]
-            });
-
-            if (newWarn >= 3) {
-              await sock.sendMessage(chatJid, {
-                text: `❌ @${senderName} reached 3 warnings and will be blocked.`,
-                mentions: [sender]
-              });
-              try {
-                await sock.updateBlockStatus(sender, 'block');
-              } catch {}
-            }
-          } else {
-            const target = mode === 'chat' ? chatJid : ownerJid;
-            if (!target) return;
-
-            const base = {
-              caption: `${reportText}\n\n> 💫 *INFINITY MD BOT*`,
-              mentions: [sender]
-            };
-
+          if (ownerJid) {
             if (voType === 'image') {
-              await sock.sendMessage(target, { image: { url: mediaPath }, ...base });
+              await sock.sendMessage(ownerJid, { image: { url: mediaPath }, caption: cap, mentions: [sender] });
             } else {
-              await sock.sendMessage(target, { video: { url: mediaPath }, ...base });
+              await sock.sendMessage(ownerJid, { video: { url: mediaPath }, caption: cap, mentions: [sender] });
             }
           }
-        } catch (e) {
-          console.error('Anti-viewOnce handler error:', e);
-        } finally {
-          try {
-            fs.unlinkSync(mediaPath);
-          } catch {}
+        } catch {}
+        finally {
+          try { fs.unlinkSync(mediaPath); } catch {}
         }
 
-        // Do NOT store VO message (already handled)
+        // Do not store VO content for antidelete (already handled)
         return;
       }
     }
 
-    // ---- Normal message types (for antidelete) ----
+    // -------- Normal message capture (text + media) --------
     content = extractText(message);
 
-    // Unwrap ephemeral if needed (some media is under ephemeralMessage)
     const unwrapped = unwrapEphemeral(message);
     const m = unwrapped || message.message;
 
@@ -434,7 +357,7 @@ async function storeMessage(sock, message) {
 
     if (!content && !mediaPath) return;
 
-    const key = makeMsgKey(message);
+    const key = makeMsgKey(chatJid, messageId);
     storeBounded(key, {
       content,
       mediaType,
@@ -445,42 +368,43 @@ async function storeMessage(sock, message) {
       timestamp: Date.now(),
       audioMime: m?.audioMessage?.mimetype || undefined
     });
-  } catch (e) {
-    console.error('storeMessage error:', e);
+  } catch (err) {
+    console.error('storeMessage error:', err);
   }
 }
 
-// --------- HANDLE REVOCATION ---------
+// -------------------------
+// HANDLE REVOCATION (protocolMessage REVOKE)
+// Call this when msg.message.protocolMessage?.type === 0
+// -------------------------
 async function handleMessageRevocation(sock, revocationMessage) {
   try {
+    const cfg = await loadAntideleteConfig();
+    const globalEnabled = await store.getSetting('global', 'antidelete');
+    const enabled = !!(cfg.enabled || globalEnabled);
+    if (!enabled) return;
+
     const proto = revocationMessage?.message?.protocolMessage;
     if (!proto?.key?.id) return;
 
-    const globalSettings = await getGlobalSettings();
-    const cfg = await loadAntideleteConfig();
-    if (!(cfg.enabled || globalSettings.antidelete)) return;
-
-    const mode = globalSettings.antidelete_mode || 'owner'; // owner/chat/private
-
     const ownerJid = getOwnerJid(sock);
-    const chatJid = revocationMessage.key.remoteJid;
+    if (!ownerJid) return;
 
     const deletedKey = proto.key;
     const deletedId = deletedKey.id;
+    const chatJid = revocationMessage.key.remoteJid;
 
-    // In groups, participant who deleted may be proto.key.participant
+    // Who deleted
     const deletedBy = deletedKey.participant || deletedKey.remoteJid;
 
-    // Ignore deletions by the bot itself
+    // Ignore deletions by the bot
     const botNum = String(sock?.user?.id || '').split(':')[0];
     if (deletedBy && botNum && String(deletedBy).includes(botNum)) return;
 
-    // IMPORTANT: stored key uses original remoteJid
-    const lookupKey = `${deletedKey.remoteJid || chatJid}:${deletedId}`;
+    // Lookup original
+    const lookupKey = makeMsgKey(deletedKey.remoteJid || chatJid, deletedId);
     const original = messageStore.get(lookupKey);
     if (!original) return;
-
-    if (mode === 'private' && original.isGroup) return;
 
     const sender = original.sender;
     const senderName = (sender || '').split('@')[0];
@@ -517,157 +441,135 @@ async function handleMessageRevocation(sock, revocationMessage) {
       text += `\n*💬 Deleted Message:*\n${original.content}`;
     }
 
-    // Decide report target
-    // owner: owner only
-    // chat: report to group if group else owner (avoids DM loops)
-    // private: owner only
-    const reportTarget = mode === 'chat' && original.isGroup ? original.chatJid : ownerJid;
+    await sock.sendMessage(ownerJid, {
+      text,
+      mentions: [deletedBy, sender].filter(Boolean)
+    });
 
-    if (reportTarget) {
-      await sock.sendMessage(reportTarget, {
-        text,
-        mentions: [deletedBy, sender].filter(Boolean)
-      });
-    }
-
-    // Resend text in chat only if mode === chat
-    if (mode === 'chat' && original.content) {
-      await sock.sendMessage(original.chatJid, {
-        text:
-          `*🔰 ANTIDELETE RESEND 🔰*\n\n` +
-          `*👤 From:* @${senderName}\n` +
-          `*💬 Message:* ${original.content}`,
-        mentions: [sender]
-      });
-    }
-
-    // Media resend/report
+    // Send media if exists
     if (original.mediaType && original.mediaPath && fs.existsSync(original.mediaPath)) {
-      const capBase = `*Deleted ${original.mediaType}*\nFrom: @${senderName}`;
-
-      const sendTo = async (jid, isChatResend) => {
-        if (!jid) return;
+      try {
         switch (original.mediaType) {
           case 'image':
-            return sock.sendMessage(jid, {
+            await sock.sendMessage(ownerJid, {
               image: { url: original.mediaPath },
-              caption: isChatResend ? `*🔰 ANTIDELETE RESEND 🔰*\n\n${capBase}` : capBase,
+              caption: `*Deleted image*\nFrom: @${senderName}`,
               mentions: [sender]
             });
+            break;
           case 'video':
-            return sock.sendMessage(jid, {
+            await sock.sendMessage(ownerJid, {
               video: { url: original.mediaPath },
-              caption: isChatResend ? `*🔰 ANTIDELETE RESEND 🔰*\n\n${capBase}` : capBase,
+              caption: `*Deleted video*\nFrom: @${senderName}`,
               mentions: [sender]
             });
+            break;
           case 'sticker':
-            return sock.sendMessage(jid, { sticker: { url: original.mediaPath } });
+            await sock.sendMessage(ownerJid, { sticker: { url: original.mediaPath } });
+            break;
           case 'audio': {
             const mime = original.audioMime || 'audio/mpeg';
-            return sock.sendMessage(jid, {
+            await sock.sendMessage(ownerJid, {
               audio: { url: original.mediaPath },
               mimetype: mime,
               ptt: false
             });
+            break;
           }
-          default:
-            return;
         }
-      };
-
-      try {
-        // Always send media to owner (so you get it even if chat mode)
-        await sendTo(ownerJid, false);
-
-        // If chat mode, resend in original chat too
-        if (mode === 'chat') {
-          await sendTo(original.chatJid, true);
-        }
-      } catch (e) {
-        if (ownerJid) {
-          try {
-            await sock.sendMessage(ownerJid, { text: `⚠️ Error sending media: ${e.message || e}` });
-          } catch {}
-        }
-      } finally {
+      } catch (err) {
         try {
-          fs.unlinkSync(original.mediaPath);
+          await sock.sendMessage(ownerJid, { text: `⚠️ Error sending media: ${err?.message || err}` });
         } catch {}
+      } finally {
+        try { fs.unlinkSync(original.mediaPath); } catch {}
       }
     }
 
     messageStore.delete(lookupKey);
-  } catch (e) {
-    console.error('handleMessageRevocation error:', e);
+  } catch (err) {
+    console.error('handleMessageRevocation error:', err);
   }
 }
 
-// --------- COMMAND (OWNER) ---------
+// -------------------------
+// COMMAND
+// -------------------------
 module.exports = {
   command: 'antidelete',
   aliases: ['antidel', 'adel'],
   category: 'owner',
-  description: 'Enable/disable antidelete & set report mode',
-  usage: '.antidelete <on|off|owner|chat|private>',
+  description: 'Enable or disable antidelete feature to track deleted messages',
+  usage: '.antidelete <on|off>',
   ownerOnly: true,
 
   async handler(sock, message, args, context = {}) {
     const chatId = context.chatId || message.key.remoteJid;
     const action = (args[0] || '').toLowerCase().trim();
 
-    const globalSettings = await getGlobalSettings();
+    const config = await loadAntideleteConfig();
 
     if (!action) {
-      const status = globalSettings.antidelete ? '✅ Enabled' : '❌ Disabled';
-      const currentMode = (globalSettings.antidelete_mode || 'owner').toUpperCase();
-      const voMode = (globalSettings.antiviewonce_mode || 'owner').toUpperCase();
-
       return sock.sendMessage(
         chatId,
         {
           text:
             `*🔰 ANTIDELETE SETUP 🔰*\n\n` +
-            `*Status:* ${status}\n` +
-            `*Mode:* ${currentMode}\n` +
-            `*Storage:* ${HAS_DB ? 'Database' : 'File'}\n\n` +
+            `*Current Status:* ${config.enabled ? '✅ Enabled' : '❌ Disabled'}\n` +
+            `*Storage:* ${HAS_DB ? 'Database' : 'File System'}\n\n` +
             `*Commands:*\n` +
             `• \`.antidelete on\` - Enable\n` +
-            `• \`.antidelete off\` - Disable\n` +
-            `• \`.antidelete owner\` - Reports to your inbox only\n` +
-            `• \`.antidelete chat\` - Reports + resend in original chat\n` +
-            `• \`.antidelete private\` - Track only private chats\n\n` +
-            `*Anti-ViewOnce Mode:* ${voMode}\n` +
-            `• Use \`.antiviewonce <owner|chat|warn>\` to change.`
+            `• \`.antidelete off\` - Disable\n\n` +
+            `*Features:*\n` +
+            `• Track deleted messages\n` +
+            `• Save deleted media\n` +
+            `• (Optional) Anti-ViewOnce if global antiviewonce is enabled\n` +
+            `• Reports to owner`
         },
         { quoted: message }
       );
     }
 
-    if (['owner', 'chat', 'private'].includes(action)) {
-      await store.saveSetting('global', 'antidelete_mode', action);
-      await store.saveSetting('global', 'antidelete', true);
-      await saveAntideleteConfig({ enabled: true });
-      return sock.sendMessage(chatId, { text: `✅ *Antidelete set to ${action.toUpperCase()} mode!*` }, { quoted: message });
-    }
-
     if (action === 'on') {
-      await store.saveSetting('global', 'antidelete', true);
-      await saveAntideleteConfig({ enabled: true });
-      return sock.sendMessage(chatId, { text: '✅ *Antidelete enabled!*' }, { quoted: message });
+      config.enabled = true;
+      await saveAntideleteConfig(config);
+      // keep legacy boolean too, so other parts of your bot can read it
+      try { await store.saveSetting('global', 'antidelete', true); } catch {}
+
+      return sock.sendMessage(
+        chatId,
+        {
+          text:
+            `✅ *Antidelete enabled!*\n\n` +
+            `Storage: ${HAS_DB ? 'Database' : 'File System'}\n` +
+            `• Tracking messages now.`
+        },
+        { quoted: message }
+      );
     }
 
     if (action === 'off') {
-      await store.saveSetting('global', 'antidelete', false);
-      await saveAntideleteConfig({ enabled: false });
-      return sock.sendMessage(chatId, { text: '❌ *Antidelete disabled!*' }, { quoted: message });
+      config.enabled = false;
+      await saveAntideleteConfig(config);
+      try { await store.saveSetting('global', 'antidelete', false); } catch {}
+
+      return sock.sendMessage(
+        chatId,
+        { text: `❌ *Antidelete disabled!*\n\nThe bot will no longer track deleted messages.` },
+        { quoted: message }
+      );
     }
 
-    return sock.sendMessage(chatId, { text: '❌ *Invalid option!*\nUse: `on`, `off`, `owner`, `chat`, or `private`' }, { quoted: message });
+    return sock.sendMessage(
+      chatId,
+      { text: '❌ *Invalid command*\nUse: `.antidelete on` or `.antidelete off`' },
+      { quoted: message }
+    );
   },
 
-  // exports for main bot
   handleMessageRevocation,
   storeMessage,
   loadAntideleteConfig,
   saveAntideleteConfig
 };
+
