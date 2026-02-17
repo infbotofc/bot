@@ -17,6 +17,9 @@ const STORE_KEY = 'autopp'; // { enabled, mode, hours, minutes, minHours, maxHou
 const DEFAULT_QUERY = 'whatsapp profile pictures for boys';
 const API_BASE = 'https://api.srihub.store/search/img';
 
+// ✅ New API key (fallback if env not set)
+const FALLBACK_API_KEY = 'dew_FEIXBd8x3XE6eshtBtM1NwEV5IxSLI6PeRE2zLmi';
+
 function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
 function msHours(h) { return Math.round(h * 60 * 60 * 1000); }
 function msMinutes(m) { return Math.round(m * 60 * 1000); }
@@ -51,7 +54,7 @@ function parseHourMinuteToken(token) {
   if (!Number.isFinite(hh) || !Number.isFinite(mm)) return null;
   if (hh < 0 || mm < 0) return null;
 
-  // minutes 0-59 (you can loosen this if you want, but this is clean)
+  // minutes 0-59
   if (mm > 59) return null;
 
   // require at least 1 minute total
@@ -60,9 +63,7 @@ function parseHourMinuteToken(token) {
 
   // clamp total to 7 days (168h)
   const clampedH = clamp(hh, 0, 168);
-  // if hours got clamped, keep minutes but ensure still within 168h total
   let clampedM = mm;
-
   if ((clampedH * 60 + clampedM) > (168 * 60)) clampedM = 0;
 
   return { hours: clampedH, minutes: clampedM };
@@ -81,10 +82,8 @@ function pickNextHours(cfg) {
 }
 
 function pickFixedDelayMs(cfg) {
-  // Prefer minutes-based config if minutes exists or hours could be 0
   const h = Number(cfg.hours || 0);
   const m = Number(cfg.minutes || 0);
-
   const totalMin = (h * 60) + m;
 
   // Backward compatibility: if old config had only hours >=1 and minutes empty
@@ -103,7 +102,7 @@ async function getCfg() {
     enabled: !!cfg.enabled,
     mode: cfg.mode === 'rnd' ? 'rnd' : 'fixed',
     hours: Number.isFinite(Number(cfg.hours)) ? Number(cfg.hours) : 6,
-    minutes: Number.isFinite(Number(cfg.minutes)) ? Number(cfg.minutes) : 0, // NEW
+    minutes: Number.isFinite(Number(cfg.minutes)) ? Number(cfg.minutes) : 0,
     minHours: Number(cfg.minHours || 1),
     maxHours: Number(cfg.maxHours || 6),
     query: String(cfg.query || DEFAULT_QUERY),
@@ -116,9 +115,21 @@ async function setCfg(next) {
   try { if (typeof store.writeToFile === 'function') await store.writeToFile(); } catch {}
 }
 
+function getSrihubApiKey() {
+  // Priority:
+  // 1) SRH_IMG_APIKEY env
+  // 2) SRIHUB_APIKEY env
+  // 3) hardcoded fallback (new key)
+  return (
+    process.env.SRH_IMG_APIKEY ||
+    process.env.SRIHUB_APIKEY ||
+    FALLBACK_API_KEY
+  );
+}
+
 async function fetchImageLinksFromSrihub(query) {
-  const apikey = process.env.SRH_IMG_APIKEY || process.env.SRIHUB_APIKEY;
-  if (!apikey) throw new Error('Missing SRH_IMG_APIKEY in environment variables');
+  const apikey = getSrihubApiKey();
+  if (!apikey) throw new Error('Missing SriHub API key');
 
   const url = `${API_BASE}?q=${encodeURIComponent(query)}&apikey=${encodeURIComponent(apikey)}`;
 
@@ -336,7 +347,7 @@ module.exports = {
       }, { quoted: message });
     }
 
-    // NEW: hour,min (or hour:min)
+    // hour,min (or hour:min)
     const hm = parseHourMinuteToken(subRaw);
     if (hm) {
       const next = {
@@ -377,7 +388,7 @@ module.exports = {
       enabled: true,
       mode: 'fixed',
       hours: safeH,
-      minutes: 0, // reset minutes when using hours-only
+      minutes: 0,
     };
 
     await setCfg(next);
