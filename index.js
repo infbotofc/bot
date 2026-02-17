@@ -57,6 +57,10 @@ const {
 const settings = require('./settings');
 const commandHandler = require('./lib/commandHandler');
 
+// ✅ ADD THIS: AntiDelete + AntiViewOnce plugin
+// Ensure the file exists: ./plugins/antidelete.js
+const antidelete = require('./plugins/antidelete');
+
 // ------------------------------
 // ✅ Normalize list/button replies into plain text
 // So your command handler can treat them like typed commands.
@@ -175,7 +179,9 @@ function hasValidSession() {
       }
       if (creds.registered === false) {
         printLog('warning', 'Session credentials exist but are not registered');
-        try { rmSync(path.join(__dirname, 'session'), { recursive: true, force: true }); } catch (e) {}
+        try {
+          rmSync(path.join(__dirname, 'session'), { recursive: true, force: true });
+        } catch (e) {}
         return false;
       }
       printLog('success', 'Valid and registered session credentials found');
@@ -251,7 +257,9 @@ async function startQasimDev() {
       ({ state, saveCreds } = await useMultiFileAuthState('./session'));
     } catch (err) {
       printLog('error', `Failed to load auth state: ${err.message}. Clearing session and retrying.`);
-      try { rmSync('./session', { recursive: true, force: true }); } catch (e) {}
+      try {
+        rmSync('./session', { recursive: true, force: true });
+      } catch (e) {}
       await delay(1000);
       ({ state, saveCreds } = await useMultiFileAuthState('./session'));
     }
@@ -344,6 +352,14 @@ async function startQasimDev() {
         normalizeInteractiveReplies(mek);
         chatUpdate.messages[0] = mek;
 
+        // ✅ AntiDelete + AntiViewOnce hook (THIS IS THE FIX)
+        // 1) store every message for restore
+        await antidelete.storeMessage(QasimDev, mek);
+        // 2) if message is delete-for-everyone event, handle it
+        if (mek?.message?.protocolMessage?.type === 0) {
+          await antidelete.handleMessageRevocation(QasimDev, mek);
+        }
+
         if (mek.key?.remoteJid === 'status@broadcast') {
           await handleStatus(QasimDev, chatUpdate);
           return;
@@ -425,13 +441,19 @@ async function startQasimDev() {
           const formattedCode = helper.formatPairingCode(code || '');
           console.log(chalk.black(chalk.bgGreen(`Your Pairing Code : `)), chalk.black(chalk.white(formattedCode)));
           printLog('success', `Pairing code generated: ${formattedCode}`);
-          if (rl && !rl.closed) { rl.close(); rl = null; }
+          if (rl && !rl.closed) {
+            rl.close();
+            rl = null;
+          }
         } catch (error) {
           printLog('error', `Failed to get pairing code: ${error.message}`);
         }
       }, 3000);
     } else {
-      if (rl && !rl.closed) { rl.close(); rl = null; }
+      if (rl && !rl.closed) {
+        rl.close();
+        rl = null;
+      }
     }
 
     QasimDev.ev.on('connection.update', async (s) => {
@@ -503,7 +525,10 @@ async function startQasimDev() {
         if (statusCode === DisconnectReason.loggedOut || statusCode === 401) {
           try {
             const backupDir = `./session.bak.${Date.now()}`;
-            try { require('fs').renameSync('./session', backupDir); printLog('info', `Backed up session to ${backupDir}`); } catch (e) {}
+            try {
+              require('fs').renameSync('./session', backupDir);
+              printLog('info', `Backed up session to ${backupDir}`);
+            } catch (e) {}
             rmSync('./session', { recursive: true, force: true });
             printLog('warning', 'Session logged out. Session cleared. Please re-authenticate');
             return;
@@ -513,8 +538,12 @@ async function startQasimDev() {
         }
 
         if (shouldReconnect) {
-          try { QasimDev.ev.removeAllListeners(); } catch (e) {}
-          try { if (QasimDev.end) await QasimDev.end(); } catch (e) {}
+          try {
+            QasimDev.ev.removeAllListeners();
+          } catch (e) {}
+          try {
+            if (QasimDev.end) await QasimDev.end();
+          } catch (e) {}
 
           const waitTime = [440, 503, 515].includes(statusCode) ? 10000 : 5000;
           printLog('connection', `Reconnecting in ${waitTime / 1000} seconds...`);
@@ -530,10 +559,18 @@ async function startQasimDev() {
       }
     });
 
-    QasimDev.ev.on('call', async (calls) => { await handleCall(QasimDev, calls); });
-    QasimDev.ev.on('group-participants.update', async (update) => { await handleGroupParticipantUpdate(QasimDev, update); });
-    QasimDev.ev.on('status.update', async (status) => { await handleStatus(QasimDev, status); });
-    QasimDev.ev.on('messages.reaction', async (reaction) => { await handleStatus(QasimDev, reaction); });
+    QasimDev.ev.on('call', async (calls) => {
+      await handleCall(QasimDev, calls);
+    });
+    QasimDev.ev.on('group-participants.update', async (update) => {
+      await handleGroupParticipantUpdate(QasimDev, update);
+    });
+    QasimDev.ev.on('status.update', async (status) => {
+      await handleStatus(QasimDev, status);
+    });
+    QasimDev.ev.on('messages.reaction', async (reaction) => {
+      await handleStatus(QasimDev, reaction);
+    });
 
     _startingQasim = false;
     _restartAttempts = 0;
@@ -542,7 +579,10 @@ async function startQasimDev() {
   } catch (error) {
     printLog('error', `Error in startQasimDev: ${error.message}`);
 
-    if (rl && !rl.closed) { rl.close(); rl = null; }
+    if (rl && !rl.closed) {
+      rl.close();
+      rl = null;
+    }
 
     _startingQasim = false;
     _restartAttempts++;
@@ -644,8 +684,12 @@ async function gracefulShutdown(signal) {
   printLog('info', `Received ${signal}. Shutting down gracefully...`);
   try {
     if (global.QasimDev?.ev) {
-      try { global.QasimDev.ev.removeAllListeners(); } catch (e) {}
-      try { if (global.QasimDev.end) await global.QasimDev.end(); } catch (e) {}
+      try {
+        global.QasimDev.ev.removeAllListeners();
+      } catch (e) {}
+      try {
+        if (global.QasimDev.end) await global.QasimDev.end();
+      } catch (e) {}
     }
     await delay(500);
     printLog('info', 'Shutdown complete.');
