@@ -12,13 +12,61 @@ let AUTOPP_TIMER = null;
 let AUTOPP_RUNNING = false;
 
 const STORE_SCOPE = 'global';
-const STORE_KEY = 'autopp'; // { enabled, mode, hours, minHours, maxHours, query, lastRun }
+const STORE_KEY = 'autopp'; // { enabled, mode, hours, minutes, minHours, maxHours, query, lastRun }
 
 const DEFAULT_QUERY = 'whatsapp profile pictures for boys';
 const API_BASE = 'https://api.srihub.store/search/img';
 
 function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
 function msHours(h) { return Math.round(h * 60 * 60 * 1000); }
+function msMinutes(m) { return Math.round(m * 60 * 1000); }
+
+function formatFixedInterval(cfg) {
+  const h = Number(cfg.hours || 0);
+  const m = Number(cfg.minutes || 0);
+  if (h <= 0 && m > 0) return `${m} minute(s)`;
+  if (m > 0) return `${h} hour(s) ${m} minute(s)`;
+  return `${h} hour(s)`;
+}
+
+function parseHourMinuteToken(token) {
+  // Supports:
+  //  - "1,15"  => 1h 15m
+  //  - "0,15"  => 0h 15m
+  //  - "1:15"  => 1h 15m (bonus)
+  // Spaces around comma allowed: "1, 15"
+  const raw = String(token || '').trim();
+  if (!raw) return null;
+
+  const cleaned = raw.replace(/\s+/g, '');
+  const sep = cleaned.includes(',') ? ',' : (cleaned.includes(':') ? ':' : null);
+  if (!sep) return null;
+
+  const parts = cleaned.split(sep);
+  if (parts.length !== 2) return null;
+
+  const hh = Number(parts[0]);
+  const mm = Number(parts[1]);
+
+  if (!Number.isFinite(hh) || !Number.isFinite(mm)) return null;
+  if (hh < 0 || mm < 0) return null;
+
+  // minutes 0-59 (you can loosen this if you want, but this is clean)
+  if (mm > 59) return null;
+
+  // require at least 1 minute total
+  const totalMin = (hh * 60) + mm;
+  if (totalMin < 1) return null;
+
+  // clamp total to 7 days (168h)
+  const clampedH = clamp(hh, 0, 168);
+  // if hours got clamped, keep minutes but ensure still within 168h total
+  let clampedM = mm;
+
+  if ((clampedH * 60 + clampedM) > (168 * 60)) clampedM = 0;
+
+  return { hours: clampedH, minutes: clampedM };
+}
 
 function pickNextHours(cfg) {
   if (cfg.mode === 'rnd') {
@@ -29,7 +77,24 @@ function pickNextHours(cfg) {
     const next = lo + Math.random() * (hi - lo);
     return Math.round(next * 10) / 10; // 1 decimal
   }
-  return clamp(Number(cfg.hours || 6), 1, 168);
+  return clamp(Number(cfg.hours || 6), 0, 168);
+}
+
+function pickFixedDelayMs(cfg) {
+  // Prefer minutes-based config if minutes exists or hours could be 0
+  const h = Number(cfg.hours || 0);
+  const m = Number(cfg.minutes || 0);
+
+  const totalMin = (h * 60) + m;
+
+  // Backward compatibility: if old config had only hours >=1 and minutes empty
+  if ((!Number.isFinite(totalMin) || totalMin <= 0) && h > 0) {
+    return msHours(clamp(h, 1, 168));
+  }
+
+  // Enforce at least 1 minute, max 168 hours
+  const safeMin = clamp(totalMin, 1, 168 * 60);
+  return msMinutes(safeMin);
 }
 
 async function getCfg() {
@@ -37,7 +102,8 @@ async function getCfg() {
   return {
     enabled: !!cfg.enabled,
     mode: cfg.mode === 'rnd' ? 'rnd' : 'fixed',
-    hours: Number(cfg.hours || 6),
+    hours: Number.isFinite(Number(cfg.hours)) ? Number(cfg.hours) : 6,
+    minutes: Number.isFinite(Number(cfg.minutes)) ? Number(cfg.minutes) : 0, // NEW
     minHours: Number(cfg.minHours || 1),
     maxHours: Number(cfg.maxHours || 6),
     query: String(cfg.query || DEFAULT_QUERY),
@@ -59,7 +125,6 @@ async function fetchImageLinksFromSrihub(query) {
   const res = await axios.get(url, { timeout: 60000 });
   const data = res.data;
 
-  // Try multiple possible response shapes safely
   const candidates = []
     .concat(data?.result || [])
     .concat(data?.results || [])
@@ -81,7 +146,6 @@ async function fetchImageLinksFromSrihub(query) {
     throw new Error('SriHub API returned no image links');
   }
 
-  // remove duplicates
   return [...new Set(links)];
 }
 
@@ -102,10 +166,8 @@ async function downloadImageToBuffer(imgUrl) {
 }
 
 async function setBotProfilePicture(sock, query) {
-  // Get links → pick random → download → set DP
   const links = await fetchImageLinksFromSrihub(query);
   const pick = links[Math.floor(Math.random() * links.length)];
-
   const buffer = await downloadImageToBuffer(pick);
 
   const filePath = path.join(TMP_DIR, `autopp_${Date.now()}.jpg`);
@@ -124,8 +186,14 @@ async function scheduleNext(sock) {
   const cfg = await getCfg();
   if (!cfg.enabled) return;
 
-  const nextHours = pickNextHours(cfg);
-  const delayMs = msHours(nextHours);
+  let delayMs;
+
+  if (cfg.mode === 'rnd') {
+    const nextHours = pickNextHours(cfg);
+    delayMs = msHours(nextHours);
+  } else {
+    delayMs = pickFixedDelayMs(cfg);
+  }
 
   if (AUTOPP_TIMER) clearTimeout(AUTOPP_TIMER);
 
@@ -168,9 +236,8 @@ module.exports = {
   aliases: ['autodp', 'autodpp'],
   category: 'owner',
   description: 'Auto change bot profile picture every X hours (or random)',
-  usage: '.autopp <hours|rnd|off|now|status|query>',
+  usage: '.autopp <hours | hour,min | rnd | off | now | status | query>',
 
-  // for index.js hook
   startAutoPP,
   stopAutoPP,
 
@@ -184,13 +251,16 @@ module.exports = {
       return sock.sendMessage(chatId, { text: '❌ Owner only.' }, { quoted: message });
     }
 
-    const sub = String(args[0] || '').trim().toLowerCase();
+    const subRaw = String(args[0] || '').trim();
+    const sub = subRaw.toLowerCase();
     const cfg = await getCfg();
 
     // status
     if (!sub || sub === 'status') {
       const sched = cfg.enabled
-        ? (cfg.mode === 'rnd' ? `Random: ${cfg.minHours}-${cfg.maxHours} hours` : `Every: ${cfg.hours} hours`)
+        ? (cfg.mode === 'rnd'
+          ? `Random: ${cfg.minHours}-${cfg.maxHours} hours`
+          : `Every: ${formatFixedInterval(cfg)}`)
         : 'OFF';
 
       return sock.sendMessage(chatId, {
@@ -203,6 +273,8 @@ module.exports = {
           `• Last Run: ${cfg.lastRun || 'Never'}\n\n` +
           `Commands:\n` +
           `• .autopp 6\n` +
+          `• .autopp 1,15  (1 hour 15 min)\n` +
+          `• .autopp 0,15  (15 min)\n` +
           `• .autopp rnd\n` +
           `• .autopp rnd 2 8\n` +
           `• .autopp query <text>\n` +
@@ -264,11 +336,38 @@ module.exports = {
       }, { quoted: message });
     }
 
-    // fixed hours
+    // NEW: hour,min (or hour:min)
+    const hm = parseHourMinuteToken(subRaw);
+    if (hm) {
+      const next = {
+        ...cfg,
+        enabled: true,
+        mode: 'fixed',
+        hours: hm.hours,
+        minutes: hm.minutes,
+      };
+
+      await setCfg(next);
+      await startAutoPP(sock);
+
+      return sock.sendMessage(chatId, {
+        text: `✅ AutoPP enabled\n• Interval: every ${formatFixedInterval(next)}\n• Query: ${next.query}`
+      }, { quoted: message });
+    }
+
+    // fixed hours (old behavior)
     const hours = Number(sub);
     if (!Number.isFinite(hours) || hours <= 0) {
       return sock.sendMessage(chatId, {
-        text: '❌ Use: `.autopp 1` or `.autopp 6` or `.autopp rnd` or `.autopp query <text>` or `.autopp off`'
+        text:
+          '❌ Use:\n' +
+          '• `.autopp 1` or `.autopp 6`\n' +
+          '• `.autopp 1,15` (1 hour 15 min)\n' +
+          '• `.autopp 0,15` (15 min)\n' +
+          '• `.autopp rnd` or `.autopp rnd 2 8`\n' +
+          '• `.autopp query <text>`\n' +
+          '• `.autopp now`\n' +
+          '• `.autopp off`'
       }, { quoted: message });
     }
 
@@ -278,6 +377,7 @@ module.exports = {
       enabled: true,
       mode: 'fixed',
       hours: safeH,
+      minutes: 0, // reset minutes when using hours-only
     };
 
     await setCfg(next);
