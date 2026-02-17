@@ -1,16 +1,18 @@
-const fs = require('fs');
 const commandHandler = require('../lib/commandHandler');
 const settings = require('../settings');
 
 /**
- * MENU with LIST BUTTONS (Baileys)
- * -------------------------------
- * - Sends an image + caption + list menu (if supported)
- * - Fallbacks to plain text menu if list is not supported by the client
+ * INFINITY MD MENU (List Buttons) - Fully Updated
+ * ----------------------------------------------
+ * Fixes your issues:
+ * ✅ Sends ONLY ONE menu message (no double header spam)
+ * ✅ Uses WhatsApp List Menu (stable)
+ * ✅ Clean fallback to text menu if list unsupported
+ * ✅ Row IDs are commands (e.g. .dlmenu) so clicking runs like typing
  *
- * IMPORTANT: You must handle list replies in your main messages.upsert:
- * const selected = msg.message?.listResponseMessage?.singleSelectReply?.selectedRowId
- * If selected exists, treat it like a typed command.
+ * REQUIRED (already done in your updated index.js):
+ * - Convert list replies to conversation text:
+ *   msg.message.listResponseMessage.singleSelectReply.selectedRowId
  */
 
 module.exports = {
@@ -31,47 +33,39 @@ module.exports = {
     const uptimeStr =
       hours > 0 ? `${hours}h ${minutes}m ${seconds}s` :
       minutes > 0 ? `${minutes}m ${seconds}s` :
-      `${seconds} seconds`;
+      `${seconds}s`;
 
-    // memory
+    // ram
     const used = process.memoryUsage().rss / 1024 / 1024;
     const totalMem = 62.80; // keep your style
 
-    // random banner
-    const banners = [
-      './assets/unnamed_1769953510098.jpg',
-      './assets/unnamed_(1)_1769953514810.jpg',
-      './assets/unnamed_(2)_1769953519419.jpg'
-    ];
-    const banner = banners[Math.floor(Math.random() * banners.length)];
-    const bannerBuf = fs.existsSync(banner) ? fs.readFileSync(banner) : null;
+    const cmdCount = (commandHandler?.commands?.size || 0);
 
-    // caption text (header)
-    let menuText = `🤖 *MAIN MENU*\n`;
-    menuText += `╭───〔 🤖 INFINITY MD 〕───\n`;
-    menuText += `│ 👤 *Owner* : ${settings.botOwner}\n`;
-    menuText += `│ 📊 *Commands* : ${(commandHandler?.commands?.size || 0)}+\n`;
-    menuText += `│ ⏱ *Uptime* : ${uptimeStr}\n`;
-    menuText += `│ 🚀 *RAM* : ${used.toFixed(2)}MB / ${totalMem}GB\n`;
-    menuText += `│ ⌨️ *Prefix* : ${prefix}\n`;
-    menuText += `╰────────────────────\n\n`;
-    menuText += `Select a category below 👇\n\n`;
-    menuText += `> 💫 *INFINITY MD BOT* - Powered by AI`;
+    const headerText =
+      `🤖 *MAIN MENU*\n` +
+      `╭───〔 🤖 INFINITY MD 〕───\n` +
+      `│ 👤 *Owner* : ${settings.botOwner}\n` +
+      `│ 📊 *Commands* : ${cmdCount}+\n` +
+      `│ ⏱ *Uptime* : ${uptimeStr}\n` +
+      `│ 🚀 *RAM* : ${used.toFixed(2)}MB / ${totalMem}GB\n` +
+      `│ ⌨️ *Prefix* : ${prefix}\n` +
+      `╰────────────────────\n\n` +
+      `Select a category below 👇\n\n` +
+      `> 💫 *INFINITY MD BOT* - Powered by AI`;
 
-    // list sections
     const sections = [
       {
         title: '📂 MAIN MENUS',
         rows: [
           { title: '👑 Owner Menu', description: 'Owner-only commands', rowId: `${prefix}ownermenu` },
           { title: '🧩 Group Menu', description: 'Group moderation & tools', rowId: `${prefix}groupmenu` },
-          { title: '📥 Download Menu', description: 'YouTube / Media downloads', rowId: `${prefix}dlmenu` },
+          { title: '📥 Download Menu', description: 'YouTube / media downloads', rowId: `${prefix}dlmenu` },
           { title: '🎮 Fun Menu', description: 'Fun & games', rowId: `${prefix}funmenu` },
           { title: '🤖 AI Menu', description: 'AI tools & chat', rowId: `${prefix}aimenu` },
           { title: '🖼 Sticker Menu', description: 'Sticker tools', rowId: `${prefix}stickermenu` },
           { title: '🎵 Audio Menu', description: 'Audio tools', rowId: `${prefix}audiomenu` },
           { title: '🎥 Video Menu', description: 'Video tools', rowId: `${prefix}videomenu` },
-          { title: '🔍 Search Menu', description: 'Search tools', rowId: `${prefix}searchmenu` },
+          { title: '🔍 Search Menu', description: 'Search commands', rowId: `${prefix}searchmenu` },
           { title: '🛠 Tools Menu', description: 'Utilities & helpers', rowId: `${prefix}toolsmenu` },
           { title: '🧠 Convert Menu', description: 'Converters', rowId: `${prefix}convertmenu` },
           { title: '⚙️ Settings Menu', description: 'Bot settings', rowId: `${prefix}settingsmenu` },
@@ -82,63 +76,38 @@ module.exports = {
     ];
 
     const listMsg = {
-      text: menuText,
+      text: headerText,
       footer: 'Infinity MD',
       title: 'INFINITY MD MENU',
       buttonText: 'OPEN MENU ✅',
       sections
     };
 
-    // If you want image + list: send image with caption first, then list message.
-    // (WhatsApp does not reliably support list+image in one message across all clients.)
-    try {
-      if (bannerBuf) {
-        await sock.sendMessage(chatId, { image: bannerBuf, caption: menuText }, { quoted: message });
-        await sock.sendMessage(chatId, listMsg, { quoted: message });
-      } else {
-        await sock.sendMessage(chatId, listMsg, { quoted: message });
-      }
-    } catch (e) {
-      // Fallback to plain text if list is not supported
-      const fallback =
-        menuText +
-        `\n\n╭───〔 📂 MAIN MENUS 〕───\n` +
-        `│ 👑 ${prefix}ownermenu\n` +
-        `│ 🧩 ${prefix}groupmenu\n` +
-        `│ 📥 ${prefix}dlmenu\n` +
-        `│ 🎮 ${prefix}funmenu\n` +
-        `│ 🤖 ${prefix}aimenu\n` +
-        `│ 🖼 ${prefix}stickermenu\n` +
-        `│ 🎵 ${prefix}audiomenu\n` +
-        `│ 🎥 ${prefix}videomenu\n` +
-        `│ 🔍 ${prefix}searchmenu\n` +
-        `│ 🛠 ${prefix}toolsmenu\n` +
-        `│ 🧠 ${prefix}convertmenu\n` +
-        `│ ⚙️ ${prefix}settingsmenu\n` +
-        `│ 🗄 ${prefix}dbmenu\n` +
-        `│ 🧪 ${prefix}othermenu\n` +
-        `╰────────────────────\n`;
+    // Fallback text menu (if list not supported)
+    const fallbackText =
+      headerText +
+      `\n\n╭───〔 📂 MAIN MENUS 〕───\n` +
+      `│ 👑 ${prefix}ownermenu\n` +
+      `│ 🧩 ${prefix}groupmenu\n` +
+      `│ 📥 ${prefix}dlmenu\n` +
+      `│ 🎮 ${prefix}funmenu\n` +
+      `│ 🤖 ${prefix}aimenu\n` +
+      `│ 🖼 ${prefix}stickermenu\n` +
+      `│ 🎵 ${prefix}audiomenu\n` +
+      `│ 🎥 ${prefix}videomenu\n` +
+      `│ 🔍 ${prefix}searchmenu\n` +
+      `│ 🛠 ${prefix}toolsmenu\n` +
+      `│ 🧠 ${prefix}convertmenu\n` +
+      `│ ⚙️ ${prefix}settingsmenu\n` +
+      `│ 🗄 ${prefix}dbmenu\n` +
+      `│ 🧪 ${prefix}othermenu\n` +
+      `╰────────────────────`;
 
-      if (bannerBuf) {
-        await sock.sendMessage(chatId, { image: bannerBuf, caption: fallback }, { quoted: message });
-      } else {
-        await sock.sendMessage(chatId, { text: fallback }, { quoted: message });
-      }
+    try {
+      await sock.sendMessage(chatId, listMsg, { quoted: message });
+    } catch (e) {
+      // Some clients / builds may not support list menus
+      await sock.sendMessage(chatId, { text: fallbackText }, { quoted: message });
     }
   }
 };
-
-/*
-  MAIN HANDLER ADD THIS (IMPORTANT):
-
-  sock.ev.on('messages.upsert', async ({ messages }) => {
-    const msg = messages[0];
-    if (!msg?.message) return;
-
-    const selected = msg.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
-    if (selected) {
-      // treat like command text
-      // example: runCommand(sock, msg, selected)
-    }
-  });
-*/
