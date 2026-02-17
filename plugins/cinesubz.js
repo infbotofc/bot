@@ -22,7 +22,7 @@ const os = require('os');
 const path = require('path');
 const { URL } = require('url');
 
-const SRIHUB_API_KEY = 'dew_kuKmHwBBCgIAdUty5TBY1VWWtUgwbQwKRtC8MFUF';
+const SRIHUB_API_KEY = 'dew_FEIXBd8x3XE6eshtBtM1NwEV5IxSLI6PeRE2zLmi';
 const TMDB_KEY = process.env.TMDB_KEY || '3c3765d22672d49fd193b764324d3493';
 
 const MAX_SEND_MB = 90;
